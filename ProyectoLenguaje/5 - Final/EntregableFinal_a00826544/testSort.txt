@@ -1,0 +1,34 @@
+DEF a[10] AS INT
+DEF i AS INT
+DEF j AS INT
+DEF k AS INT
+DEF input AS INT
+DEF temp1 AS INT
+DEF temp2 AS INT
+
+PROGRAM
+
+FOR (i = 0, i < 10) {
+    IN(input)
+    LET a[i] = input
+    LET i = i + 1
+}
+
+FOR (j = 0, j < 10){
+    LET k = j + 1
+    FOR (k = 0, k < 10) {
+        LET temp1 = a[j]
+        LET temp2 = a[k]
+        IF (temp1 < temp2) {
+            LET a[k] = temp1
+            LET a[j] = temp2
+        }
+        LET k = k + 1
+    }
+    LET j = j + 1
+}
+
+
+PRINT(a)
+
+PEND

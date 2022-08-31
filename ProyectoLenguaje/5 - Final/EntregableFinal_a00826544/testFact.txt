@@ -1,0 +1,29 @@
+DEF i AS INT
+DEF fact AS INT
+DEF numero AS INT
+
+PROCEDURE factorial {
+    FOR(i = 1 , i <= numero) {
+        LET fact = fact * i
+        LET i = i + 1
+    }
+}
+
+PROGRAM
+    LET fact = 1
+
+    IN(numero)
+
+    IF (numero < 0){
+        LET fact = 0
+    } ELSE {
+        IF(numero == 0) {
+            LET fact = 1
+        } ELSE {
+            CALL factorial
+        }
+    }
+
+    PRINT(fact)
+
+PEND

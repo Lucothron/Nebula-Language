@@ -1,0 +1,16 @@
+PROGRAM
+
+DIM a AS MAT[]
+
+DIM b AS MAT[]
+
+DIM c AS MAT[]
+
+
+LET a = [10, 20]
+
+LET b = [20, 10]
+
+
+
+PEND

@@ -1,0 +1,16 @@
+PROGRAM
+
+DIM num1 as INT
+DIM num2 as INT
+DIM num3 as INT
+
+LET num1 = 2
+LET num2 = 4
+LET num3 = 6
+
+IF (num1 > num2) {
+    LET num2 = num1 * num3 + (5 - 2)
+    LET num1 = num2 + 1
+}
+
+PEND

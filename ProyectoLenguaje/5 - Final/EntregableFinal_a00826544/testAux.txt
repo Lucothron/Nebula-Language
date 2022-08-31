@@ -1,0 +1,147 @@
+PROGRAM
+
+DIM a as INT
+DIM b as INT
+DIM x as INT
+DIM y as INT
+DIM z as INT
+
+WHILE (x < y) {
+    IF (a > b) {
+        DO {
+            LET y = 3
+            LET z = 4
+        } WHILE (x > a)
+    } ELSE {
+        WHILE (y < b) {
+            LET y = y + 1
+        }
+    }
+}
+
+PEND
+
+---------------------
+
+PROGRAM
+
+DIM a as INT
+DIM b as INT
+DIM c as INT
+DIM d as INT
+DIM e as INT
+DIM f as INT
+
+IF (a > b) {
+    IF (b < c) {
+        LET a = b
+    } ELSE {
+        LET b = c + d
+    }
+} ELSE {
+    IF (d > e) {
+        LET d = f
+    } ELSE {
+        LET d = e
+    }
+}
+
+PEND
+
+---------------------
+
+PROGRAM
+
+DIM a AS INT
+DIM b AS INT
+DIM c AS INT
+
+IF (a < b) {
+    LET a = 2
+    IF (b < c) {
+        LET b = 2
+    } ELSE {
+        LET c = 2
+    }
+}
+
+PEND
+
+---------------------
+
+PROGRAM
+
+DIM a AS INT
+DIM b AS INT
+DIM c AS INT
+
+IF (a < b) {
+    LET a = 2
+    IF (b > 2) {
+        LET c = 2
+    }
+} ELSE {
+    LET b = 2
+}
+
+PEND
+
+---------------------
+
+PROGRAM
+
+DIM a as INT
+DIM b as INT
+DIM c as INT
+
+FOR (a = 1, 3) {
+    LET a = a + 1
+    FOR (b = 3, 6) {
+        LET b = b + 2
+    }
+}
+
+PEND
+
+---------------------
+
+PROGRAM
+
+DIM a as INT
+DIM b as INT
+DIM c as INT
+
+IN (a)
+
+IF (a < 10){
+    PRINT('hola')
+} ELSE {
+    PRINT('adios')
+}
+
+PEND
+
+---------------------
+
+DEF f AS INT
+DEF x AS INT
+
+PROCEDURE alfa {
+    IF (x > 1) {
+        LET f = f * x
+        LET x = x - 1
+        call alfa
+    }
+}
+
+PROGRAM
+
+IN(x)
+
+LET f = 1
+
+CALL alfa
+
+PRINT(f)
+
+PEND

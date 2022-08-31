@@ -1,0 +1,10 @@
+PROGRAM
+
+DEF a AS INT
+LET a = 1
+
+WHILE (a < 4) {
+    LET a = a + 1
+    PRINT(a)
+}
+PEND

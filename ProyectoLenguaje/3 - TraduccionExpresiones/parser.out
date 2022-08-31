@@ -1,0 +1,3305 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> START
+Rule 1     START -> PROGRAM V P S PEND
+Rule 2     V -> DIM VARAUX V
+Rule 3     V -> LET VARASSIGN V S
+Rule 4     V -> EMPTY
+Rule 5     P -> SUBPROCEDURE LPAREN ID RPAREN V P S SUBEND
+Rule 6     P -> IN LPAREN NUMTYPE RPAREN S
+Rule 7     P -> PRINT LPAREN NUMTYPE RPAREN S
+Rule 8     P -> EMPTY
+Rule 9     S -> IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S
+Rule 10    IFELSE -> ELSE LCURL S RCURL
+Rule 11    IFELSE -> <empty>
+Rule 12    S -> WHILE LPAREN LOGE RPAREN LCURL V S RCURL S
+Rule 13    S -> DO COLON V S WHILE LPAREN LOGE RPAREN S
+Rule 14    S -> FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL
+Rule 15    S -> E
+Rule 16    S -> EMPTY
+Rule 17    VARAUX -> ID AS VARTYPE
+Rule 18    VARID -> ID
+Rule 19    VARASSIGN -> VARID EQUAL E
+Rule 20    VARTYPE -> INT
+Rule 21    VARTYPE -> FLOAT
+Rule 22    VARTYPE -> VECDEF
+Rule 23    VARTYPE -> MATDEF
+Rule 24    NUMTYPE -> ID
+Rule 25    NUMTYPE -> NINT
+Rule 26    NUMTYPE -> NFLOAT
+Rule 27    VAR -> NINT
+Rule 28    VAR -> NFLOAT
+Rule 29    VAR -> VECTOR
+Rule 30    VAR -> MATRIX
+Rule 31    VAR -> ID
+Rule 32    VECDEF -> VEC LBRACK VAR RBRACK
+Rule 33    MATDEF -> MAT LBRACK VAR RBRACK LBRACK VAR RBRACK
+Rule 34    VECTOR -> ID LBRACK NUMTYPE RBRACK
+Rule 35    MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+Rule 36    EMPTY -> <empty>
+Rule 37    E -> E PLUS T
+Rule 38    E -> E MINUS T
+Rule 39    E -> T
+Rule 40    T -> T MULT F
+Rule 41    T -> T DIV F
+Rule 42    T -> F
+Rule 43    F -> LPAREN E RPAREN
+Rule 44    F -> NINT
+Rule 45    F -> NFLOAT
+Rule 46    F -> VECTOR
+Rule 47    F -> MATRIX
+Rule 48    F -> ID
+Rule 49    LOGE -> LOGE OR LOGT
+Rule 50    LOGE -> NOT LOGT
+Rule 51    LOGE -> LOGT
+Rule 52    LOGT -> LOGT AND LOGF
+Rule 53    LOGT -> LOGF
+Rule 54    LOGF -> VAR LT VAR
+Rule 55    LOGF -> VAR LE VAR
+Rule 56    LOGF -> VAR GT VAR
+Rule 57    LOGF -> VAR GE VAR
+Rule 58    LOGF -> VAR EQ VAR
+Rule 59    LOGF -> VAR NE VAR
+Rule 60    LOGF -> LPAREN LOGE RPAREN
+
+Terminals, with rules where they appear
+
+AND                  : 52
+AS                   : 17
+COLON                : 13
+COMMA                : 14 35
+DIM                  : 2
+DIV                  : 41
+DO                   : 13
+ELSE                 : 10
+EQ                   : 58
+EQUAL                : 19
+FLOAT                : 21
+FOR                  : 14
+GE                   : 57
+GT                   : 56
+ID                   : 5 17 18 24 31 34 35 48
+IF                   : 9
+IN                   : 6
+INT                  : 20
+LBRACK               : 32 33 33 34 35
+LCURL                : 9 10 12 14
+LE                   : 55
+LET                  : 3
+LPAREN               : 5 6 7 9 12 13 14 43 60
+LT                   : 54
+MAT                  : 33
+MINUS                : 38
+MULT                 : 40
+NE                   : 59
+NFLOAT               : 26 28 45
+NINT                 : 25 27 44
+NOT                  : 50
+OR                   : 49
+PEND                 : 1
+PLUS                 : 37
+PRINT                : 7
+PROGRAM              : 1
+RBRACK               : 32 33 33 34 35
+RCURL                : 9 10 12 14
+RPAREN               : 5 6 7 9 12 13 14 43 60
+SUBEND               : 5
+SUBPROCEDURE         : 5
+VEC                  : 32
+WHILE                : 12 13
+error                : 
+
+Nonterminals, with rules where they appear
+
+E                    : 15 19 37 38 43
+EMPTY                : 4 8 16
+F                    : 40 41 42
+IFELSE               : 9
+LOGE                 : 9 12 13 14 14 49 60
+LOGF                 : 52 53
+LOGT                 : 49 50 51 52
+MATDEF               : 23
+MATRIX               : 30 47
+NUMTYPE              : 6 7 34 35 35
+P                    : 1 5
+S                    : 1 3 5 6 7 9 9 10 12 12 13 13 14
+START                : 0
+T                    : 37 38 39 40 41
+V                    : 1 2 3 5 9 12 13 14
+VAR                  : 32 33 33 54 54 55 55 56 56 57 57 58 58 59 59
+VARASSIGN            : 3
+VARAUX               : 2
+VARID                : 19
+VARTYPE              : 17
+VECDEF               : 22
+VECTOR               : 29 46
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . START
+    (1) START -> . PROGRAM V P S PEND
+
+    PROGRAM         shift and go to state 2
+
+    START                          shift and go to state 1
+
+state 1
+
+    (0) S' -> START .
+
+
+
+state 2
+
+    (1) START -> PROGRAM . V P S PEND
+    (2) V -> . DIM VARAUX V
+    (3) V -> . LET VARASSIGN V S
+    (4) V -> . EMPTY
+    (36) EMPTY -> .
+
+    DIM             shift and go to state 4
+    LET             shift and go to state 5
+    SUBPROCEDURE    reduce using rule 36 (EMPTY -> .)
+    IN              reduce using rule 36 (EMPTY -> .)
+    PRINT           reduce using rule 36 (EMPTY -> .)
+    IF              reduce using rule 36 (EMPTY -> .)
+    WHILE           reduce using rule 36 (EMPTY -> .)
+    DO              reduce using rule 36 (EMPTY -> .)
+    FOR             reduce using rule 36 (EMPTY -> .)
+    LPAREN          reduce using rule 36 (EMPTY -> .)
+    NINT            reduce using rule 36 (EMPTY -> .)
+    NFLOAT          reduce using rule 36 (EMPTY -> .)
+    ID              reduce using rule 36 (EMPTY -> .)
+    PEND            reduce using rule 36 (EMPTY -> .)
+
+    V                              shift and go to state 3
+    EMPTY                          shift and go to state 6
+
+state 3
+
+    (1) START -> PROGRAM V . P S PEND
+    (5) P -> . SUBPROCEDURE LPAREN ID RPAREN V P S SUBEND
+    (6) P -> . IN LPAREN NUMTYPE RPAREN S
+    (7) P -> . PRINT LPAREN NUMTYPE RPAREN S
+    (8) P -> . EMPTY
+    (36) EMPTY -> .
+
+    SUBPROCEDURE    shift and go to state 8
+    IN              shift and go to state 9
+    PRINT           shift and go to state 10
+    IF              reduce using rule 36 (EMPTY -> .)
+    WHILE           reduce using rule 36 (EMPTY -> .)
+    DO              reduce using rule 36 (EMPTY -> .)
+    FOR             reduce using rule 36 (EMPTY -> .)
+    LPAREN          reduce using rule 36 (EMPTY -> .)
+    NINT            reduce using rule 36 (EMPTY -> .)
+    NFLOAT          reduce using rule 36 (EMPTY -> .)
+    ID              reduce using rule 36 (EMPTY -> .)
+    PEND            reduce using rule 36 (EMPTY -> .)
+
+    P                              shift and go to state 7
+    EMPTY                          shift and go to state 11
+
+state 4
+
+    (2) V -> DIM . VARAUX V
+    (17) VARAUX -> . ID AS VARTYPE
+
+    ID              shift and go to state 13
+
+    VARAUX                         shift and go to state 12
+
+state 5
+
+    (3) V -> LET . VARASSIGN V S
+    (19) VARASSIGN -> . VARID EQUAL E
+    (18) VARID -> . ID
+
+    ID              shift and go to state 16
+
+    VARASSIGN                      shift and go to state 14
+    VARID                          shift and go to state 15
+
+state 6
+
+    (4) V -> EMPTY .
+
+    SUBPROCEDURE    reduce using rule 4 (V -> EMPTY .)
+    IN              reduce using rule 4 (V -> EMPTY .)
+    PRINT           reduce using rule 4 (V -> EMPTY .)
+    IF              reduce using rule 4 (V -> EMPTY .)
+    WHILE           reduce using rule 4 (V -> EMPTY .)
+    DO              reduce using rule 4 (V -> EMPTY .)
+    FOR             reduce using rule 4 (V -> EMPTY .)
+    LPAREN          reduce using rule 4 (V -> EMPTY .)
+    NINT            reduce using rule 4 (V -> EMPTY .)
+    NFLOAT          reduce using rule 4 (V -> EMPTY .)
+    ID              reduce using rule 4 (V -> EMPTY .)
+    PEND            reduce using rule 4 (V -> EMPTY .)
+    SUBEND          reduce using rule 4 (V -> EMPTY .)
+    RCURL           reduce using rule 4 (V -> EMPTY .)
+
+
+state 7
+
+    (1) START -> PROGRAM V P . S PEND
+    (9) S -> . IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S
+    (12) S -> . WHILE LPAREN LOGE RPAREN LCURL V S RCURL S
+    (13) S -> . DO COLON V S WHILE LPAREN LOGE RPAREN S
+    (14) S -> . FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL
+    (15) S -> . E
+    (16) S -> . EMPTY
+    (37) E -> . E PLUS T
+    (38) E -> . E MINUS T
+    (39) E -> . T
+    (36) EMPTY -> .
+    (40) T -> . T MULT F
+    (41) T -> . T DIV F
+    (42) T -> . F
+    (43) F -> . LPAREN E RPAREN
+    (44) F -> . NINT
+    (45) F -> . NFLOAT
+    (46) F -> . VECTOR
+    (47) F -> . MATRIX
+    (48) F -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    IF              shift and go to state 18
+    WHILE           shift and go to state 20
+    DO              shift and go to state 21
+    FOR             shift and go to state 22
+    PEND            reduce using rule 36 (EMPTY -> .)
+    LPAREN          shift and go to state 19
+    NINT            shift and go to state 27
+    NFLOAT          shift and go to state 28
+    ID              shift and go to state 31
+
+    S                              shift and go to state 17
+    E                              shift and go to state 23
+    EMPTY                          shift and go to state 24
+    T                              shift and go to state 25
+    F                              shift and go to state 26
+    VECTOR                         shift and go to state 29
+    MATRIX                         shift and go to state 30
+
+state 8
+
+    (5) P -> SUBPROCEDURE . LPAREN ID RPAREN V P S SUBEND
+
+    LPAREN          shift and go to state 32
+
+
+state 9
+
+    (6) P -> IN . LPAREN NUMTYPE RPAREN S
+
+    LPAREN          shift and go to state 33
+
+
+state 10
+
+    (7) P -> PRINT . LPAREN NUMTYPE RPAREN S
+
+    LPAREN          shift and go to state 34
+
+
+state 11
+
+    (8) P -> EMPTY .
+
+    IF              reduce using rule 8 (P -> EMPTY .)
+    WHILE           reduce using rule 8 (P -> EMPTY .)
+    DO              reduce using rule 8 (P -> EMPTY .)
+    FOR             reduce using rule 8 (P -> EMPTY .)
+    LPAREN          reduce using rule 8 (P -> EMPTY .)
+    NINT            reduce using rule 8 (P -> EMPTY .)
+    NFLOAT          reduce using rule 8 (P -> EMPTY .)
+    ID              reduce using rule 8 (P -> EMPTY .)
+    PEND            reduce using rule 8 (P -> EMPTY .)
+    SUBEND          reduce using rule 8 (P -> EMPTY .)
+
+
+state 12
+
+    (2) V -> DIM VARAUX . V
+    (2) V -> . DIM VARAUX V
+    (3) V -> . LET VARASSIGN V S
+    (4) V -> . EMPTY
+    (36) EMPTY -> .
+
+    DIM             shift and go to state 4
+    LET             shift and go to state 5
+    SUBPROCEDURE    reduce using rule 36 (EMPTY -> .)
+    IN              reduce using rule 36 (EMPTY -> .)
+    PRINT           reduce using rule 36 (EMPTY -> .)
+    IF              reduce using rule 36 (EMPTY -> .)
+    WHILE           reduce using rule 36 (EMPTY -> .)
+    DO              reduce using rule 36 (EMPTY -> .)
+    FOR             reduce using rule 36 (EMPTY -> .)
+    LPAREN          reduce using rule 36 (EMPTY -> .)
+    NINT            reduce using rule 36 (EMPTY -> .)
+    NFLOAT          reduce using rule 36 (EMPTY -> .)
+    ID              reduce using rule 36 (EMPTY -> .)
+    PEND            reduce using rule 36 (EMPTY -> .)
+    SUBEND          reduce using rule 36 (EMPTY -> .)
+    RCURL           reduce using rule 36 (EMPTY -> .)
+
+    V                              shift and go to state 35
+    EMPTY                          shift and go to state 6
+
+state 13
+
+    (17) VARAUX -> ID . AS VARTYPE
+
+    AS              shift and go to state 36
+
+
+state 14
+
+    (3) V -> LET VARASSIGN . V S
+    (2) V -> . DIM VARAUX V
+    (3) V -> . LET VARASSIGN V S
+    (4) V -> . EMPTY
+    (36) EMPTY -> .
+
+    DIM             shift and go to state 4
+    LET             shift and go to state 5
+    SUBPROCEDURE    reduce using rule 36 (EMPTY -> .)
+    IN              reduce using rule 36 (EMPTY -> .)
+    PRINT           reduce using rule 36 (EMPTY -> .)
+    IF              reduce using rule 36 (EMPTY -> .)
+    WHILE           reduce using rule 36 (EMPTY -> .)
+    DO              reduce using rule 36 (EMPTY -> .)
+    FOR             reduce using rule 36 (EMPTY -> .)
+    LPAREN          reduce using rule 36 (EMPTY -> .)
+    NINT            reduce using rule 36 (EMPTY -> .)
+    NFLOAT          reduce using rule 36 (EMPTY -> .)
+    ID              reduce using rule 36 (EMPTY -> .)
+    PEND            reduce using rule 36 (EMPTY -> .)
+    SUBEND          reduce using rule 36 (EMPTY -> .)
+    RCURL           reduce using rule 36 (EMPTY -> .)
+
+    V                              shift and go to state 37
+    EMPTY                          shift and go to state 6
+
+state 15
+
+    (19) VARASSIGN -> VARID . EQUAL E
+
+    EQUAL           shift and go to state 38
+
+
+state 16
+
+    (18) VARID -> ID .
+
+    EQUAL           reduce using rule 18 (VARID -> ID .)
+
+
+state 17
+
+    (1) START -> PROGRAM V P S . PEND
+
+    PEND            shift and go to state 39
+
+
+state 18
+
+    (9) S -> IF . LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S
+
+    LPAREN          shift and go to state 40
+
+
+state 19
+
+    (43) F -> LPAREN . E RPAREN
+    (37) E -> . E PLUS T
+    (38) E -> . E MINUS T
+    (39) E -> . T
+    (40) T -> . T MULT F
+    (41) T -> . T DIV F
+    (42) T -> . F
+    (43) F -> . LPAREN E RPAREN
+    (44) F -> . NINT
+    (45) F -> . NFLOAT
+    (46) F -> . VECTOR
+    (47) F -> . MATRIX
+    (48) F -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    LPAREN          shift and go to state 19
+    NINT            shift and go to state 27
+    NFLOAT          shift and go to state 28
+    ID              shift and go to state 31
+
+    E                              shift and go to state 41
+    T                              shift and go to state 25
+    F                              shift and go to state 26
+    VECTOR                         shift and go to state 29
+    MATRIX                         shift and go to state 30
+
+state 20
+
+    (12) S -> WHILE . LPAREN LOGE RPAREN LCURL V S RCURL S
+
+    LPAREN          shift and go to state 42
+
+
+state 21
+
+    (13) S -> DO . COLON V S WHILE LPAREN LOGE RPAREN S
+
+    COLON           shift and go to state 43
+
+
+state 22
+
+    (14) S -> FOR . LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL
+
+    LPAREN          shift and go to state 44
+
+
+state 23
+
+    (15) S -> E .
+    (37) E -> E . PLUS T
+    (38) E -> E . MINUS T
+
+    PEND            reduce using rule 15 (S -> E .)
+    SUBPROCEDURE    reduce using rule 15 (S -> E .)
+    IN              reduce using rule 15 (S -> E .)
+    PRINT           reduce using rule 15 (S -> E .)
+    IF              reduce using rule 15 (S -> E .)
+    WHILE           reduce using rule 15 (S -> E .)
+    DO              reduce using rule 15 (S -> E .)
+    FOR             reduce using rule 15 (S -> E .)
+    LPAREN          reduce using rule 15 (S -> E .)
+    NINT            reduce using rule 15 (S -> E .)
+    NFLOAT          reduce using rule 15 (S -> E .)
+    ID              reduce using rule 15 (S -> E .)
+    SUBEND          reduce using rule 15 (S -> E .)
+    RCURL           reduce using rule 15 (S -> E .)
+    PLUS            shift and go to state 45
+    MINUS           shift and go to state 46
+
+
+state 24
+
+    (16) S -> EMPTY .
+
+    PEND            reduce using rule 16 (S -> EMPTY .)
+    SUBPROCEDURE    reduce using rule 16 (S -> EMPTY .)
+    IN              reduce using rule 16 (S -> EMPTY .)
+    PRINT           reduce using rule 16 (S -> EMPTY .)
+    IF              reduce using rule 16 (S -> EMPTY .)
+    WHILE           reduce using rule 16 (S -> EMPTY .)
+    DO              reduce using rule 16 (S -> EMPTY .)
+    FOR             reduce using rule 16 (S -> EMPTY .)
+    LPAREN          reduce using rule 16 (S -> EMPTY .)
+    NINT            reduce using rule 16 (S -> EMPTY .)
+    NFLOAT          reduce using rule 16 (S -> EMPTY .)
+    ID              reduce using rule 16 (S -> EMPTY .)
+    SUBEND          reduce using rule 16 (S -> EMPTY .)
+    RCURL           reduce using rule 16 (S -> EMPTY .)
+
+
+state 25
+
+    (39) E -> T .
+    (40) T -> T . MULT F
+    (41) T -> T . DIV F
+
+    PLUS            reduce using rule 39 (E -> T .)
+    MINUS           reduce using rule 39 (E -> T .)
+    PEND            reduce using rule 39 (E -> T .)
+    RPAREN          reduce using rule 39 (E -> T .)
+    SUBPROCEDURE    reduce using rule 39 (E -> T .)
+    IN              reduce using rule 39 (E -> T .)
+    PRINT           reduce using rule 39 (E -> T .)
+    IF              reduce using rule 39 (E -> T .)
+    WHILE           reduce using rule 39 (E -> T .)
+    DO              reduce using rule 39 (E -> T .)
+    FOR             reduce using rule 39 (E -> T .)
+    LPAREN          reduce using rule 39 (E -> T .)
+    NINT            reduce using rule 39 (E -> T .)
+    NFLOAT          reduce using rule 39 (E -> T .)
+    ID              reduce using rule 39 (E -> T .)
+    SUBEND          reduce using rule 39 (E -> T .)
+    RCURL           reduce using rule 39 (E -> T .)
+    DIM             reduce using rule 39 (E -> T .)
+    LET             reduce using rule 39 (E -> T .)
+    MULT            shift and go to state 47
+    DIV             shift and go to state 48
+
+
+state 26
+
+    (42) T -> F .
+
+    MULT            reduce using rule 42 (T -> F .)
+    DIV             reduce using rule 42 (T -> F .)
+    PLUS            reduce using rule 42 (T -> F .)
+    MINUS           reduce using rule 42 (T -> F .)
+    PEND            reduce using rule 42 (T -> F .)
+    RPAREN          reduce using rule 42 (T -> F .)
+    SUBPROCEDURE    reduce using rule 42 (T -> F .)
+    IN              reduce using rule 42 (T -> F .)
+    PRINT           reduce using rule 42 (T -> F .)
+    IF              reduce using rule 42 (T -> F .)
+    WHILE           reduce using rule 42 (T -> F .)
+    DO              reduce using rule 42 (T -> F .)
+    FOR             reduce using rule 42 (T -> F .)
+    LPAREN          reduce using rule 42 (T -> F .)
+    NINT            reduce using rule 42 (T -> F .)
+    NFLOAT          reduce using rule 42 (T -> F .)
+    ID              reduce using rule 42 (T -> F .)
+    SUBEND          reduce using rule 42 (T -> F .)
+    RCURL           reduce using rule 42 (T -> F .)
+    DIM             reduce using rule 42 (T -> F .)
+    LET             reduce using rule 42 (T -> F .)
+
+
+state 27
+
+    (44) F -> NINT .
+
+    MULT            reduce using rule 44 (F -> NINT .)
+    DIV             reduce using rule 44 (F -> NINT .)
+    PLUS            reduce using rule 44 (F -> NINT .)
+    MINUS           reduce using rule 44 (F -> NINT .)
+    PEND            reduce using rule 44 (F -> NINT .)
+    RPAREN          reduce using rule 44 (F -> NINT .)
+    SUBPROCEDURE    reduce using rule 44 (F -> NINT .)
+    IN              reduce using rule 44 (F -> NINT .)
+    PRINT           reduce using rule 44 (F -> NINT .)
+    IF              reduce using rule 44 (F -> NINT .)
+    WHILE           reduce using rule 44 (F -> NINT .)
+    DO              reduce using rule 44 (F -> NINT .)
+    FOR             reduce using rule 44 (F -> NINT .)
+    LPAREN          reduce using rule 44 (F -> NINT .)
+    NINT            reduce using rule 44 (F -> NINT .)
+    NFLOAT          reduce using rule 44 (F -> NINT .)
+    ID              reduce using rule 44 (F -> NINT .)
+    SUBEND          reduce using rule 44 (F -> NINT .)
+    RCURL           reduce using rule 44 (F -> NINT .)
+    DIM             reduce using rule 44 (F -> NINT .)
+    LET             reduce using rule 44 (F -> NINT .)
+
+
+state 28
+
+    (45) F -> NFLOAT .
+
+    MULT            reduce using rule 45 (F -> NFLOAT .)
+    DIV             reduce using rule 45 (F -> NFLOAT .)
+    PLUS            reduce using rule 45 (F -> NFLOAT .)
+    MINUS           reduce using rule 45 (F -> NFLOAT .)
+    PEND            reduce using rule 45 (F -> NFLOAT .)
+    RPAREN          reduce using rule 45 (F -> NFLOAT .)
+    SUBPROCEDURE    reduce using rule 45 (F -> NFLOAT .)
+    IN              reduce using rule 45 (F -> NFLOAT .)
+    PRINT           reduce using rule 45 (F -> NFLOAT .)
+    IF              reduce using rule 45 (F -> NFLOAT .)
+    WHILE           reduce using rule 45 (F -> NFLOAT .)
+    DO              reduce using rule 45 (F -> NFLOAT .)
+    FOR             reduce using rule 45 (F -> NFLOAT .)
+    LPAREN          reduce using rule 45 (F -> NFLOAT .)
+    NINT            reduce using rule 45 (F -> NFLOAT .)
+    NFLOAT          reduce using rule 45 (F -> NFLOAT .)
+    ID              reduce using rule 45 (F -> NFLOAT .)
+    SUBEND          reduce using rule 45 (F -> NFLOAT .)
+    RCURL           reduce using rule 45 (F -> NFLOAT .)
+    DIM             reduce using rule 45 (F -> NFLOAT .)
+    LET             reduce using rule 45 (F -> NFLOAT .)
+
+
+state 29
+
+    (46) F -> VECTOR .
+
+    MULT            reduce using rule 46 (F -> VECTOR .)
+    DIV             reduce using rule 46 (F -> VECTOR .)
+    PLUS            reduce using rule 46 (F -> VECTOR .)
+    MINUS           reduce using rule 46 (F -> VECTOR .)
+    PEND            reduce using rule 46 (F -> VECTOR .)
+    RPAREN          reduce using rule 46 (F -> VECTOR .)
+    SUBPROCEDURE    reduce using rule 46 (F -> VECTOR .)
+    IN              reduce using rule 46 (F -> VECTOR .)
+    PRINT           reduce using rule 46 (F -> VECTOR .)
+    IF              reduce using rule 46 (F -> VECTOR .)
+    WHILE           reduce using rule 46 (F -> VECTOR .)
+    DO              reduce using rule 46 (F -> VECTOR .)
+    FOR             reduce using rule 46 (F -> VECTOR .)
+    LPAREN          reduce using rule 46 (F -> VECTOR .)
+    NINT            reduce using rule 46 (F -> VECTOR .)
+    NFLOAT          reduce using rule 46 (F -> VECTOR .)
+    ID              reduce using rule 46 (F -> VECTOR .)
+    SUBEND          reduce using rule 46 (F -> VECTOR .)
+    RCURL           reduce using rule 46 (F -> VECTOR .)
+    DIM             reduce using rule 46 (F -> VECTOR .)
+    LET             reduce using rule 46 (F -> VECTOR .)
+
+
+state 30
+
+    (47) F -> MATRIX .
+
+    MULT            reduce using rule 47 (F -> MATRIX .)
+    DIV             reduce using rule 47 (F -> MATRIX .)
+    PLUS            reduce using rule 47 (F -> MATRIX .)
+    MINUS           reduce using rule 47 (F -> MATRIX .)
+    PEND            reduce using rule 47 (F -> MATRIX .)
+    RPAREN          reduce using rule 47 (F -> MATRIX .)
+    SUBPROCEDURE    reduce using rule 47 (F -> MATRIX .)
+    IN              reduce using rule 47 (F -> MATRIX .)
+    PRINT           reduce using rule 47 (F -> MATRIX .)
+    IF              reduce using rule 47 (F -> MATRIX .)
+    WHILE           reduce using rule 47 (F -> MATRIX .)
+    DO              reduce using rule 47 (F -> MATRIX .)
+    FOR             reduce using rule 47 (F -> MATRIX .)
+    LPAREN          reduce using rule 47 (F -> MATRIX .)
+    NINT            reduce using rule 47 (F -> MATRIX .)
+    NFLOAT          reduce using rule 47 (F -> MATRIX .)
+    ID              reduce using rule 47 (F -> MATRIX .)
+    SUBEND          reduce using rule 47 (F -> MATRIX .)
+    RCURL           reduce using rule 47 (F -> MATRIX .)
+    DIM             reduce using rule 47 (F -> MATRIX .)
+    LET             reduce using rule 47 (F -> MATRIX .)
+
+
+state 31
+
+    (48) F -> ID .
+    (34) VECTOR -> ID . LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> ID . LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    MULT            reduce using rule 48 (F -> ID .)
+    DIV             reduce using rule 48 (F -> ID .)
+    PLUS            reduce using rule 48 (F -> ID .)
+    MINUS           reduce using rule 48 (F -> ID .)
+    PEND            reduce using rule 48 (F -> ID .)
+    RPAREN          reduce using rule 48 (F -> ID .)
+    SUBPROCEDURE    reduce using rule 48 (F -> ID .)
+    IN              reduce using rule 48 (F -> ID .)
+    PRINT           reduce using rule 48 (F -> ID .)
+    IF              reduce using rule 48 (F -> ID .)
+    WHILE           reduce using rule 48 (F -> ID .)
+    DO              reduce using rule 48 (F -> ID .)
+    FOR             reduce using rule 48 (F -> ID .)
+    LPAREN          reduce using rule 48 (F -> ID .)
+    NINT            reduce using rule 48 (F -> ID .)
+    NFLOAT          reduce using rule 48 (F -> ID .)
+    ID              reduce using rule 48 (F -> ID .)
+    SUBEND          reduce using rule 48 (F -> ID .)
+    RCURL           reduce using rule 48 (F -> ID .)
+    DIM             reduce using rule 48 (F -> ID .)
+    LET             reduce using rule 48 (F -> ID .)
+    LBRACK          shift and go to state 49
+
+
+state 32
+
+    (5) P -> SUBPROCEDURE LPAREN . ID RPAREN V P S SUBEND
+
+    ID              shift and go to state 50
+
+
+state 33
+
+    (6) P -> IN LPAREN . NUMTYPE RPAREN S
+    (24) NUMTYPE -> . ID
+    (25) NUMTYPE -> . NINT
+    (26) NUMTYPE -> . NFLOAT
+
+    ID              shift and go to state 52
+    NINT            shift and go to state 53
+    NFLOAT          shift and go to state 54
+
+    NUMTYPE                        shift and go to state 51
+
+state 34
+
+    (7) P -> PRINT LPAREN . NUMTYPE RPAREN S
+    (24) NUMTYPE -> . ID
+    (25) NUMTYPE -> . NINT
+    (26) NUMTYPE -> . NFLOAT
+
+    ID              shift and go to state 52
+    NINT            shift and go to state 53
+    NFLOAT          shift and go to state 54
+
+    NUMTYPE                        shift and go to state 55
+
+state 35
+
+    (2) V -> DIM VARAUX V .
+
+    SUBPROCEDURE    reduce using rule 2 (V -> DIM VARAUX V .)
+    IN              reduce using rule 2 (V -> DIM VARAUX V .)
+    PRINT           reduce using rule 2 (V -> DIM VARAUX V .)
+    IF              reduce using rule 2 (V -> DIM VARAUX V .)
+    WHILE           reduce using rule 2 (V -> DIM VARAUX V .)
+    DO              reduce using rule 2 (V -> DIM VARAUX V .)
+    FOR             reduce using rule 2 (V -> DIM VARAUX V .)
+    LPAREN          reduce using rule 2 (V -> DIM VARAUX V .)
+    NINT            reduce using rule 2 (V -> DIM VARAUX V .)
+    NFLOAT          reduce using rule 2 (V -> DIM VARAUX V .)
+    ID              reduce using rule 2 (V -> DIM VARAUX V .)
+    PEND            reduce using rule 2 (V -> DIM VARAUX V .)
+    SUBEND          reduce using rule 2 (V -> DIM VARAUX V .)
+    RCURL           reduce using rule 2 (V -> DIM VARAUX V .)
+
+
+state 36
+
+    (17) VARAUX -> ID AS . VARTYPE
+    (20) VARTYPE -> . INT
+    (21) VARTYPE -> . FLOAT
+    (22) VARTYPE -> . VECDEF
+    (23) VARTYPE -> . MATDEF
+    (32) VECDEF -> . VEC LBRACK VAR RBRACK
+    (33) MATDEF -> . MAT LBRACK VAR RBRACK LBRACK VAR RBRACK
+
+    INT             shift and go to state 57
+    FLOAT           shift and go to state 58
+    VEC             shift and go to state 61
+    MAT             shift and go to state 62
+
+    VARTYPE                        shift and go to state 56
+    VECDEF                         shift and go to state 59
+    MATDEF                         shift and go to state 60
+
+state 37
+
+    (3) V -> LET VARASSIGN V . S
+    (9) S -> . IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S
+    (12) S -> . WHILE LPAREN LOGE RPAREN LCURL V S RCURL S
+    (13) S -> . DO COLON V S WHILE LPAREN LOGE RPAREN S
+    (14) S -> . FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL
+    (15) S -> . E
+    (16) S -> . EMPTY
+    (37) E -> . E PLUS T
+    (38) E -> . E MINUS T
+    (39) E -> . T
+    (36) EMPTY -> .
+    (40) T -> . T MULT F
+    (41) T -> . T DIV F
+    (42) T -> . F
+    (43) F -> . LPAREN E RPAREN
+    (44) F -> . NINT
+    (45) F -> . NFLOAT
+    (46) F -> . VECTOR
+    (47) F -> . MATRIX
+    (48) F -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+  ! shift/reduce conflict for DO resolved as shift
+  ! shift/reduce conflict for FOR resolved as shift
+  ! shift/reduce conflict for LPAREN resolved as shift
+  ! shift/reduce conflict for NINT resolved as shift
+  ! shift/reduce conflict for NFLOAT resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+    IF              shift and go to state 18
+    WHILE           shift and go to state 20
+    DO              shift and go to state 21
+    FOR             shift and go to state 22
+    SUBPROCEDURE    reduce using rule 36 (EMPTY -> .)
+    IN              reduce using rule 36 (EMPTY -> .)
+    PRINT           reduce using rule 36 (EMPTY -> .)
+    PEND            reduce using rule 36 (EMPTY -> .)
+    SUBEND          reduce using rule 36 (EMPTY -> .)
+    RCURL           reduce using rule 36 (EMPTY -> .)
+    LPAREN          shift and go to state 19
+    NINT            shift and go to state 27
+    NFLOAT          shift and go to state 28
+    ID              shift and go to state 31
+
+  ! IF              [ reduce using rule 36 (EMPTY -> .) ]
+  ! WHILE           [ reduce using rule 36 (EMPTY -> .) ]
+  ! DO              [ reduce using rule 36 (EMPTY -> .) ]
+  ! FOR             [ reduce using rule 36 (EMPTY -> .) ]
+  ! LPAREN          [ reduce using rule 36 (EMPTY -> .) ]
+  ! NINT            [ reduce using rule 36 (EMPTY -> .) ]
+  ! NFLOAT          [ reduce using rule 36 (EMPTY -> .) ]
+  ! ID              [ reduce using rule 36 (EMPTY -> .) ]
+
+    S                              shift and go to state 63
+    E                              shift and go to state 23
+    EMPTY                          shift and go to state 24
+    T                              shift and go to state 25
+    F                              shift and go to state 26
+    VECTOR                         shift and go to state 29
+    MATRIX                         shift and go to state 30
+
+state 38
+
+    (19) VARASSIGN -> VARID EQUAL . E
+    (37) E -> . E PLUS T
+    (38) E -> . E MINUS T
+    (39) E -> . T
+    (40) T -> . T MULT F
+    (41) T -> . T DIV F
+    (42) T -> . F
+    (43) F -> . LPAREN E RPAREN
+    (44) F -> . NINT
+    (45) F -> . NFLOAT
+    (46) F -> . VECTOR
+    (47) F -> . MATRIX
+    (48) F -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    LPAREN          shift and go to state 19
+    NINT            shift and go to state 27
+    NFLOAT          shift and go to state 28
+    ID              shift and go to state 31
+
+    E                              shift and go to state 64
+    T                              shift and go to state 25
+    F                              shift and go to state 26
+    VECTOR                         shift and go to state 29
+    MATRIX                         shift and go to state 30
+
+state 39
+
+    (1) START -> PROGRAM V P S PEND .
+
+    $end            reduce using rule 1 (START -> PROGRAM V P S PEND .)
+
+
+state 40
+
+    (9) S -> IF LPAREN . LOGE RPAREN LCURL V S RCURL IFELSE S
+    (49) LOGE -> . LOGE OR LOGT
+    (50) LOGE -> . NOT LOGT
+    (51) LOGE -> . LOGT
+    (52) LOGT -> . LOGT AND LOGF
+    (53) LOGT -> . LOGF
+    (54) LOGF -> . VAR LT VAR
+    (55) LOGF -> . VAR LE VAR
+    (56) LOGF -> . VAR GT VAR
+    (57) LOGF -> . VAR GE VAR
+    (58) LOGF -> . VAR EQ VAR
+    (59) LOGF -> . VAR NE VAR
+    (60) LOGF -> . LPAREN LOGE RPAREN
+    (27) VAR -> . NINT
+    (28) VAR -> . NFLOAT
+    (29) VAR -> . VECTOR
+    (30) VAR -> . MATRIX
+    (31) VAR -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    NOT             shift and go to state 68
+    LPAREN          shift and go to state 65
+    NINT            shift and go to state 71
+    NFLOAT          shift and go to state 72
+    ID              shift and go to state 75
+
+    LOGE                           shift and go to state 66
+    LOGT                           shift and go to state 67
+    LOGF                           shift and go to state 69
+    VAR                            shift and go to state 70
+    VECTOR                         shift and go to state 73
+    MATRIX                         shift and go to state 74
+
+state 41
+
+    (43) F -> LPAREN E . RPAREN
+    (37) E -> E . PLUS T
+    (38) E -> E . MINUS T
+
+    RPAREN          shift and go to state 76
+    PLUS            shift and go to state 45
+    MINUS           shift and go to state 46
+
+
+state 42
+
+    (12) S -> WHILE LPAREN . LOGE RPAREN LCURL V S RCURL S
+    (49) LOGE -> . LOGE OR LOGT
+    (50) LOGE -> . NOT LOGT
+    (51) LOGE -> . LOGT
+    (52) LOGT -> . LOGT AND LOGF
+    (53) LOGT -> . LOGF
+    (54) LOGF -> . VAR LT VAR
+    (55) LOGF -> . VAR LE VAR
+    (56) LOGF -> . VAR GT VAR
+    (57) LOGF -> . VAR GE VAR
+    (58) LOGF -> . VAR EQ VAR
+    (59) LOGF -> . VAR NE VAR
+    (60) LOGF -> . LPAREN LOGE RPAREN
+    (27) VAR -> . NINT
+    (28) VAR -> . NFLOAT
+    (29) VAR -> . VECTOR
+    (30) VAR -> . MATRIX
+    (31) VAR -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    NOT             shift and go to state 68
+    LPAREN          shift and go to state 65
+    NINT            shift and go to state 71
+    NFLOAT          shift and go to state 72
+    ID              shift and go to state 75
+
+    LOGE                           shift and go to state 77
+    LOGT                           shift and go to state 67
+    LOGF                           shift and go to state 69
+    VAR                            shift and go to state 70
+    VECTOR                         shift and go to state 73
+    MATRIX                         shift and go to state 74
+
+state 43
+
+    (13) S -> DO COLON . V S WHILE LPAREN LOGE RPAREN S
+    (2) V -> . DIM VARAUX V
+    (3) V -> . LET VARASSIGN V S
+    (4) V -> . EMPTY
+    (36) EMPTY -> .
+
+    DIM             shift and go to state 4
+    LET             shift and go to state 5
+    IF              reduce using rule 36 (EMPTY -> .)
+    WHILE           reduce using rule 36 (EMPTY -> .)
+    DO              reduce using rule 36 (EMPTY -> .)
+    FOR             reduce using rule 36 (EMPTY -> .)
+    LPAREN          reduce using rule 36 (EMPTY -> .)
+    NINT            reduce using rule 36 (EMPTY -> .)
+    NFLOAT          reduce using rule 36 (EMPTY -> .)
+    ID              reduce using rule 36 (EMPTY -> .)
+
+    V                              shift and go to state 78
+    EMPTY                          shift and go to state 6
+
+state 44
+
+    (14) S -> FOR LPAREN . LOGE COMMA LOGE RPAREN LCURL V S RCURL
+    (49) LOGE -> . LOGE OR LOGT
+    (50) LOGE -> . NOT LOGT
+    (51) LOGE -> . LOGT
+    (52) LOGT -> . LOGT AND LOGF
+    (53) LOGT -> . LOGF
+    (54) LOGF -> . VAR LT VAR
+    (55) LOGF -> . VAR LE VAR
+    (56) LOGF -> . VAR GT VAR
+    (57) LOGF -> . VAR GE VAR
+    (58) LOGF -> . VAR EQ VAR
+    (59) LOGF -> . VAR NE VAR
+    (60) LOGF -> . LPAREN LOGE RPAREN
+    (27) VAR -> . NINT
+    (28) VAR -> . NFLOAT
+    (29) VAR -> . VECTOR
+    (30) VAR -> . MATRIX
+    (31) VAR -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    NOT             shift and go to state 68
+    LPAREN          shift and go to state 65
+    NINT            shift and go to state 71
+    NFLOAT          shift and go to state 72
+    ID              shift and go to state 75
+
+    LOGE                           shift and go to state 79
+    LOGT                           shift and go to state 67
+    LOGF                           shift and go to state 69
+    VAR                            shift and go to state 70
+    VECTOR                         shift and go to state 73
+    MATRIX                         shift and go to state 74
+
+state 45
+
+    (37) E -> E PLUS . T
+    (40) T -> . T MULT F
+    (41) T -> . T DIV F
+    (42) T -> . F
+    (43) F -> . LPAREN E RPAREN
+    (44) F -> . NINT
+    (45) F -> . NFLOAT
+    (46) F -> . VECTOR
+    (47) F -> . MATRIX
+    (48) F -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    LPAREN          shift and go to state 19
+    NINT            shift and go to state 27
+    NFLOAT          shift and go to state 28
+    ID              shift and go to state 31
+
+    T                              shift and go to state 80
+    F                              shift and go to state 26
+    VECTOR                         shift and go to state 29
+    MATRIX                         shift and go to state 30
+
+state 46
+
+    (38) E -> E MINUS . T
+    (40) T -> . T MULT F
+    (41) T -> . T DIV F
+    (42) T -> . F
+    (43) F -> . LPAREN E RPAREN
+    (44) F -> . NINT
+    (45) F -> . NFLOAT
+    (46) F -> . VECTOR
+    (47) F -> . MATRIX
+    (48) F -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    LPAREN          shift and go to state 19
+    NINT            shift and go to state 27
+    NFLOAT          shift and go to state 28
+    ID              shift and go to state 31
+
+    T                              shift and go to state 81
+    F                              shift and go to state 26
+    VECTOR                         shift and go to state 29
+    MATRIX                         shift and go to state 30
+
+state 47
+
+    (40) T -> T MULT . F
+    (43) F -> . LPAREN E RPAREN
+    (44) F -> . NINT
+    (45) F -> . NFLOAT
+    (46) F -> . VECTOR
+    (47) F -> . MATRIX
+    (48) F -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    LPAREN          shift and go to state 19
+    NINT            shift and go to state 27
+    NFLOAT          shift and go to state 28
+    ID              shift and go to state 31
+
+    F                              shift and go to state 82
+    VECTOR                         shift and go to state 29
+    MATRIX                         shift and go to state 30
+
+state 48
+
+    (41) T -> T DIV . F
+    (43) F -> . LPAREN E RPAREN
+    (44) F -> . NINT
+    (45) F -> . NFLOAT
+    (46) F -> . VECTOR
+    (47) F -> . MATRIX
+    (48) F -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    LPAREN          shift and go to state 19
+    NINT            shift and go to state 27
+    NFLOAT          shift and go to state 28
+    ID              shift and go to state 31
+
+    F                              shift and go to state 83
+    VECTOR                         shift and go to state 29
+    MATRIX                         shift and go to state 30
+
+state 49
+
+    (34) VECTOR -> ID LBRACK . NUMTYPE RBRACK
+    (35) MATRIX -> ID LBRACK . NUMTYPE COMMA NUMTYPE RBRACK
+    (24) NUMTYPE -> . ID
+    (25) NUMTYPE -> . NINT
+    (26) NUMTYPE -> . NFLOAT
+
+    ID              shift and go to state 52
+    NINT            shift and go to state 53
+    NFLOAT          shift and go to state 54
+
+    NUMTYPE                        shift and go to state 84
+
+state 50
+
+    (5) P -> SUBPROCEDURE LPAREN ID . RPAREN V P S SUBEND
+
+    RPAREN          shift and go to state 85
+
+
+state 51
+
+    (6) P -> IN LPAREN NUMTYPE . RPAREN S
+
+    RPAREN          shift and go to state 86
+
+
+state 52
+
+    (24) NUMTYPE -> ID .
+
+    RPAREN          reduce using rule 24 (NUMTYPE -> ID .)
+    RBRACK          reduce using rule 24 (NUMTYPE -> ID .)
+    COMMA           reduce using rule 24 (NUMTYPE -> ID .)
+
+
+state 53
+
+    (25) NUMTYPE -> NINT .
+
+    RPAREN          reduce using rule 25 (NUMTYPE -> NINT .)
+    RBRACK          reduce using rule 25 (NUMTYPE -> NINT .)
+    COMMA           reduce using rule 25 (NUMTYPE -> NINT .)
+
+
+state 54
+
+    (26) NUMTYPE -> NFLOAT .
+
+    RPAREN          reduce using rule 26 (NUMTYPE -> NFLOAT .)
+    RBRACK          reduce using rule 26 (NUMTYPE -> NFLOAT .)
+    COMMA           reduce using rule 26 (NUMTYPE -> NFLOAT .)
+
+
+state 55
+
+    (7) P -> PRINT LPAREN NUMTYPE . RPAREN S
+
+    RPAREN          shift and go to state 87
+
+
+state 56
+
+    (17) VARAUX -> ID AS VARTYPE .
+
+    DIM             reduce using rule 17 (VARAUX -> ID AS VARTYPE .)
+    LET             reduce using rule 17 (VARAUX -> ID AS VARTYPE .)
+    SUBPROCEDURE    reduce using rule 17 (VARAUX -> ID AS VARTYPE .)
+    IN              reduce using rule 17 (VARAUX -> ID AS VARTYPE .)
+    PRINT           reduce using rule 17 (VARAUX -> ID AS VARTYPE .)
+    IF              reduce using rule 17 (VARAUX -> ID AS VARTYPE .)
+    WHILE           reduce using rule 17 (VARAUX -> ID AS VARTYPE .)
+    DO              reduce using rule 17 (VARAUX -> ID AS VARTYPE .)
+    FOR             reduce using rule 17 (VARAUX -> ID AS VARTYPE .)
+    LPAREN          reduce using rule 17 (VARAUX -> ID AS VARTYPE .)
+    NINT            reduce using rule 17 (VARAUX -> ID AS VARTYPE .)
+    NFLOAT          reduce using rule 17 (VARAUX -> ID AS VARTYPE .)
+    ID              reduce using rule 17 (VARAUX -> ID AS VARTYPE .)
+    PEND            reduce using rule 17 (VARAUX -> ID AS VARTYPE .)
+    SUBEND          reduce using rule 17 (VARAUX -> ID AS VARTYPE .)
+    RCURL           reduce using rule 17 (VARAUX -> ID AS VARTYPE .)
+
+
+state 57
+
+    (20) VARTYPE -> INT .
+
+    DIM             reduce using rule 20 (VARTYPE -> INT .)
+    LET             reduce using rule 20 (VARTYPE -> INT .)
+    SUBPROCEDURE    reduce using rule 20 (VARTYPE -> INT .)
+    IN              reduce using rule 20 (VARTYPE -> INT .)
+    PRINT           reduce using rule 20 (VARTYPE -> INT .)
+    IF              reduce using rule 20 (VARTYPE -> INT .)
+    WHILE           reduce using rule 20 (VARTYPE -> INT .)
+    DO              reduce using rule 20 (VARTYPE -> INT .)
+    FOR             reduce using rule 20 (VARTYPE -> INT .)
+    LPAREN          reduce using rule 20 (VARTYPE -> INT .)
+    NINT            reduce using rule 20 (VARTYPE -> INT .)
+    NFLOAT          reduce using rule 20 (VARTYPE -> INT .)
+    ID              reduce using rule 20 (VARTYPE -> INT .)
+    PEND            reduce using rule 20 (VARTYPE -> INT .)
+    SUBEND          reduce using rule 20 (VARTYPE -> INT .)
+    RCURL           reduce using rule 20 (VARTYPE -> INT .)
+
+
+state 58
+
+    (21) VARTYPE -> FLOAT .
+
+    DIM             reduce using rule 21 (VARTYPE -> FLOAT .)
+    LET             reduce using rule 21 (VARTYPE -> FLOAT .)
+    SUBPROCEDURE    reduce using rule 21 (VARTYPE -> FLOAT .)
+    IN              reduce using rule 21 (VARTYPE -> FLOAT .)
+    PRINT           reduce using rule 21 (VARTYPE -> FLOAT .)
+    IF              reduce using rule 21 (VARTYPE -> FLOAT .)
+    WHILE           reduce using rule 21 (VARTYPE -> FLOAT .)
+    DO              reduce using rule 21 (VARTYPE -> FLOAT .)
+    FOR             reduce using rule 21 (VARTYPE -> FLOAT .)
+    LPAREN          reduce using rule 21 (VARTYPE -> FLOAT .)
+    NINT            reduce using rule 21 (VARTYPE -> FLOAT .)
+    NFLOAT          reduce using rule 21 (VARTYPE -> FLOAT .)
+    ID              reduce using rule 21 (VARTYPE -> FLOAT .)
+    PEND            reduce using rule 21 (VARTYPE -> FLOAT .)
+    SUBEND          reduce using rule 21 (VARTYPE -> FLOAT .)
+    RCURL           reduce using rule 21 (VARTYPE -> FLOAT .)
+
+
+state 59
+
+    (22) VARTYPE -> VECDEF .
+
+    DIM             reduce using rule 22 (VARTYPE -> VECDEF .)
+    LET             reduce using rule 22 (VARTYPE -> VECDEF .)
+    SUBPROCEDURE    reduce using rule 22 (VARTYPE -> VECDEF .)
+    IN              reduce using rule 22 (VARTYPE -> VECDEF .)
+    PRINT           reduce using rule 22 (VARTYPE -> VECDEF .)
+    IF              reduce using rule 22 (VARTYPE -> VECDEF .)
+    WHILE           reduce using rule 22 (VARTYPE -> VECDEF .)
+    DO              reduce using rule 22 (VARTYPE -> VECDEF .)
+    FOR             reduce using rule 22 (VARTYPE -> VECDEF .)
+    LPAREN          reduce using rule 22 (VARTYPE -> VECDEF .)
+    NINT            reduce using rule 22 (VARTYPE -> VECDEF .)
+    NFLOAT          reduce using rule 22 (VARTYPE -> VECDEF .)
+    ID              reduce using rule 22 (VARTYPE -> VECDEF .)
+    PEND            reduce using rule 22 (VARTYPE -> VECDEF .)
+    SUBEND          reduce using rule 22 (VARTYPE -> VECDEF .)
+    RCURL           reduce using rule 22 (VARTYPE -> VECDEF .)
+
+
+state 60
+
+    (23) VARTYPE -> MATDEF .
+
+    DIM             reduce using rule 23 (VARTYPE -> MATDEF .)
+    LET             reduce using rule 23 (VARTYPE -> MATDEF .)
+    SUBPROCEDURE    reduce using rule 23 (VARTYPE -> MATDEF .)
+    IN              reduce using rule 23 (VARTYPE -> MATDEF .)
+    PRINT           reduce using rule 23 (VARTYPE -> MATDEF .)
+    IF              reduce using rule 23 (VARTYPE -> MATDEF .)
+    WHILE           reduce using rule 23 (VARTYPE -> MATDEF .)
+    DO              reduce using rule 23 (VARTYPE -> MATDEF .)
+    FOR             reduce using rule 23 (VARTYPE -> MATDEF .)
+    LPAREN          reduce using rule 23 (VARTYPE -> MATDEF .)
+    NINT            reduce using rule 23 (VARTYPE -> MATDEF .)
+    NFLOAT          reduce using rule 23 (VARTYPE -> MATDEF .)
+    ID              reduce using rule 23 (VARTYPE -> MATDEF .)
+    PEND            reduce using rule 23 (VARTYPE -> MATDEF .)
+    SUBEND          reduce using rule 23 (VARTYPE -> MATDEF .)
+    RCURL           reduce using rule 23 (VARTYPE -> MATDEF .)
+
+
+state 61
+
+    (32) VECDEF -> VEC . LBRACK VAR RBRACK
+
+    LBRACK          shift and go to state 88
+
+
+state 62
+
+    (33) MATDEF -> MAT . LBRACK VAR RBRACK LBRACK VAR RBRACK
+
+    LBRACK          shift and go to state 89
+
+
+state 63
+
+    (3) V -> LET VARASSIGN V S .
+
+    SUBPROCEDURE    reduce using rule 3 (V -> LET VARASSIGN V S .)
+    IN              reduce using rule 3 (V -> LET VARASSIGN V S .)
+    PRINT           reduce using rule 3 (V -> LET VARASSIGN V S .)
+    IF              reduce using rule 3 (V -> LET VARASSIGN V S .)
+    WHILE           reduce using rule 3 (V -> LET VARASSIGN V S .)
+    DO              reduce using rule 3 (V -> LET VARASSIGN V S .)
+    FOR             reduce using rule 3 (V -> LET VARASSIGN V S .)
+    LPAREN          reduce using rule 3 (V -> LET VARASSIGN V S .)
+    NINT            reduce using rule 3 (V -> LET VARASSIGN V S .)
+    NFLOAT          reduce using rule 3 (V -> LET VARASSIGN V S .)
+    ID              reduce using rule 3 (V -> LET VARASSIGN V S .)
+    PEND            reduce using rule 3 (V -> LET VARASSIGN V S .)
+    SUBEND          reduce using rule 3 (V -> LET VARASSIGN V S .)
+    RCURL           reduce using rule 3 (V -> LET VARASSIGN V S .)
+
+
+state 64
+
+    (19) VARASSIGN -> VARID EQUAL E .
+    (37) E -> E . PLUS T
+    (38) E -> E . MINUS T
+
+    DIM             reduce using rule 19 (VARASSIGN -> VARID EQUAL E .)
+    LET             reduce using rule 19 (VARASSIGN -> VARID EQUAL E .)
+    IF              reduce using rule 19 (VARASSIGN -> VARID EQUAL E .)
+    WHILE           reduce using rule 19 (VARASSIGN -> VARID EQUAL E .)
+    DO              reduce using rule 19 (VARASSIGN -> VARID EQUAL E .)
+    FOR             reduce using rule 19 (VARASSIGN -> VARID EQUAL E .)
+    LPAREN          reduce using rule 19 (VARASSIGN -> VARID EQUAL E .)
+    NINT            reduce using rule 19 (VARASSIGN -> VARID EQUAL E .)
+    NFLOAT          reduce using rule 19 (VARASSIGN -> VARID EQUAL E .)
+    ID              reduce using rule 19 (VARASSIGN -> VARID EQUAL E .)
+    SUBPROCEDURE    reduce using rule 19 (VARASSIGN -> VARID EQUAL E .)
+    IN              reduce using rule 19 (VARASSIGN -> VARID EQUAL E .)
+    PRINT           reduce using rule 19 (VARASSIGN -> VARID EQUAL E .)
+    PEND            reduce using rule 19 (VARASSIGN -> VARID EQUAL E .)
+    SUBEND          reduce using rule 19 (VARASSIGN -> VARID EQUAL E .)
+    RCURL           reduce using rule 19 (VARASSIGN -> VARID EQUAL E .)
+    PLUS            shift and go to state 45
+    MINUS           shift and go to state 46
+
+
+state 65
+
+    (60) LOGF -> LPAREN . LOGE RPAREN
+    (49) LOGE -> . LOGE OR LOGT
+    (50) LOGE -> . NOT LOGT
+    (51) LOGE -> . LOGT
+    (52) LOGT -> . LOGT AND LOGF
+    (53) LOGT -> . LOGF
+    (54) LOGF -> . VAR LT VAR
+    (55) LOGF -> . VAR LE VAR
+    (56) LOGF -> . VAR GT VAR
+    (57) LOGF -> . VAR GE VAR
+    (58) LOGF -> . VAR EQ VAR
+    (59) LOGF -> . VAR NE VAR
+    (60) LOGF -> . LPAREN LOGE RPAREN
+    (27) VAR -> . NINT
+    (28) VAR -> . NFLOAT
+    (29) VAR -> . VECTOR
+    (30) VAR -> . MATRIX
+    (31) VAR -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    NOT             shift and go to state 68
+    LPAREN          shift and go to state 65
+    NINT            shift and go to state 71
+    NFLOAT          shift and go to state 72
+    ID              shift and go to state 75
+
+    LOGE                           shift and go to state 90
+    LOGT                           shift and go to state 67
+    LOGF                           shift and go to state 69
+    VAR                            shift and go to state 70
+    VECTOR                         shift and go to state 73
+    MATRIX                         shift and go to state 74
+
+state 66
+
+    (9) S -> IF LPAREN LOGE . RPAREN LCURL V S RCURL IFELSE S
+    (49) LOGE -> LOGE . OR LOGT
+
+    RPAREN          shift and go to state 91
+    OR              shift and go to state 92
+
+
+state 67
+
+    (51) LOGE -> LOGT .
+    (52) LOGT -> LOGT . AND LOGF
+
+    RPAREN          reduce using rule 51 (LOGE -> LOGT .)
+    OR              reduce using rule 51 (LOGE -> LOGT .)
+    COMMA           reduce using rule 51 (LOGE -> LOGT .)
+    AND             shift and go to state 93
+
+
+state 68
+
+    (50) LOGE -> NOT . LOGT
+    (52) LOGT -> . LOGT AND LOGF
+    (53) LOGT -> . LOGF
+    (54) LOGF -> . VAR LT VAR
+    (55) LOGF -> . VAR LE VAR
+    (56) LOGF -> . VAR GT VAR
+    (57) LOGF -> . VAR GE VAR
+    (58) LOGF -> . VAR EQ VAR
+    (59) LOGF -> . VAR NE VAR
+    (60) LOGF -> . LPAREN LOGE RPAREN
+    (27) VAR -> . NINT
+    (28) VAR -> . NFLOAT
+    (29) VAR -> . VECTOR
+    (30) VAR -> . MATRIX
+    (31) VAR -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    LPAREN          shift and go to state 65
+    NINT            shift and go to state 71
+    NFLOAT          shift and go to state 72
+    ID              shift and go to state 75
+
+    LOGT                           shift and go to state 94
+    LOGF                           shift and go to state 69
+    VAR                            shift and go to state 70
+    VECTOR                         shift and go to state 73
+    MATRIX                         shift and go to state 74
+
+state 69
+
+    (53) LOGT -> LOGF .
+
+    AND             reduce using rule 53 (LOGT -> LOGF .)
+    RPAREN          reduce using rule 53 (LOGT -> LOGF .)
+    OR              reduce using rule 53 (LOGT -> LOGF .)
+    COMMA           reduce using rule 53 (LOGT -> LOGF .)
+
+
+state 70
+
+    (54) LOGF -> VAR . LT VAR
+    (55) LOGF -> VAR . LE VAR
+    (56) LOGF -> VAR . GT VAR
+    (57) LOGF -> VAR . GE VAR
+    (58) LOGF -> VAR . EQ VAR
+    (59) LOGF -> VAR . NE VAR
+
+    LT              shift and go to state 95
+    LE              shift and go to state 96
+    GT              shift and go to state 97
+    GE              shift and go to state 98
+    EQ              shift and go to state 99
+    NE              shift and go to state 100
+
+
+state 71
+
+    (27) VAR -> NINT .
+
+    LT              reduce using rule 27 (VAR -> NINT .)
+    LE              reduce using rule 27 (VAR -> NINT .)
+    GT              reduce using rule 27 (VAR -> NINT .)
+    GE              reduce using rule 27 (VAR -> NINT .)
+    EQ              reduce using rule 27 (VAR -> NINT .)
+    NE              reduce using rule 27 (VAR -> NINT .)
+    RBRACK          reduce using rule 27 (VAR -> NINT .)
+    AND             reduce using rule 27 (VAR -> NINT .)
+    RPAREN          reduce using rule 27 (VAR -> NINT .)
+    OR              reduce using rule 27 (VAR -> NINT .)
+    COMMA           reduce using rule 27 (VAR -> NINT .)
+
+
+state 72
+
+    (28) VAR -> NFLOAT .
+
+    LT              reduce using rule 28 (VAR -> NFLOAT .)
+    LE              reduce using rule 28 (VAR -> NFLOAT .)
+    GT              reduce using rule 28 (VAR -> NFLOAT .)
+    GE              reduce using rule 28 (VAR -> NFLOAT .)
+    EQ              reduce using rule 28 (VAR -> NFLOAT .)
+    NE              reduce using rule 28 (VAR -> NFLOAT .)
+    RBRACK          reduce using rule 28 (VAR -> NFLOAT .)
+    AND             reduce using rule 28 (VAR -> NFLOAT .)
+    RPAREN          reduce using rule 28 (VAR -> NFLOAT .)
+    OR              reduce using rule 28 (VAR -> NFLOAT .)
+    COMMA           reduce using rule 28 (VAR -> NFLOAT .)
+
+
+state 73
+
+    (29) VAR -> VECTOR .
+
+    LT              reduce using rule 29 (VAR -> VECTOR .)
+    LE              reduce using rule 29 (VAR -> VECTOR .)
+    GT              reduce using rule 29 (VAR -> VECTOR .)
+    GE              reduce using rule 29 (VAR -> VECTOR .)
+    EQ              reduce using rule 29 (VAR -> VECTOR .)
+    NE              reduce using rule 29 (VAR -> VECTOR .)
+    RBRACK          reduce using rule 29 (VAR -> VECTOR .)
+    AND             reduce using rule 29 (VAR -> VECTOR .)
+    RPAREN          reduce using rule 29 (VAR -> VECTOR .)
+    OR              reduce using rule 29 (VAR -> VECTOR .)
+    COMMA           reduce using rule 29 (VAR -> VECTOR .)
+
+
+state 74
+
+    (30) VAR -> MATRIX .
+
+    LT              reduce using rule 30 (VAR -> MATRIX .)
+    LE              reduce using rule 30 (VAR -> MATRIX .)
+    GT              reduce using rule 30 (VAR -> MATRIX .)
+    GE              reduce using rule 30 (VAR -> MATRIX .)
+    EQ              reduce using rule 30 (VAR -> MATRIX .)
+    NE              reduce using rule 30 (VAR -> MATRIX .)
+    RBRACK          reduce using rule 30 (VAR -> MATRIX .)
+    AND             reduce using rule 30 (VAR -> MATRIX .)
+    RPAREN          reduce using rule 30 (VAR -> MATRIX .)
+    OR              reduce using rule 30 (VAR -> MATRIX .)
+    COMMA           reduce using rule 30 (VAR -> MATRIX .)
+
+
+state 75
+
+    (31) VAR -> ID .
+    (34) VECTOR -> ID . LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> ID . LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    LT              reduce using rule 31 (VAR -> ID .)
+    LE              reduce using rule 31 (VAR -> ID .)
+    GT              reduce using rule 31 (VAR -> ID .)
+    GE              reduce using rule 31 (VAR -> ID .)
+    EQ              reduce using rule 31 (VAR -> ID .)
+    NE              reduce using rule 31 (VAR -> ID .)
+    RBRACK          reduce using rule 31 (VAR -> ID .)
+    AND             reduce using rule 31 (VAR -> ID .)
+    RPAREN          reduce using rule 31 (VAR -> ID .)
+    OR              reduce using rule 31 (VAR -> ID .)
+    COMMA           reduce using rule 31 (VAR -> ID .)
+    LBRACK          shift and go to state 49
+
+
+state 76
+
+    (43) F -> LPAREN E RPAREN .
+
+    MULT            reduce using rule 43 (F -> LPAREN E RPAREN .)
+    DIV             reduce using rule 43 (F -> LPAREN E RPAREN .)
+    PLUS            reduce using rule 43 (F -> LPAREN E RPAREN .)
+    MINUS           reduce using rule 43 (F -> LPAREN E RPAREN .)
+    PEND            reduce using rule 43 (F -> LPAREN E RPAREN .)
+    RPAREN          reduce using rule 43 (F -> LPAREN E RPAREN .)
+    SUBPROCEDURE    reduce using rule 43 (F -> LPAREN E RPAREN .)
+    IN              reduce using rule 43 (F -> LPAREN E RPAREN .)
+    PRINT           reduce using rule 43 (F -> LPAREN E RPAREN .)
+    IF              reduce using rule 43 (F -> LPAREN E RPAREN .)
+    WHILE           reduce using rule 43 (F -> LPAREN E RPAREN .)
+    DO              reduce using rule 43 (F -> LPAREN E RPAREN .)
+    FOR             reduce using rule 43 (F -> LPAREN E RPAREN .)
+    LPAREN          reduce using rule 43 (F -> LPAREN E RPAREN .)
+    NINT            reduce using rule 43 (F -> LPAREN E RPAREN .)
+    NFLOAT          reduce using rule 43 (F -> LPAREN E RPAREN .)
+    ID              reduce using rule 43 (F -> LPAREN E RPAREN .)
+    SUBEND          reduce using rule 43 (F -> LPAREN E RPAREN .)
+    RCURL           reduce using rule 43 (F -> LPAREN E RPAREN .)
+    DIM             reduce using rule 43 (F -> LPAREN E RPAREN .)
+    LET             reduce using rule 43 (F -> LPAREN E RPAREN .)
+
+
+state 77
+
+    (12) S -> WHILE LPAREN LOGE . RPAREN LCURL V S RCURL S
+    (49) LOGE -> LOGE . OR LOGT
+
+    RPAREN          shift and go to state 101
+    OR              shift and go to state 92
+
+
+state 78
+
+    (13) S -> DO COLON V . S WHILE LPAREN LOGE RPAREN S
+    (9) S -> . IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S
+    (12) S -> . WHILE LPAREN LOGE RPAREN LCURL V S RCURL S
+    (13) S -> . DO COLON V S WHILE LPAREN LOGE RPAREN S
+    (14) S -> . FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL
+    (15) S -> . E
+    (16) S -> . EMPTY
+    (37) E -> . E PLUS T
+    (38) E -> . E MINUS T
+    (39) E -> . T
+    (36) EMPTY -> .
+    (40) T -> . T MULT F
+    (41) T -> . T DIV F
+    (42) T -> . F
+    (43) F -> . LPAREN E RPAREN
+    (44) F -> . NINT
+    (45) F -> . NFLOAT
+    (46) F -> . VECTOR
+    (47) F -> . MATRIX
+    (48) F -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+  ! shift/reduce conflict for WHILE resolved as shift
+    IF              shift and go to state 18
+    WHILE           shift and go to state 20
+    DO              shift and go to state 21
+    FOR             shift and go to state 22
+    LPAREN          shift and go to state 19
+    NINT            shift and go to state 27
+    NFLOAT          shift and go to state 28
+    ID              shift and go to state 31
+
+  ! WHILE           [ reduce using rule 36 (EMPTY -> .) ]
+
+    S                              shift and go to state 102
+    E                              shift and go to state 23
+    EMPTY                          shift and go to state 24
+    T                              shift and go to state 25
+    F                              shift and go to state 26
+    VECTOR                         shift and go to state 29
+    MATRIX                         shift and go to state 30
+
+state 79
+
+    (14) S -> FOR LPAREN LOGE . COMMA LOGE RPAREN LCURL V S RCURL
+    (49) LOGE -> LOGE . OR LOGT
+
+    COMMA           shift and go to state 103
+    OR              shift and go to state 92
+
+
+state 80
+
+    (37) E -> E PLUS T .
+    (40) T -> T . MULT F
+    (41) T -> T . DIV F
+
+    PLUS            reduce using rule 37 (E -> E PLUS T .)
+    MINUS           reduce using rule 37 (E -> E PLUS T .)
+    PEND            reduce using rule 37 (E -> E PLUS T .)
+    RPAREN          reduce using rule 37 (E -> E PLUS T .)
+    SUBPROCEDURE    reduce using rule 37 (E -> E PLUS T .)
+    IN              reduce using rule 37 (E -> E PLUS T .)
+    PRINT           reduce using rule 37 (E -> E PLUS T .)
+    IF              reduce using rule 37 (E -> E PLUS T .)
+    WHILE           reduce using rule 37 (E -> E PLUS T .)
+    DO              reduce using rule 37 (E -> E PLUS T .)
+    FOR             reduce using rule 37 (E -> E PLUS T .)
+    LPAREN          reduce using rule 37 (E -> E PLUS T .)
+    NINT            reduce using rule 37 (E -> E PLUS T .)
+    NFLOAT          reduce using rule 37 (E -> E PLUS T .)
+    ID              reduce using rule 37 (E -> E PLUS T .)
+    SUBEND          reduce using rule 37 (E -> E PLUS T .)
+    RCURL           reduce using rule 37 (E -> E PLUS T .)
+    DIM             reduce using rule 37 (E -> E PLUS T .)
+    LET             reduce using rule 37 (E -> E PLUS T .)
+    MULT            shift and go to state 47
+    DIV             shift and go to state 48
+
+
+state 81
+
+    (38) E -> E MINUS T .
+    (40) T -> T . MULT F
+    (41) T -> T . DIV F
+
+    PLUS            reduce using rule 38 (E -> E MINUS T .)
+    MINUS           reduce using rule 38 (E -> E MINUS T .)
+    PEND            reduce using rule 38 (E -> E MINUS T .)
+    RPAREN          reduce using rule 38 (E -> E MINUS T .)
+    SUBPROCEDURE    reduce using rule 38 (E -> E MINUS T .)
+    IN              reduce using rule 38 (E -> E MINUS T .)
+    PRINT           reduce using rule 38 (E -> E MINUS T .)
+    IF              reduce using rule 38 (E -> E MINUS T .)
+    WHILE           reduce using rule 38 (E -> E MINUS T .)
+    DO              reduce using rule 38 (E -> E MINUS T .)
+    FOR             reduce using rule 38 (E -> E MINUS T .)
+    LPAREN          reduce using rule 38 (E -> E MINUS T .)
+    NINT            reduce using rule 38 (E -> E MINUS T .)
+    NFLOAT          reduce using rule 38 (E -> E MINUS T .)
+    ID              reduce using rule 38 (E -> E MINUS T .)
+    SUBEND          reduce using rule 38 (E -> E MINUS T .)
+    RCURL           reduce using rule 38 (E -> E MINUS T .)
+    DIM             reduce using rule 38 (E -> E MINUS T .)
+    LET             reduce using rule 38 (E -> E MINUS T .)
+    MULT            shift and go to state 47
+    DIV             shift and go to state 48
+
+
+state 82
+
+    (40) T -> T MULT F .
+
+    MULT            reduce using rule 40 (T -> T MULT F .)
+    DIV             reduce using rule 40 (T -> T MULT F .)
+    PLUS            reduce using rule 40 (T -> T MULT F .)
+    MINUS           reduce using rule 40 (T -> T MULT F .)
+    PEND            reduce using rule 40 (T -> T MULT F .)
+    RPAREN          reduce using rule 40 (T -> T MULT F .)
+    SUBPROCEDURE    reduce using rule 40 (T -> T MULT F .)
+    IN              reduce using rule 40 (T -> T MULT F .)
+    PRINT           reduce using rule 40 (T -> T MULT F .)
+    IF              reduce using rule 40 (T -> T MULT F .)
+    WHILE           reduce using rule 40 (T -> T MULT F .)
+    DO              reduce using rule 40 (T -> T MULT F .)
+    FOR             reduce using rule 40 (T -> T MULT F .)
+    LPAREN          reduce using rule 40 (T -> T MULT F .)
+    NINT            reduce using rule 40 (T -> T MULT F .)
+    NFLOAT          reduce using rule 40 (T -> T MULT F .)
+    ID              reduce using rule 40 (T -> T MULT F .)
+    SUBEND          reduce using rule 40 (T -> T MULT F .)
+    RCURL           reduce using rule 40 (T -> T MULT F .)
+    DIM             reduce using rule 40 (T -> T MULT F .)
+    LET             reduce using rule 40 (T -> T MULT F .)
+
+
+state 83
+
+    (41) T -> T DIV F .
+
+    MULT            reduce using rule 41 (T -> T DIV F .)
+    DIV             reduce using rule 41 (T -> T DIV F .)
+    PLUS            reduce using rule 41 (T -> T DIV F .)
+    MINUS           reduce using rule 41 (T -> T DIV F .)
+    PEND            reduce using rule 41 (T -> T DIV F .)
+    RPAREN          reduce using rule 41 (T -> T DIV F .)
+    SUBPROCEDURE    reduce using rule 41 (T -> T DIV F .)
+    IN              reduce using rule 41 (T -> T DIV F .)
+    PRINT           reduce using rule 41 (T -> T DIV F .)
+    IF              reduce using rule 41 (T -> T DIV F .)
+    WHILE           reduce using rule 41 (T -> T DIV F .)
+    DO              reduce using rule 41 (T -> T DIV F .)
+    FOR             reduce using rule 41 (T -> T DIV F .)
+    LPAREN          reduce using rule 41 (T -> T DIV F .)
+    NINT            reduce using rule 41 (T -> T DIV F .)
+    NFLOAT          reduce using rule 41 (T -> T DIV F .)
+    ID              reduce using rule 41 (T -> T DIV F .)
+    SUBEND          reduce using rule 41 (T -> T DIV F .)
+    RCURL           reduce using rule 41 (T -> T DIV F .)
+    DIM             reduce using rule 41 (T -> T DIV F .)
+    LET             reduce using rule 41 (T -> T DIV F .)
+
+
+state 84
+
+    (34) VECTOR -> ID LBRACK NUMTYPE . RBRACK
+    (35) MATRIX -> ID LBRACK NUMTYPE . COMMA NUMTYPE RBRACK
+
+    RBRACK          shift and go to state 104
+    COMMA           shift and go to state 105
+
+
+state 85
+
+    (5) P -> SUBPROCEDURE LPAREN ID RPAREN . V P S SUBEND
+    (2) V -> . DIM VARAUX V
+    (3) V -> . LET VARASSIGN V S
+    (4) V -> . EMPTY
+    (36) EMPTY -> .
+
+    DIM             shift and go to state 4
+    LET             shift and go to state 5
+    SUBPROCEDURE    reduce using rule 36 (EMPTY -> .)
+    IN              reduce using rule 36 (EMPTY -> .)
+    PRINT           reduce using rule 36 (EMPTY -> .)
+    IF              reduce using rule 36 (EMPTY -> .)
+    WHILE           reduce using rule 36 (EMPTY -> .)
+    DO              reduce using rule 36 (EMPTY -> .)
+    FOR             reduce using rule 36 (EMPTY -> .)
+    LPAREN          reduce using rule 36 (EMPTY -> .)
+    NINT            reduce using rule 36 (EMPTY -> .)
+    NFLOAT          reduce using rule 36 (EMPTY -> .)
+    ID              reduce using rule 36 (EMPTY -> .)
+    SUBEND          reduce using rule 36 (EMPTY -> .)
+
+    V                              shift and go to state 106
+    EMPTY                          shift and go to state 6
+
+state 86
+
+    (6) P -> IN LPAREN NUMTYPE RPAREN . S
+    (9) S -> . IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S
+    (12) S -> . WHILE LPAREN LOGE RPAREN LCURL V S RCURL S
+    (13) S -> . DO COLON V S WHILE LPAREN LOGE RPAREN S
+    (14) S -> . FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL
+    (15) S -> . E
+    (16) S -> . EMPTY
+    (37) E -> . E PLUS T
+    (38) E -> . E MINUS T
+    (39) E -> . T
+    (36) EMPTY -> .
+    (40) T -> . T MULT F
+    (41) T -> . T DIV F
+    (42) T -> . F
+    (43) F -> . LPAREN E RPAREN
+    (44) F -> . NINT
+    (45) F -> . NFLOAT
+    (46) F -> . VECTOR
+    (47) F -> . MATRIX
+    (48) F -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+  ! shift/reduce conflict for DO resolved as shift
+  ! shift/reduce conflict for FOR resolved as shift
+  ! shift/reduce conflict for LPAREN resolved as shift
+  ! shift/reduce conflict for NINT resolved as shift
+  ! shift/reduce conflict for NFLOAT resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+    IF              shift and go to state 18
+    WHILE           shift and go to state 20
+    DO              shift and go to state 21
+    FOR             shift and go to state 22
+    PEND            reduce using rule 36 (EMPTY -> .)
+    SUBEND          reduce using rule 36 (EMPTY -> .)
+    LPAREN          shift and go to state 19
+    NINT            shift and go to state 27
+    NFLOAT          shift and go to state 28
+    ID              shift and go to state 31
+
+  ! IF              [ reduce using rule 36 (EMPTY -> .) ]
+  ! WHILE           [ reduce using rule 36 (EMPTY -> .) ]
+  ! DO              [ reduce using rule 36 (EMPTY -> .) ]
+  ! FOR             [ reduce using rule 36 (EMPTY -> .) ]
+  ! LPAREN          [ reduce using rule 36 (EMPTY -> .) ]
+  ! NINT            [ reduce using rule 36 (EMPTY -> .) ]
+  ! NFLOAT          [ reduce using rule 36 (EMPTY -> .) ]
+  ! ID              [ reduce using rule 36 (EMPTY -> .) ]
+
+    S                              shift and go to state 107
+    E                              shift and go to state 23
+    EMPTY                          shift and go to state 24
+    T                              shift and go to state 25
+    F                              shift and go to state 26
+    VECTOR                         shift and go to state 29
+    MATRIX                         shift and go to state 30
+
+state 87
+
+    (7) P -> PRINT LPAREN NUMTYPE RPAREN . S
+    (9) S -> . IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S
+    (12) S -> . WHILE LPAREN LOGE RPAREN LCURL V S RCURL S
+    (13) S -> . DO COLON V S WHILE LPAREN LOGE RPAREN S
+    (14) S -> . FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL
+    (15) S -> . E
+    (16) S -> . EMPTY
+    (37) E -> . E PLUS T
+    (38) E -> . E MINUS T
+    (39) E -> . T
+    (36) EMPTY -> .
+    (40) T -> . T MULT F
+    (41) T -> . T DIV F
+    (42) T -> . F
+    (43) F -> . LPAREN E RPAREN
+    (44) F -> . NINT
+    (45) F -> . NFLOAT
+    (46) F -> . VECTOR
+    (47) F -> . MATRIX
+    (48) F -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+  ! shift/reduce conflict for DO resolved as shift
+  ! shift/reduce conflict for FOR resolved as shift
+  ! shift/reduce conflict for LPAREN resolved as shift
+  ! shift/reduce conflict for NINT resolved as shift
+  ! shift/reduce conflict for NFLOAT resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+    IF              shift and go to state 18
+    WHILE           shift and go to state 20
+    DO              shift and go to state 21
+    FOR             shift and go to state 22
+    PEND            reduce using rule 36 (EMPTY -> .)
+    SUBEND          reduce using rule 36 (EMPTY -> .)
+    LPAREN          shift and go to state 19
+    NINT            shift and go to state 27
+    NFLOAT          shift and go to state 28
+    ID              shift and go to state 31
+
+  ! IF              [ reduce using rule 36 (EMPTY -> .) ]
+  ! WHILE           [ reduce using rule 36 (EMPTY -> .) ]
+  ! DO              [ reduce using rule 36 (EMPTY -> .) ]
+  ! FOR             [ reduce using rule 36 (EMPTY -> .) ]
+  ! LPAREN          [ reduce using rule 36 (EMPTY -> .) ]
+  ! NINT            [ reduce using rule 36 (EMPTY -> .) ]
+  ! NFLOAT          [ reduce using rule 36 (EMPTY -> .) ]
+  ! ID              [ reduce using rule 36 (EMPTY -> .) ]
+
+    S                              shift and go to state 108
+    E                              shift and go to state 23
+    EMPTY                          shift and go to state 24
+    T                              shift and go to state 25
+    F                              shift and go to state 26
+    VECTOR                         shift and go to state 29
+    MATRIX                         shift and go to state 30
+
+state 88
+
+    (32) VECDEF -> VEC LBRACK . VAR RBRACK
+    (27) VAR -> . NINT
+    (28) VAR -> . NFLOAT
+    (29) VAR -> . VECTOR
+    (30) VAR -> . MATRIX
+    (31) VAR -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    NINT            shift and go to state 71
+    NFLOAT          shift and go to state 72
+    ID              shift and go to state 75
+
+    VAR                            shift and go to state 109
+    VECTOR                         shift and go to state 73
+    MATRIX                         shift and go to state 74
+
+state 89
+
+    (33) MATDEF -> MAT LBRACK . VAR RBRACK LBRACK VAR RBRACK
+    (27) VAR -> . NINT
+    (28) VAR -> . NFLOAT
+    (29) VAR -> . VECTOR
+    (30) VAR -> . MATRIX
+    (31) VAR -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    NINT            shift and go to state 71
+    NFLOAT          shift and go to state 72
+    ID              shift and go to state 75
+
+    VAR                            shift and go to state 110
+    VECTOR                         shift and go to state 73
+    MATRIX                         shift and go to state 74
+
+state 90
+
+    (60) LOGF -> LPAREN LOGE . RPAREN
+    (49) LOGE -> LOGE . OR LOGT
+
+    RPAREN          shift and go to state 111
+    OR              shift and go to state 92
+
+
+state 91
+
+    (9) S -> IF LPAREN LOGE RPAREN . LCURL V S RCURL IFELSE S
+
+    LCURL           shift and go to state 112
+
+
+state 92
+
+    (49) LOGE -> LOGE OR . LOGT
+    (52) LOGT -> . LOGT AND LOGF
+    (53) LOGT -> . LOGF
+    (54) LOGF -> . VAR LT VAR
+    (55) LOGF -> . VAR LE VAR
+    (56) LOGF -> . VAR GT VAR
+    (57) LOGF -> . VAR GE VAR
+    (58) LOGF -> . VAR EQ VAR
+    (59) LOGF -> . VAR NE VAR
+    (60) LOGF -> . LPAREN LOGE RPAREN
+    (27) VAR -> . NINT
+    (28) VAR -> . NFLOAT
+    (29) VAR -> . VECTOR
+    (30) VAR -> . MATRIX
+    (31) VAR -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    LPAREN          shift and go to state 65
+    NINT            shift and go to state 71
+    NFLOAT          shift and go to state 72
+    ID              shift and go to state 75
+
+    LOGT                           shift and go to state 113
+    LOGF                           shift and go to state 69
+    VAR                            shift and go to state 70
+    VECTOR                         shift and go to state 73
+    MATRIX                         shift and go to state 74
+
+state 93
+
+    (52) LOGT -> LOGT AND . LOGF
+    (54) LOGF -> . VAR LT VAR
+    (55) LOGF -> . VAR LE VAR
+    (56) LOGF -> . VAR GT VAR
+    (57) LOGF -> . VAR GE VAR
+    (58) LOGF -> . VAR EQ VAR
+    (59) LOGF -> . VAR NE VAR
+    (60) LOGF -> . LPAREN LOGE RPAREN
+    (27) VAR -> . NINT
+    (28) VAR -> . NFLOAT
+    (29) VAR -> . VECTOR
+    (30) VAR -> . MATRIX
+    (31) VAR -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    LPAREN          shift and go to state 65
+    NINT            shift and go to state 71
+    NFLOAT          shift and go to state 72
+    ID              shift and go to state 75
+
+    LOGF                           shift and go to state 114
+    VAR                            shift and go to state 70
+    VECTOR                         shift and go to state 73
+    MATRIX                         shift and go to state 74
+
+state 94
+
+    (50) LOGE -> NOT LOGT .
+    (52) LOGT -> LOGT . AND LOGF
+
+    RPAREN          reduce using rule 50 (LOGE -> NOT LOGT .)
+    OR              reduce using rule 50 (LOGE -> NOT LOGT .)
+    COMMA           reduce using rule 50 (LOGE -> NOT LOGT .)
+    AND             shift and go to state 93
+
+
+state 95
+
+    (54) LOGF -> VAR LT . VAR
+    (27) VAR -> . NINT
+    (28) VAR -> . NFLOAT
+    (29) VAR -> . VECTOR
+    (30) VAR -> . MATRIX
+    (31) VAR -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    NINT            shift and go to state 71
+    NFLOAT          shift and go to state 72
+    ID              shift and go to state 75
+
+    VAR                            shift and go to state 115
+    VECTOR                         shift and go to state 73
+    MATRIX                         shift and go to state 74
+
+state 96
+
+    (55) LOGF -> VAR LE . VAR
+    (27) VAR -> . NINT
+    (28) VAR -> . NFLOAT
+    (29) VAR -> . VECTOR
+    (30) VAR -> . MATRIX
+    (31) VAR -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    NINT            shift and go to state 71
+    NFLOAT          shift and go to state 72
+    ID              shift and go to state 75
+
+    VAR                            shift and go to state 116
+    VECTOR                         shift and go to state 73
+    MATRIX                         shift and go to state 74
+
+state 97
+
+    (56) LOGF -> VAR GT . VAR
+    (27) VAR -> . NINT
+    (28) VAR -> . NFLOAT
+    (29) VAR -> . VECTOR
+    (30) VAR -> . MATRIX
+    (31) VAR -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    NINT            shift and go to state 71
+    NFLOAT          shift and go to state 72
+    ID              shift and go to state 75
+
+    VAR                            shift and go to state 117
+    VECTOR                         shift and go to state 73
+    MATRIX                         shift and go to state 74
+
+state 98
+
+    (57) LOGF -> VAR GE . VAR
+    (27) VAR -> . NINT
+    (28) VAR -> . NFLOAT
+    (29) VAR -> . VECTOR
+    (30) VAR -> . MATRIX
+    (31) VAR -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    NINT            shift and go to state 71
+    NFLOAT          shift and go to state 72
+    ID              shift and go to state 75
+
+    VAR                            shift and go to state 118
+    VECTOR                         shift and go to state 73
+    MATRIX                         shift and go to state 74
+
+state 99
+
+    (58) LOGF -> VAR EQ . VAR
+    (27) VAR -> . NINT
+    (28) VAR -> . NFLOAT
+    (29) VAR -> . VECTOR
+    (30) VAR -> . MATRIX
+    (31) VAR -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    NINT            shift and go to state 71
+    NFLOAT          shift and go to state 72
+    ID              shift and go to state 75
+
+    VAR                            shift and go to state 119
+    VECTOR                         shift and go to state 73
+    MATRIX                         shift and go to state 74
+
+state 100
+
+    (59) LOGF -> VAR NE . VAR
+    (27) VAR -> . NINT
+    (28) VAR -> . NFLOAT
+    (29) VAR -> . VECTOR
+    (30) VAR -> . MATRIX
+    (31) VAR -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    NINT            shift and go to state 71
+    NFLOAT          shift and go to state 72
+    ID              shift and go to state 75
+
+    VAR                            shift and go to state 120
+    VECTOR                         shift and go to state 73
+    MATRIX                         shift and go to state 74
+
+state 101
+
+    (12) S -> WHILE LPAREN LOGE RPAREN . LCURL V S RCURL S
+
+    LCURL           shift and go to state 121
+
+
+state 102
+
+    (13) S -> DO COLON V S . WHILE LPAREN LOGE RPAREN S
+
+    WHILE           shift and go to state 122
+
+
+state 103
+
+    (14) S -> FOR LPAREN LOGE COMMA . LOGE RPAREN LCURL V S RCURL
+    (49) LOGE -> . LOGE OR LOGT
+    (50) LOGE -> . NOT LOGT
+    (51) LOGE -> . LOGT
+    (52) LOGT -> . LOGT AND LOGF
+    (53) LOGT -> . LOGF
+    (54) LOGF -> . VAR LT VAR
+    (55) LOGF -> . VAR LE VAR
+    (56) LOGF -> . VAR GT VAR
+    (57) LOGF -> . VAR GE VAR
+    (58) LOGF -> . VAR EQ VAR
+    (59) LOGF -> . VAR NE VAR
+    (60) LOGF -> . LPAREN LOGE RPAREN
+    (27) VAR -> . NINT
+    (28) VAR -> . NFLOAT
+    (29) VAR -> . VECTOR
+    (30) VAR -> . MATRIX
+    (31) VAR -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    NOT             shift and go to state 68
+    LPAREN          shift and go to state 65
+    NINT            shift and go to state 71
+    NFLOAT          shift and go to state 72
+    ID              shift and go to state 75
+
+    LOGE                           shift and go to state 123
+    LOGT                           shift and go to state 67
+    LOGF                           shift and go to state 69
+    VAR                            shift and go to state 70
+    VECTOR                         shift and go to state 73
+    MATRIX                         shift and go to state 74
+
+state 104
+
+    (34) VECTOR -> ID LBRACK NUMTYPE RBRACK .
+
+    MULT            reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    DIV             reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    PLUS            reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    MINUS           reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    PEND            reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    RPAREN          reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    SUBPROCEDURE    reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    IN              reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    PRINT           reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    IF              reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    WHILE           reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    DO              reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    FOR             reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    LPAREN          reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    NINT            reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    NFLOAT          reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    ID              reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    SUBEND          reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    RCURL           reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    DIM             reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    LET             reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    LT              reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    LE              reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    GT              reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    GE              reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    EQ              reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    NE              reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    RBRACK          reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    AND             reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    OR              reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+    COMMA           reduce using rule 34 (VECTOR -> ID LBRACK NUMTYPE RBRACK .)
+
+
+state 105
+
+    (35) MATRIX -> ID LBRACK NUMTYPE COMMA . NUMTYPE RBRACK
+    (24) NUMTYPE -> . ID
+    (25) NUMTYPE -> . NINT
+    (26) NUMTYPE -> . NFLOAT
+
+    ID              shift and go to state 52
+    NINT            shift and go to state 53
+    NFLOAT          shift and go to state 54
+
+    NUMTYPE                        shift and go to state 124
+
+state 106
+
+    (5) P -> SUBPROCEDURE LPAREN ID RPAREN V . P S SUBEND
+    (5) P -> . SUBPROCEDURE LPAREN ID RPAREN V P S SUBEND
+    (6) P -> . IN LPAREN NUMTYPE RPAREN S
+    (7) P -> . PRINT LPAREN NUMTYPE RPAREN S
+    (8) P -> . EMPTY
+    (36) EMPTY -> .
+
+    SUBPROCEDURE    shift and go to state 8
+    IN              shift and go to state 9
+    PRINT           shift and go to state 10
+    IF              reduce using rule 36 (EMPTY -> .)
+    WHILE           reduce using rule 36 (EMPTY -> .)
+    DO              reduce using rule 36 (EMPTY -> .)
+    FOR             reduce using rule 36 (EMPTY -> .)
+    LPAREN          reduce using rule 36 (EMPTY -> .)
+    NINT            reduce using rule 36 (EMPTY -> .)
+    NFLOAT          reduce using rule 36 (EMPTY -> .)
+    ID              reduce using rule 36 (EMPTY -> .)
+    SUBEND          reduce using rule 36 (EMPTY -> .)
+
+    P                              shift and go to state 125
+    EMPTY                          shift and go to state 11
+
+state 107
+
+    (6) P -> IN LPAREN NUMTYPE RPAREN S .
+
+    IF              reduce using rule 6 (P -> IN LPAREN NUMTYPE RPAREN S .)
+    WHILE           reduce using rule 6 (P -> IN LPAREN NUMTYPE RPAREN S .)
+    DO              reduce using rule 6 (P -> IN LPAREN NUMTYPE RPAREN S .)
+    FOR             reduce using rule 6 (P -> IN LPAREN NUMTYPE RPAREN S .)
+    LPAREN          reduce using rule 6 (P -> IN LPAREN NUMTYPE RPAREN S .)
+    NINT            reduce using rule 6 (P -> IN LPAREN NUMTYPE RPAREN S .)
+    NFLOAT          reduce using rule 6 (P -> IN LPAREN NUMTYPE RPAREN S .)
+    ID              reduce using rule 6 (P -> IN LPAREN NUMTYPE RPAREN S .)
+    PEND            reduce using rule 6 (P -> IN LPAREN NUMTYPE RPAREN S .)
+    SUBEND          reduce using rule 6 (P -> IN LPAREN NUMTYPE RPAREN S .)
+
+
+state 108
+
+    (7) P -> PRINT LPAREN NUMTYPE RPAREN S .
+
+    IF              reduce using rule 7 (P -> PRINT LPAREN NUMTYPE RPAREN S .)
+    WHILE           reduce using rule 7 (P -> PRINT LPAREN NUMTYPE RPAREN S .)
+    DO              reduce using rule 7 (P -> PRINT LPAREN NUMTYPE RPAREN S .)
+    FOR             reduce using rule 7 (P -> PRINT LPAREN NUMTYPE RPAREN S .)
+    LPAREN          reduce using rule 7 (P -> PRINT LPAREN NUMTYPE RPAREN S .)
+    NINT            reduce using rule 7 (P -> PRINT LPAREN NUMTYPE RPAREN S .)
+    NFLOAT          reduce using rule 7 (P -> PRINT LPAREN NUMTYPE RPAREN S .)
+    ID              reduce using rule 7 (P -> PRINT LPAREN NUMTYPE RPAREN S .)
+    PEND            reduce using rule 7 (P -> PRINT LPAREN NUMTYPE RPAREN S .)
+    SUBEND          reduce using rule 7 (P -> PRINT LPAREN NUMTYPE RPAREN S .)
+
+
+state 109
+
+    (32) VECDEF -> VEC LBRACK VAR . RBRACK
+
+    RBRACK          shift and go to state 126
+
+
+state 110
+
+    (33) MATDEF -> MAT LBRACK VAR . RBRACK LBRACK VAR RBRACK
+
+    RBRACK          shift and go to state 127
+
+
+state 111
+
+    (60) LOGF -> LPAREN LOGE RPAREN .
+
+    AND             reduce using rule 60 (LOGF -> LPAREN LOGE RPAREN .)
+    RPAREN          reduce using rule 60 (LOGF -> LPAREN LOGE RPAREN .)
+    OR              reduce using rule 60 (LOGF -> LPAREN LOGE RPAREN .)
+    COMMA           reduce using rule 60 (LOGF -> LPAREN LOGE RPAREN .)
+
+
+state 112
+
+    (9) S -> IF LPAREN LOGE RPAREN LCURL . V S RCURL IFELSE S
+    (2) V -> . DIM VARAUX V
+    (3) V -> . LET VARASSIGN V S
+    (4) V -> . EMPTY
+    (36) EMPTY -> .
+
+    DIM             shift and go to state 4
+    LET             shift and go to state 5
+    IF              reduce using rule 36 (EMPTY -> .)
+    WHILE           reduce using rule 36 (EMPTY -> .)
+    DO              reduce using rule 36 (EMPTY -> .)
+    FOR             reduce using rule 36 (EMPTY -> .)
+    LPAREN          reduce using rule 36 (EMPTY -> .)
+    NINT            reduce using rule 36 (EMPTY -> .)
+    NFLOAT          reduce using rule 36 (EMPTY -> .)
+    ID              reduce using rule 36 (EMPTY -> .)
+    RCURL           reduce using rule 36 (EMPTY -> .)
+
+    V                              shift and go to state 128
+    EMPTY                          shift and go to state 6
+
+state 113
+
+    (49) LOGE -> LOGE OR LOGT .
+    (52) LOGT -> LOGT . AND LOGF
+
+    RPAREN          reduce using rule 49 (LOGE -> LOGE OR LOGT .)
+    OR              reduce using rule 49 (LOGE -> LOGE OR LOGT .)
+    COMMA           reduce using rule 49 (LOGE -> LOGE OR LOGT .)
+    AND             shift and go to state 93
+
+
+state 114
+
+    (52) LOGT -> LOGT AND LOGF .
+
+    AND             reduce using rule 52 (LOGT -> LOGT AND LOGF .)
+    RPAREN          reduce using rule 52 (LOGT -> LOGT AND LOGF .)
+    OR              reduce using rule 52 (LOGT -> LOGT AND LOGF .)
+    COMMA           reduce using rule 52 (LOGT -> LOGT AND LOGF .)
+
+
+state 115
+
+    (54) LOGF -> VAR LT VAR .
+
+    AND             reduce using rule 54 (LOGF -> VAR LT VAR .)
+    RPAREN          reduce using rule 54 (LOGF -> VAR LT VAR .)
+    OR              reduce using rule 54 (LOGF -> VAR LT VAR .)
+    COMMA           reduce using rule 54 (LOGF -> VAR LT VAR .)
+
+
+state 116
+
+    (55) LOGF -> VAR LE VAR .
+
+    AND             reduce using rule 55 (LOGF -> VAR LE VAR .)
+    RPAREN          reduce using rule 55 (LOGF -> VAR LE VAR .)
+    OR              reduce using rule 55 (LOGF -> VAR LE VAR .)
+    COMMA           reduce using rule 55 (LOGF -> VAR LE VAR .)
+
+
+state 117
+
+    (56) LOGF -> VAR GT VAR .
+
+    AND             reduce using rule 56 (LOGF -> VAR GT VAR .)
+    RPAREN          reduce using rule 56 (LOGF -> VAR GT VAR .)
+    OR              reduce using rule 56 (LOGF -> VAR GT VAR .)
+    COMMA           reduce using rule 56 (LOGF -> VAR GT VAR .)
+
+
+state 118
+
+    (57) LOGF -> VAR GE VAR .
+
+    AND             reduce using rule 57 (LOGF -> VAR GE VAR .)
+    RPAREN          reduce using rule 57 (LOGF -> VAR GE VAR .)
+    OR              reduce using rule 57 (LOGF -> VAR GE VAR .)
+    COMMA           reduce using rule 57 (LOGF -> VAR GE VAR .)
+
+
+state 119
+
+    (58) LOGF -> VAR EQ VAR .
+
+    AND             reduce using rule 58 (LOGF -> VAR EQ VAR .)
+    RPAREN          reduce using rule 58 (LOGF -> VAR EQ VAR .)
+    OR              reduce using rule 58 (LOGF -> VAR EQ VAR .)
+    COMMA           reduce using rule 58 (LOGF -> VAR EQ VAR .)
+
+
+state 120
+
+    (59) LOGF -> VAR NE VAR .
+
+    AND             reduce using rule 59 (LOGF -> VAR NE VAR .)
+    RPAREN          reduce using rule 59 (LOGF -> VAR NE VAR .)
+    OR              reduce using rule 59 (LOGF -> VAR NE VAR .)
+    COMMA           reduce using rule 59 (LOGF -> VAR NE VAR .)
+
+
+state 121
+
+    (12) S -> WHILE LPAREN LOGE RPAREN LCURL . V S RCURL S
+    (2) V -> . DIM VARAUX V
+    (3) V -> . LET VARASSIGN V S
+    (4) V -> . EMPTY
+    (36) EMPTY -> .
+
+    DIM             shift and go to state 4
+    LET             shift and go to state 5
+    IF              reduce using rule 36 (EMPTY -> .)
+    WHILE           reduce using rule 36 (EMPTY -> .)
+    DO              reduce using rule 36 (EMPTY -> .)
+    FOR             reduce using rule 36 (EMPTY -> .)
+    LPAREN          reduce using rule 36 (EMPTY -> .)
+    NINT            reduce using rule 36 (EMPTY -> .)
+    NFLOAT          reduce using rule 36 (EMPTY -> .)
+    ID              reduce using rule 36 (EMPTY -> .)
+    RCURL           reduce using rule 36 (EMPTY -> .)
+
+    V                              shift and go to state 129
+    EMPTY                          shift and go to state 6
+
+state 122
+
+    (13) S -> DO COLON V S WHILE . LPAREN LOGE RPAREN S
+
+    LPAREN          shift and go to state 130
+
+
+state 123
+
+    (14) S -> FOR LPAREN LOGE COMMA LOGE . RPAREN LCURL V S RCURL
+    (49) LOGE -> LOGE . OR LOGT
+
+    RPAREN          shift and go to state 131
+    OR              shift and go to state 92
+
+
+state 124
+
+    (35) MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE . RBRACK
+
+    RBRACK          shift and go to state 132
+
+
+state 125
+
+    (5) P -> SUBPROCEDURE LPAREN ID RPAREN V P . S SUBEND
+    (9) S -> . IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S
+    (12) S -> . WHILE LPAREN LOGE RPAREN LCURL V S RCURL S
+    (13) S -> . DO COLON V S WHILE LPAREN LOGE RPAREN S
+    (14) S -> . FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL
+    (15) S -> . E
+    (16) S -> . EMPTY
+    (37) E -> . E PLUS T
+    (38) E -> . E MINUS T
+    (39) E -> . T
+    (36) EMPTY -> .
+    (40) T -> . T MULT F
+    (41) T -> . T DIV F
+    (42) T -> . F
+    (43) F -> . LPAREN E RPAREN
+    (44) F -> . NINT
+    (45) F -> . NFLOAT
+    (46) F -> . VECTOR
+    (47) F -> . MATRIX
+    (48) F -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    IF              shift and go to state 18
+    WHILE           shift and go to state 20
+    DO              shift and go to state 21
+    FOR             shift and go to state 22
+    SUBEND          reduce using rule 36 (EMPTY -> .)
+    LPAREN          shift and go to state 19
+    NINT            shift and go to state 27
+    NFLOAT          shift and go to state 28
+    ID              shift and go to state 31
+
+    S                              shift and go to state 133
+    E                              shift and go to state 23
+    EMPTY                          shift and go to state 24
+    T                              shift and go to state 25
+    F                              shift and go to state 26
+    VECTOR                         shift and go to state 29
+    MATRIX                         shift and go to state 30
+
+state 126
+
+    (32) VECDEF -> VEC LBRACK VAR RBRACK .
+
+    DIM             reduce using rule 32 (VECDEF -> VEC LBRACK VAR RBRACK .)
+    LET             reduce using rule 32 (VECDEF -> VEC LBRACK VAR RBRACK .)
+    SUBPROCEDURE    reduce using rule 32 (VECDEF -> VEC LBRACK VAR RBRACK .)
+    IN              reduce using rule 32 (VECDEF -> VEC LBRACK VAR RBRACK .)
+    PRINT           reduce using rule 32 (VECDEF -> VEC LBRACK VAR RBRACK .)
+    IF              reduce using rule 32 (VECDEF -> VEC LBRACK VAR RBRACK .)
+    WHILE           reduce using rule 32 (VECDEF -> VEC LBRACK VAR RBRACK .)
+    DO              reduce using rule 32 (VECDEF -> VEC LBRACK VAR RBRACK .)
+    FOR             reduce using rule 32 (VECDEF -> VEC LBRACK VAR RBRACK .)
+    LPAREN          reduce using rule 32 (VECDEF -> VEC LBRACK VAR RBRACK .)
+    NINT            reduce using rule 32 (VECDEF -> VEC LBRACK VAR RBRACK .)
+    NFLOAT          reduce using rule 32 (VECDEF -> VEC LBRACK VAR RBRACK .)
+    ID              reduce using rule 32 (VECDEF -> VEC LBRACK VAR RBRACK .)
+    PEND            reduce using rule 32 (VECDEF -> VEC LBRACK VAR RBRACK .)
+    SUBEND          reduce using rule 32 (VECDEF -> VEC LBRACK VAR RBRACK .)
+    RCURL           reduce using rule 32 (VECDEF -> VEC LBRACK VAR RBRACK .)
+
+
+state 127
+
+    (33) MATDEF -> MAT LBRACK VAR RBRACK . LBRACK VAR RBRACK
+
+    LBRACK          shift and go to state 134
+
+
+state 128
+
+    (9) S -> IF LPAREN LOGE RPAREN LCURL V . S RCURL IFELSE S
+    (9) S -> . IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S
+    (12) S -> . WHILE LPAREN LOGE RPAREN LCURL V S RCURL S
+    (13) S -> . DO COLON V S WHILE LPAREN LOGE RPAREN S
+    (14) S -> . FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL
+    (15) S -> . E
+    (16) S -> . EMPTY
+    (37) E -> . E PLUS T
+    (38) E -> . E MINUS T
+    (39) E -> . T
+    (36) EMPTY -> .
+    (40) T -> . T MULT F
+    (41) T -> . T DIV F
+    (42) T -> . F
+    (43) F -> . LPAREN E RPAREN
+    (44) F -> . NINT
+    (45) F -> . NFLOAT
+    (46) F -> . VECTOR
+    (47) F -> . MATRIX
+    (48) F -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    IF              shift and go to state 18
+    WHILE           shift and go to state 20
+    DO              shift and go to state 21
+    FOR             shift and go to state 22
+    RCURL           reduce using rule 36 (EMPTY -> .)
+    LPAREN          shift and go to state 19
+    NINT            shift and go to state 27
+    NFLOAT          shift and go to state 28
+    ID              shift and go to state 31
+
+    S                              shift and go to state 135
+    E                              shift and go to state 23
+    EMPTY                          shift and go to state 24
+    T                              shift and go to state 25
+    F                              shift and go to state 26
+    VECTOR                         shift and go to state 29
+    MATRIX                         shift and go to state 30
+
+state 129
+
+    (12) S -> WHILE LPAREN LOGE RPAREN LCURL V . S RCURL S
+    (9) S -> . IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S
+    (12) S -> . WHILE LPAREN LOGE RPAREN LCURL V S RCURL S
+    (13) S -> . DO COLON V S WHILE LPAREN LOGE RPAREN S
+    (14) S -> . FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL
+    (15) S -> . E
+    (16) S -> . EMPTY
+    (37) E -> . E PLUS T
+    (38) E -> . E MINUS T
+    (39) E -> . T
+    (36) EMPTY -> .
+    (40) T -> . T MULT F
+    (41) T -> . T DIV F
+    (42) T -> . F
+    (43) F -> . LPAREN E RPAREN
+    (44) F -> . NINT
+    (45) F -> . NFLOAT
+    (46) F -> . VECTOR
+    (47) F -> . MATRIX
+    (48) F -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    IF              shift and go to state 18
+    WHILE           shift and go to state 20
+    DO              shift and go to state 21
+    FOR             shift and go to state 22
+    RCURL           reduce using rule 36 (EMPTY -> .)
+    LPAREN          shift and go to state 19
+    NINT            shift and go to state 27
+    NFLOAT          shift and go to state 28
+    ID              shift and go to state 31
+
+    S                              shift and go to state 136
+    E                              shift and go to state 23
+    EMPTY                          shift and go to state 24
+    T                              shift and go to state 25
+    F                              shift and go to state 26
+    VECTOR                         shift and go to state 29
+    MATRIX                         shift and go to state 30
+
+state 130
+
+    (13) S -> DO COLON V S WHILE LPAREN . LOGE RPAREN S
+    (49) LOGE -> . LOGE OR LOGT
+    (50) LOGE -> . NOT LOGT
+    (51) LOGE -> . LOGT
+    (52) LOGT -> . LOGT AND LOGF
+    (53) LOGT -> . LOGF
+    (54) LOGF -> . VAR LT VAR
+    (55) LOGF -> . VAR LE VAR
+    (56) LOGF -> . VAR GT VAR
+    (57) LOGF -> . VAR GE VAR
+    (58) LOGF -> . VAR EQ VAR
+    (59) LOGF -> . VAR NE VAR
+    (60) LOGF -> . LPAREN LOGE RPAREN
+    (27) VAR -> . NINT
+    (28) VAR -> . NFLOAT
+    (29) VAR -> . VECTOR
+    (30) VAR -> . MATRIX
+    (31) VAR -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    NOT             shift and go to state 68
+    LPAREN          shift and go to state 65
+    NINT            shift and go to state 71
+    NFLOAT          shift and go to state 72
+    ID              shift and go to state 75
+
+    LOGE                           shift and go to state 137
+    LOGT                           shift and go to state 67
+    LOGF                           shift and go to state 69
+    VAR                            shift and go to state 70
+    VECTOR                         shift and go to state 73
+    MATRIX                         shift and go to state 74
+
+state 131
+
+    (14) S -> FOR LPAREN LOGE COMMA LOGE RPAREN . LCURL V S RCURL
+
+    LCURL           shift and go to state 138
+
+
+state 132
+
+    (35) MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .
+
+    MULT            reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    DIV             reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    PLUS            reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    MINUS           reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    PEND            reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    RPAREN          reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    SUBPROCEDURE    reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    IN              reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    PRINT           reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    IF              reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    WHILE           reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    DO              reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    FOR             reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    LPAREN          reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    NINT            reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    NFLOAT          reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    ID              reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    SUBEND          reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    RCURL           reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    DIM             reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    LET             reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    LT              reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    LE              reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    GT              reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    GE              reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    EQ              reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    NE              reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    RBRACK          reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    AND             reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    OR              reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    COMMA           reduce using rule 35 (MATRIX -> ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+
+
+state 133
+
+    (5) P -> SUBPROCEDURE LPAREN ID RPAREN V P S . SUBEND
+
+    SUBEND          shift and go to state 139
+
+
+state 134
+
+    (33) MATDEF -> MAT LBRACK VAR RBRACK LBRACK . VAR RBRACK
+    (27) VAR -> . NINT
+    (28) VAR -> . NFLOAT
+    (29) VAR -> . VECTOR
+    (30) VAR -> . MATRIX
+    (31) VAR -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    NINT            shift and go to state 71
+    NFLOAT          shift and go to state 72
+    ID              shift and go to state 75
+
+    VAR                            shift and go to state 140
+    VECTOR                         shift and go to state 73
+    MATRIX                         shift and go to state 74
+
+state 135
+
+    (9) S -> IF LPAREN LOGE RPAREN LCURL V S . RCURL IFELSE S
+
+    RCURL           shift and go to state 141
+
+
+state 136
+
+    (12) S -> WHILE LPAREN LOGE RPAREN LCURL V S . RCURL S
+
+    RCURL           shift and go to state 142
+
+
+state 137
+
+    (13) S -> DO COLON V S WHILE LPAREN LOGE . RPAREN S
+    (49) LOGE -> LOGE . OR LOGT
+
+    RPAREN          shift and go to state 143
+    OR              shift and go to state 92
+
+
+state 138
+
+    (14) S -> FOR LPAREN LOGE COMMA LOGE RPAREN LCURL . V S RCURL
+    (2) V -> . DIM VARAUX V
+    (3) V -> . LET VARASSIGN V S
+    (4) V -> . EMPTY
+    (36) EMPTY -> .
+
+    DIM             shift and go to state 4
+    LET             shift and go to state 5
+    IF              reduce using rule 36 (EMPTY -> .)
+    WHILE           reduce using rule 36 (EMPTY -> .)
+    DO              reduce using rule 36 (EMPTY -> .)
+    FOR             reduce using rule 36 (EMPTY -> .)
+    LPAREN          reduce using rule 36 (EMPTY -> .)
+    NINT            reduce using rule 36 (EMPTY -> .)
+    NFLOAT          reduce using rule 36 (EMPTY -> .)
+    ID              reduce using rule 36 (EMPTY -> .)
+    RCURL           reduce using rule 36 (EMPTY -> .)
+
+    V                              shift and go to state 144
+    EMPTY                          shift and go to state 6
+
+state 139
+
+    (5) P -> SUBPROCEDURE LPAREN ID RPAREN V P S SUBEND .
+
+    IF              reduce using rule 5 (P -> SUBPROCEDURE LPAREN ID RPAREN V P S SUBEND .)
+    WHILE           reduce using rule 5 (P -> SUBPROCEDURE LPAREN ID RPAREN V P S SUBEND .)
+    DO              reduce using rule 5 (P -> SUBPROCEDURE LPAREN ID RPAREN V P S SUBEND .)
+    FOR             reduce using rule 5 (P -> SUBPROCEDURE LPAREN ID RPAREN V P S SUBEND .)
+    LPAREN          reduce using rule 5 (P -> SUBPROCEDURE LPAREN ID RPAREN V P S SUBEND .)
+    NINT            reduce using rule 5 (P -> SUBPROCEDURE LPAREN ID RPAREN V P S SUBEND .)
+    NFLOAT          reduce using rule 5 (P -> SUBPROCEDURE LPAREN ID RPAREN V P S SUBEND .)
+    ID              reduce using rule 5 (P -> SUBPROCEDURE LPAREN ID RPAREN V P S SUBEND .)
+    PEND            reduce using rule 5 (P -> SUBPROCEDURE LPAREN ID RPAREN V P S SUBEND .)
+    SUBEND          reduce using rule 5 (P -> SUBPROCEDURE LPAREN ID RPAREN V P S SUBEND .)
+
+
+state 140
+
+    (33) MATDEF -> MAT LBRACK VAR RBRACK LBRACK VAR . RBRACK
+
+    RBRACK          shift and go to state 145
+
+
+state 141
+
+    (9) S -> IF LPAREN LOGE RPAREN LCURL V S RCURL . IFELSE S
+    (10) IFELSE -> . ELSE LCURL S RCURL
+    (11) IFELSE -> .
+
+    ELSE            shift and go to state 147
+    IF              reduce using rule 11 (IFELSE -> .)
+    WHILE           reduce using rule 11 (IFELSE -> .)
+    DO              reduce using rule 11 (IFELSE -> .)
+    FOR             reduce using rule 11 (IFELSE -> .)
+    LPAREN          reduce using rule 11 (IFELSE -> .)
+    NINT            reduce using rule 11 (IFELSE -> .)
+    NFLOAT          reduce using rule 11 (IFELSE -> .)
+    ID              reduce using rule 11 (IFELSE -> .)
+    PEND            reduce using rule 11 (IFELSE -> .)
+    SUBPROCEDURE    reduce using rule 11 (IFELSE -> .)
+    IN              reduce using rule 11 (IFELSE -> .)
+    PRINT           reduce using rule 11 (IFELSE -> .)
+    SUBEND          reduce using rule 11 (IFELSE -> .)
+    RCURL           reduce using rule 11 (IFELSE -> .)
+
+    IFELSE                         shift and go to state 146
+
+state 142
+
+    (12) S -> WHILE LPAREN LOGE RPAREN LCURL V S RCURL . S
+    (9) S -> . IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S
+    (12) S -> . WHILE LPAREN LOGE RPAREN LCURL V S RCURL S
+    (13) S -> . DO COLON V S WHILE LPAREN LOGE RPAREN S
+    (14) S -> . FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL
+    (15) S -> . E
+    (16) S -> . EMPTY
+    (37) E -> . E PLUS T
+    (38) E -> . E MINUS T
+    (39) E -> . T
+    (36) EMPTY -> .
+    (40) T -> . T MULT F
+    (41) T -> . T DIV F
+    (42) T -> . F
+    (43) F -> . LPAREN E RPAREN
+    (44) F -> . NINT
+    (45) F -> . NFLOAT
+    (46) F -> . VECTOR
+    (47) F -> . MATRIX
+    (48) F -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+  ! shift/reduce conflict for DO resolved as shift
+  ! shift/reduce conflict for FOR resolved as shift
+  ! shift/reduce conflict for LPAREN resolved as shift
+  ! shift/reduce conflict for NINT resolved as shift
+  ! shift/reduce conflict for NFLOAT resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+    IF              shift and go to state 18
+    WHILE           shift and go to state 20
+    DO              shift and go to state 21
+    FOR             shift and go to state 22
+    PEND            reduce using rule 36 (EMPTY -> .)
+    SUBPROCEDURE    reduce using rule 36 (EMPTY -> .)
+    IN              reduce using rule 36 (EMPTY -> .)
+    PRINT           reduce using rule 36 (EMPTY -> .)
+    SUBEND          reduce using rule 36 (EMPTY -> .)
+    RCURL           reduce using rule 36 (EMPTY -> .)
+    LPAREN          shift and go to state 19
+    NINT            shift and go to state 27
+    NFLOAT          shift and go to state 28
+    ID              shift and go to state 31
+
+  ! IF              [ reduce using rule 36 (EMPTY -> .) ]
+  ! WHILE           [ reduce using rule 36 (EMPTY -> .) ]
+  ! DO              [ reduce using rule 36 (EMPTY -> .) ]
+  ! FOR             [ reduce using rule 36 (EMPTY -> .) ]
+  ! LPAREN          [ reduce using rule 36 (EMPTY -> .) ]
+  ! NINT            [ reduce using rule 36 (EMPTY -> .) ]
+  ! NFLOAT          [ reduce using rule 36 (EMPTY -> .) ]
+  ! ID              [ reduce using rule 36 (EMPTY -> .) ]
+
+    S                              shift and go to state 148
+    E                              shift and go to state 23
+    EMPTY                          shift and go to state 24
+    T                              shift and go to state 25
+    F                              shift and go to state 26
+    VECTOR                         shift and go to state 29
+    MATRIX                         shift and go to state 30
+
+state 143
+
+    (13) S -> DO COLON V S WHILE LPAREN LOGE RPAREN . S
+    (9) S -> . IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S
+    (12) S -> . WHILE LPAREN LOGE RPAREN LCURL V S RCURL S
+    (13) S -> . DO COLON V S WHILE LPAREN LOGE RPAREN S
+    (14) S -> . FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL
+    (15) S -> . E
+    (16) S -> . EMPTY
+    (37) E -> . E PLUS T
+    (38) E -> . E MINUS T
+    (39) E -> . T
+    (36) EMPTY -> .
+    (40) T -> . T MULT F
+    (41) T -> . T DIV F
+    (42) T -> . F
+    (43) F -> . LPAREN E RPAREN
+    (44) F -> . NINT
+    (45) F -> . NFLOAT
+    (46) F -> . VECTOR
+    (47) F -> . MATRIX
+    (48) F -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+  ! shift/reduce conflict for DO resolved as shift
+  ! shift/reduce conflict for FOR resolved as shift
+  ! shift/reduce conflict for LPAREN resolved as shift
+  ! shift/reduce conflict for NINT resolved as shift
+  ! shift/reduce conflict for NFLOAT resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+    IF              shift and go to state 18
+    WHILE           shift and go to state 20
+    DO              shift and go to state 21
+    FOR             shift and go to state 22
+    PEND            reduce using rule 36 (EMPTY -> .)
+    SUBPROCEDURE    reduce using rule 36 (EMPTY -> .)
+    IN              reduce using rule 36 (EMPTY -> .)
+    PRINT           reduce using rule 36 (EMPTY -> .)
+    SUBEND          reduce using rule 36 (EMPTY -> .)
+    RCURL           reduce using rule 36 (EMPTY -> .)
+    LPAREN          shift and go to state 19
+    NINT            shift and go to state 27
+    NFLOAT          shift and go to state 28
+    ID              shift and go to state 31
+
+  ! IF              [ reduce using rule 36 (EMPTY -> .) ]
+  ! WHILE           [ reduce using rule 36 (EMPTY -> .) ]
+  ! DO              [ reduce using rule 36 (EMPTY -> .) ]
+  ! FOR             [ reduce using rule 36 (EMPTY -> .) ]
+  ! LPAREN          [ reduce using rule 36 (EMPTY -> .) ]
+  ! NINT            [ reduce using rule 36 (EMPTY -> .) ]
+  ! NFLOAT          [ reduce using rule 36 (EMPTY -> .) ]
+  ! ID              [ reduce using rule 36 (EMPTY -> .) ]
+
+    S                              shift and go to state 149
+    E                              shift and go to state 23
+    EMPTY                          shift and go to state 24
+    T                              shift and go to state 25
+    F                              shift and go to state 26
+    VECTOR                         shift and go to state 29
+    MATRIX                         shift and go to state 30
+
+state 144
+
+    (14) S -> FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V . S RCURL
+    (9) S -> . IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S
+    (12) S -> . WHILE LPAREN LOGE RPAREN LCURL V S RCURL S
+    (13) S -> . DO COLON V S WHILE LPAREN LOGE RPAREN S
+    (14) S -> . FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL
+    (15) S -> . E
+    (16) S -> . EMPTY
+    (37) E -> . E PLUS T
+    (38) E -> . E MINUS T
+    (39) E -> . T
+    (36) EMPTY -> .
+    (40) T -> . T MULT F
+    (41) T -> . T DIV F
+    (42) T -> . F
+    (43) F -> . LPAREN E RPAREN
+    (44) F -> . NINT
+    (45) F -> . NFLOAT
+    (46) F -> . VECTOR
+    (47) F -> . MATRIX
+    (48) F -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    IF              shift and go to state 18
+    WHILE           shift and go to state 20
+    DO              shift and go to state 21
+    FOR             shift and go to state 22
+    RCURL           reduce using rule 36 (EMPTY -> .)
+    LPAREN          shift and go to state 19
+    NINT            shift and go to state 27
+    NFLOAT          shift and go to state 28
+    ID              shift and go to state 31
+
+    S                              shift and go to state 150
+    E                              shift and go to state 23
+    EMPTY                          shift and go to state 24
+    T                              shift and go to state 25
+    F                              shift and go to state 26
+    VECTOR                         shift and go to state 29
+    MATRIX                         shift and go to state 30
+
+state 145
+
+    (33) MATDEF -> MAT LBRACK VAR RBRACK LBRACK VAR RBRACK .
+
+    DIM             reduce using rule 33 (MATDEF -> MAT LBRACK VAR RBRACK LBRACK VAR RBRACK .)
+    LET             reduce using rule 33 (MATDEF -> MAT LBRACK VAR RBRACK LBRACK VAR RBRACK .)
+    SUBPROCEDURE    reduce using rule 33 (MATDEF -> MAT LBRACK VAR RBRACK LBRACK VAR RBRACK .)
+    IN              reduce using rule 33 (MATDEF -> MAT LBRACK VAR RBRACK LBRACK VAR RBRACK .)
+    PRINT           reduce using rule 33 (MATDEF -> MAT LBRACK VAR RBRACK LBRACK VAR RBRACK .)
+    IF              reduce using rule 33 (MATDEF -> MAT LBRACK VAR RBRACK LBRACK VAR RBRACK .)
+    WHILE           reduce using rule 33 (MATDEF -> MAT LBRACK VAR RBRACK LBRACK VAR RBRACK .)
+    DO              reduce using rule 33 (MATDEF -> MAT LBRACK VAR RBRACK LBRACK VAR RBRACK .)
+    FOR             reduce using rule 33 (MATDEF -> MAT LBRACK VAR RBRACK LBRACK VAR RBRACK .)
+    LPAREN          reduce using rule 33 (MATDEF -> MAT LBRACK VAR RBRACK LBRACK VAR RBRACK .)
+    NINT            reduce using rule 33 (MATDEF -> MAT LBRACK VAR RBRACK LBRACK VAR RBRACK .)
+    NFLOAT          reduce using rule 33 (MATDEF -> MAT LBRACK VAR RBRACK LBRACK VAR RBRACK .)
+    ID              reduce using rule 33 (MATDEF -> MAT LBRACK VAR RBRACK LBRACK VAR RBRACK .)
+    PEND            reduce using rule 33 (MATDEF -> MAT LBRACK VAR RBRACK LBRACK VAR RBRACK .)
+    SUBEND          reduce using rule 33 (MATDEF -> MAT LBRACK VAR RBRACK LBRACK VAR RBRACK .)
+    RCURL           reduce using rule 33 (MATDEF -> MAT LBRACK VAR RBRACK LBRACK VAR RBRACK .)
+
+
+state 146
+
+    (9) S -> IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE . S
+    (9) S -> . IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S
+    (12) S -> . WHILE LPAREN LOGE RPAREN LCURL V S RCURL S
+    (13) S -> . DO COLON V S WHILE LPAREN LOGE RPAREN S
+    (14) S -> . FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL
+    (15) S -> . E
+    (16) S -> . EMPTY
+    (37) E -> . E PLUS T
+    (38) E -> . E MINUS T
+    (39) E -> . T
+    (36) EMPTY -> .
+    (40) T -> . T MULT F
+    (41) T -> . T DIV F
+    (42) T -> . F
+    (43) F -> . LPAREN E RPAREN
+    (44) F -> . NINT
+    (45) F -> . NFLOAT
+    (46) F -> . VECTOR
+    (47) F -> . MATRIX
+    (48) F -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+  ! shift/reduce conflict for DO resolved as shift
+  ! shift/reduce conflict for FOR resolved as shift
+  ! shift/reduce conflict for LPAREN resolved as shift
+  ! shift/reduce conflict for NINT resolved as shift
+  ! shift/reduce conflict for NFLOAT resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+    IF              shift and go to state 18
+    WHILE           shift and go to state 20
+    DO              shift and go to state 21
+    FOR             shift and go to state 22
+    PEND            reduce using rule 36 (EMPTY -> .)
+    SUBPROCEDURE    reduce using rule 36 (EMPTY -> .)
+    IN              reduce using rule 36 (EMPTY -> .)
+    PRINT           reduce using rule 36 (EMPTY -> .)
+    SUBEND          reduce using rule 36 (EMPTY -> .)
+    RCURL           reduce using rule 36 (EMPTY -> .)
+    LPAREN          shift and go to state 19
+    NINT            shift and go to state 27
+    NFLOAT          shift and go to state 28
+    ID              shift and go to state 31
+
+  ! IF              [ reduce using rule 36 (EMPTY -> .) ]
+  ! WHILE           [ reduce using rule 36 (EMPTY -> .) ]
+  ! DO              [ reduce using rule 36 (EMPTY -> .) ]
+  ! FOR             [ reduce using rule 36 (EMPTY -> .) ]
+  ! LPAREN          [ reduce using rule 36 (EMPTY -> .) ]
+  ! NINT            [ reduce using rule 36 (EMPTY -> .) ]
+  ! NFLOAT          [ reduce using rule 36 (EMPTY -> .) ]
+  ! ID              [ reduce using rule 36 (EMPTY -> .) ]
+
+    S                              shift and go to state 151
+    E                              shift and go to state 23
+    EMPTY                          shift and go to state 24
+    T                              shift and go to state 25
+    F                              shift and go to state 26
+    VECTOR                         shift and go to state 29
+    MATRIX                         shift and go to state 30
+
+state 147
+
+    (10) IFELSE -> ELSE . LCURL S RCURL
+
+    LCURL           shift and go to state 152
+
+
+state 148
+
+    (12) S -> WHILE LPAREN LOGE RPAREN LCURL V S RCURL S .
+
+    PEND            reduce using rule 12 (S -> WHILE LPAREN LOGE RPAREN LCURL V S RCURL S .)
+    SUBPROCEDURE    reduce using rule 12 (S -> WHILE LPAREN LOGE RPAREN LCURL V S RCURL S .)
+    IN              reduce using rule 12 (S -> WHILE LPAREN LOGE RPAREN LCURL V S RCURL S .)
+    PRINT           reduce using rule 12 (S -> WHILE LPAREN LOGE RPAREN LCURL V S RCURL S .)
+    IF              reduce using rule 12 (S -> WHILE LPAREN LOGE RPAREN LCURL V S RCURL S .)
+    WHILE           reduce using rule 12 (S -> WHILE LPAREN LOGE RPAREN LCURL V S RCURL S .)
+    DO              reduce using rule 12 (S -> WHILE LPAREN LOGE RPAREN LCURL V S RCURL S .)
+    FOR             reduce using rule 12 (S -> WHILE LPAREN LOGE RPAREN LCURL V S RCURL S .)
+    LPAREN          reduce using rule 12 (S -> WHILE LPAREN LOGE RPAREN LCURL V S RCURL S .)
+    NINT            reduce using rule 12 (S -> WHILE LPAREN LOGE RPAREN LCURL V S RCURL S .)
+    NFLOAT          reduce using rule 12 (S -> WHILE LPAREN LOGE RPAREN LCURL V S RCURL S .)
+    ID              reduce using rule 12 (S -> WHILE LPAREN LOGE RPAREN LCURL V S RCURL S .)
+    SUBEND          reduce using rule 12 (S -> WHILE LPAREN LOGE RPAREN LCURL V S RCURL S .)
+    RCURL           reduce using rule 12 (S -> WHILE LPAREN LOGE RPAREN LCURL V S RCURL S .)
+
+
+state 149
+
+    (13) S -> DO COLON V S WHILE LPAREN LOGE RPAREN S .
+
+    PEND            reduce using rule 13 (S -> DO COLON V S WHILE LPAREN LOGE RPAREN S .)
+    SUBPROCEDURE    reduce using rule 13 (S -> DO COLON V S WHILE LPAREN LOGE RPAREN S .)
+    IN              reduce using rule 13 (S -> DO COLON V S WHILE LPAREN LOGE RPAREN S .)
+    PRINT           reduce using rule 13 (S -> DO COLON V S WHILE LPAREN LOGE RPAREN S .)
+    IF              reduce using rule 13 (S -> DO COLON V S WHILE LPAREN LOGE RPAREN S .)
+    WHILE           reduce using rule 13 (S -> DO COLON V S WHILE LPAREN LOGE RPAREN S .)
+    DO              reduce using rule 13 (S -> DO COLON V S WHILE LPAREN LOGE RPAREN S .)
+    FOR             reduce using rule 13 (S -> DO COLON V S WHILE LPAREN LOGE RPAREN S .)
+    LPAREN          reduce using rule 13 (S -> DO COLON V S WHILE LPAREN LOGE RPAREN S .)
+    NINT            reduce using rule 13 (S -> DO COLON V S WHILE LPAREN LOGE RPAREN S .)
+    NFLOAT          reduce using rule 13 (S -> DO COLON V S WHILE LPAREN LOGE RPAREN S .)
+    ID              reduce using rule 13 (S -> DO COLON V S WHILE LPAREN LOGE RPAREN S .)
+    SUBEND          reduce using rule 13 (S -> DO COLON V S WHILE LPAREN LOGE RPAREN S .)
+    RCURL           reduce using rule 13 (S -> DO COLON V S WHILE LPAREN LOGE RPAREN S .)
+
+
+state 150
+
+    (14) S -> FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S . RCURL
+
+    RCURL           shift and go to state 153
+
+
+state 151
+
+    (9) S -> IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S .
+
+    PEND            reduce using rule 9 (S -> IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S .)
+    SUBPROCEDURE    reduce using rule 9 (S -> IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S .)
+    IN              reduce using rule 9 (S -> IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S .)
+    PRINT           reduce using rule 9 (S -> IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S .)
+    IF              reduce using rule 9 (S -> IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S .)
+    WHILE           reduce using rule 9 (S -> IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S .)
+    DO              reduce using rule 9 (S -> IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S .)
+    FOR             reduce using rule 9 (S -> IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S .)
+    LPAREN          reduce using rule 9 (S -> IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S .)
+    NINT            reduce using rule 9 (S -> IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S .)
+    NFLOAT          reduce using rule 9 (S -> IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S .)
+    ID              reduce using rule 9 (S -> IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S .)
+    SUBEND          reduce using rule 9 (S -> IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S .)
+    RCURL           reduce using rule 9 (S -> IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S .)
+
+
+state 152
+
+    (10) IFELSE -> ELSE LCURL . S RCURL
+    (9) S -> . IF LPAREN LOGE RPAREN LCURL V S RCURL IFELSE S
+    (12) S -> . WHILE LPAREN LOGE RPAREN LCURL V S RCURL S
+    (13) S -> . DO COLON V S WHILE LPAREN LOGE RPAREN S
+    (14) S -> . FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL
+    (15) S -> . E
+    (16) S -> . EMPTY
+    (37) E -> . E PLUS T
+    (38) E -> . E MINUS T
+    (39) E -> . T
+    (36) EMPTY -> .
+    (40) T -> . T MULT F
+    (41) T -> . T DIV F
+    (42) T -> . F
+    (43) F -> . LPAREN E RPAREN
+    (44) F -> . NINT
+    (45) F -> . NFLOAT
+    (46) F -> . VECTOR
+    (47) F -> . MATRIX
+    (48) F -> . ID
+    (34) VECTOR -> . ID LBRACK NUMTYPE RBRACK
+    (35) MATRIX -> . ID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+
+    IF              shift and go to state 18
+    WHILE           shift and go to state 20
+    DO              shift and go to state 21
+    FOR             shift and go to state 22
+    RCURL           reduce using rule 36 (EMPTY -> .)
+    LPAREN          shift and go to state 19
+    NINT            shift and go to state 27
+    NFLOAT          shift and go to state 28
+    ID              shift and go to state 31
+
+    S                              shift and go to state 154
+    E                              shift and go to state 23
+    EMPTY                          shift and go to state 24
+    T                              shift and go to state 25
+    F                              shift and go to state 26
+    VECTOR                         shift and go to state 29
+    MATRIX                         shift and go to state 30
+
+state 153
+
+    (14) S -> FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL .
+
+    PEND            reduce using rule 14 (S -> FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL .)
+    SUBPROCEDURE    reduce using rule 14 (S -> FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL .)
+    IN              reduce using rule 14 (S -> FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL .)
+    PRINT           reduce using rule 14 (S -> FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL .)
+    IF              reduce using rule 14 (S -> FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL .)
+    WHILE           reduce using rule 14 (S -> FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL .)
+    DO              reduce using rule 14 (S -> FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL .)
+    FOR             reduce using rule 14 (S -> FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL .)
+    LPAREN          reduce using rule 14 (S -> FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL .)
+    NINT            reduce using rule 14 (S -> FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL .)
+    NFLOAT          reduce using rule 14 (S -> FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL .)
+    ID              reduce using rule 14 (S -> FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL .)
+    SUBEND          reduce using rule 14 (S -> FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL .)
+    RCURL           reduce using rule 14 (S -> FOR LPAREN LOGE COMMA LOGE RPAREN LCURL V S RCURL .)
+
+
+state 154
+
+    (10) IFELSE -> ELSE LCURL S . RCURL
+
+    RCURL           shift and go to state 155
+
+
+state 155
+
+    (10) IFELSE -> ELSE LCURL S RCURL .
+
+    IF              reduce using rule 10 (IFELSE -> ELSE LCURL S RCURL .)
+    WHILE           reduce using rule 10 (IFELSE -> ELSE LCURL S RCURL .)
+    DO              reduce using rule 10 (IFELSE -> ELSE LCURL S RCURL .)
+    FOR             reduce using rule 10 (IFELSE -> ELSE LCURL S RCURL .)
+    LPAREN          reduce using rule 10 (IFELSE -> ELSE LCURL S RCURL .)
+    NINT            reduce using rule 10 (IFELSE -> ELSE LCURL S RCURL .)
+    NFLOAT          reduce using rule 10 (IFELSE -> ELSE LCURL S RCURL .)
+    ID              reduce using rule 10 (IFELSE -> ELSE LCURL S RCURL .)
+    PEND            reduce using rule 10 (IFELSE -> ELSE LCURL S RCURL .)
+    SUBPROCEDURE    reduce using rule 10 (IFELSE -> ELSE LCURL S RCURL .)
+    IN              reduce using rule 10 (IFELSE -> ELSE LCURL S RCURL .)
+    PRINT           reduce using rule 10 (IFELSE -> ELSE LCURL S RCURL .)
+    SUBEND          reduce using rule 10 (IFELSE -> ELSE LCURL S RCURL .)
+    RCURL           reduce using rule 10 (IFELSE -> ELSE LCURL S RCURL .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for IF in state 37 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 37 resolved as shift
+WARNING: shift/reduce conflict for DO in state 37 resolved as shift
+WARNING: shift/reduce conflict for FOR in state 37 resolved as shift
+WARNING: shift/reduce conflict for LPAREN in state 37 resolved as shift
+WARNING: shift/reduce conflict for NINT in state 37 resolved as shift
+WARNING: shift/reduce conflict for NFLOAT in state 37 resolved as shift
+WARNING: shift/reduce conflict for ID in state 37 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 78 resolved as shift
+WARNING: shift/reduce conflict for IF in state 86 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 86 resolved as shift
+WARNING: shift/reduce conflict for DO in state 86 resolved as shift
+WARNING: shift/reduce conflict for FOR in state 86 resolved as shift
+WARNING: shift/reduce conflict for LPAREN in state 86 resolved as shift
+WARNING: shift/reduce conflict for NINT in state 86 resolved as shift
+WARNING: shift/reduce conflict for NFLOAT in state 86 resolved as shift
+WARNING: shift/reduce conflict for ID in state 86 resolved as shift
+WARNING: shift/reduce conflict for IF in state 87 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 87 resolved as shift
+WARNING: shift/reduce conflict for DO in state 87 resolved as shift
+WARNING: shift/reduce conflict for FOR in state 87 resolved as shift
+WARNING: shift/reduce conflict for LPAREN in state 87 resolved as shift
+WARNING: shift/reduce conflict for NINT in state 87 resolved as shift
+WARNING: shift/reduce conflict for NFLOAT in state 87 resolved as shift
+WARNING: shift/reduce conflict for ID in state 87 resolved as shift
+WARNING: shift/reduce conflict for IF in state 142 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 142 resolved as shift
+WARNING: shift/reduce conflict for DO in state 142 resolved as shift
+WARNING: shift/reduce conflict for FOR in state 142 resolved as shift
+WARNING: shift/reduce conflict for LPAREN in state 142 resolved as shift
+WARNING: shift/reduce conflict for NINT in state 142 resolved as shift
+WARNING: shift/reduce conflict for NFLOAT in state 142 resolved as shift
+WARNING: shift/reduce conflict for ID in state 142 resolved as shift
+WARNING: shift/reduce conflict for IF in state 143 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 143 resolved as shift
+WARNING: shift/reduce conflict for DO in state 143 resolved as shift
+WARNING: shift/reduce conflict for FOR in state 143 resolved as shift
+WARNING: shift/reduce conflict for LPAREN in state 143 resolved as shift
+WARNING: shift/reduce conflict for NINT in state 143 resolved as shift
+WARNING: shift/reduce conflict for NFLOAT in state 143 resolved as shift
+WARNING: shift/reduce conflict for ID in state 143 resolved as shift
+WARNING: shift/reduce conflict for IF in state 146 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 146 resolved as shift
+WARNING: shift/reduce conflict for DO in state 146 resolved as shift
+WARNING: shift/reduce conflict for FOR in state 146 resolved as shift
+WARNING: shift/reduce conflict for LPAREN in state 146 resolved as shift
+WARNING: shift/reduce conflict for NINT in state 146 resolved as shift
+WARNING: shift/reduce conflict for NFLOAT in state 146 resolved as shift
+WARNING: shift/reduce conflict for ID in state 146 resolved as shift

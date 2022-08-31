@@ -1,0 +1,46 @@
+DEF numAbs AS FLOAT
+DEF estCuad AS FLOAT
+DEF margen AS FLOAT
+
+DEF altura AS FLOAT
+DEF base AS FLOAT
+DEF lado AS FLOAT
+DEF numCuad AS FLOAT
+DEF perim as FLOAT
+DEF otro AS INT
+
+PROCEDURE abs {
+    IF (numAbs < 0) {
+        LET numAbs = numAbs * -1
+    }
+}
+
+PROCEDURE calcLado {
+    LET  numAbs = ((estCuad * estCuad) - numCuad)
+    CALL abs
+    WHILE (numAbs >= margen) {
+        LET estCuad = (((numCuad / estCuad) + estCuad) / 2.0)
+        LET numAbs = ((estCuad * estCuad) - numCuad)
+        CALL abs
+    }
+    LET numCuad = estCuad
+}
+
+PROGRAM
+    LET estCuad = 1.0
+    LET margen = 0.000001
+    LET otro = 1
+
+    DO {
+        IN(altura)
+        IN(base)
+        LET numCuad = ((altura * altura) + (base * base))
+        GOSUB calcLado
+        LET lado = numCuad
+        LET perim = lado + base + altura
+        PRINT(perim)
+        IN(otro)
+    } WHILE (otro == 0)
+
+
+PEND

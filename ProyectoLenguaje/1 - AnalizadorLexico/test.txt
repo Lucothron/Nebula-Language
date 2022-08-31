@@ -1,0 +1,6 @@
+PROGRAM
+
+DIM var as INT
+DIM num as MAT[2][2]
+
+PEND

@@ -1,0 +1,59 @@
+DEF numero AS INT
+DEF numeroB AS INT
+
+DEF impreso AS INT
+
+PROCEDURE sacarNum {
+    IF (impreso == 1) {
+        PRINT(1)
+    } ELSE {
+        IF (impreso == 2) {
+            PRINT(2)
+        } ELSE {
+            IF (impreso == 3) {
+                PRINT(3)
+            } ELSE {
+                IF (impreso == 4) {
+                        PRINT(4)
+                } ELSE {
+                    IF (impreso == 5) {
+                        PRINT(5)
+                    } ELSE {
+                        IF (impreso == 6) {
+                            PRINT(6)
+                        } ELSE {
+                            IF (impreso == 7) {
+                                    PRINT(7)
+                            } ELSE {
+                                IF (impreso == 8) {
+                                    PRINT(8)
+                                } ELSE {
+                                    IF (impreso == 9) {
+                                        PRINT(9)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } 
+    }
+}
+
+PROGRAM
+
+IN(numeroB)
+
+DO {
+    LET numero = numeroB
+    LET numero = numero / 10
+    LET numero  = numero * 10
+    LET numero  = numeroB - numero
+    LET impreso = numero
+    CALL sacarNum
+    LET numeroB = numeroB - numero
+    LET numeroB = numeroB / 10
+} WHILE (numeroB == 0)
+
+PEND

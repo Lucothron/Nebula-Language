@@ -1,0 +1,79 @@
+DEF x AS INT
+DEF y AS INT
+DEF i AS INT
+DEF j AS INT
+DEF k AS INT
+DEF fact AS INT
+DEF acum AS INT
+DEF tay AS INT
+DEF temp AS INT
+DEF xTemp AS INT
+DEF input AS INT
+DEF choice AS INT
+
+PROCEDURE factorial {
+    LET fact = 1
+    FOR (i = 1, i <= x) {
+        LET fact = fact * i
+        LET i = i + 1
+    }
+}
+
+PROCEDURE exp {
+    LET acum = x
+    FOR (j = 1, j < y) {
+        LET acum = acum * x
+        LET j = j + 1
+    }
+}
+
+PROCEDURE taylor {
+    LET tay = 0
+    FOR (k = 0, k < 10) {
+        LET y = k
+        LET xTemp = x
+        LET x = k
+        CALL factorial
+        CALL exp
+        LET temp = acum / fact
+        LET tay = tay + temp
+        LET x = xTemp
+        LET k = k + 1
+    }
+}
+
+PROGRAM
+
+LET input = 1
+
+WHILE (input == 1) {
+    IN(choice)
+
+    IF (choice == 1) {
+        IN(x)
+
+        CALL factorial
+
+        PRINT(fact)
+    } ELSE {
+        IF (choice == 2) {
+            IN(x)
+            IN(y)
+
+            CALL exp
+
+            PRINT(acum)
+        } ELSE {
+            IF (choice == 3) {
+                IN(x)
+
+                CALL taylor
+
+                PRINT(tay)
+            }
+        }
+    }
+    IN(input)
+}
+
+PEND

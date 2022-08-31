@@ -1,0 +1,41 @@
+DEF a[2,2,2] AS INT
+DEF i AS INT
+DEF j AS INT
+DEF k AS INT
+DEF temp AS INT
+DEF input AS INT
+
+PROCEDURE mult {
+    FOR (i = 0, i < 2) {
+        FOR (j = 0, j < 2) {
+            FOR (k = 0, k < 2) {
+                LET temp = a[k, i, j]
+                LET temp = temp * 2
+                LET a[k, i, j] = temp
+                LET k = k + 1
+            }
+            LET j = j + 1
+        }
+        LET i = i + 1
+    }
+}
+
+PROGRAM
+
+FOR (i = 0, i < 2) {
+    FOR (j = 0, j < 2) {
+        FOR (k = 0, k < 2) {
+            IN(input)
+            LET a[k, i, j] = input
+            LET k = k + 1
+        }
+        LET j = j + 1
+    }
+    LET i = i + 1
+}
+
+CALL mult
+
+PRINT(a)
+
+PEND

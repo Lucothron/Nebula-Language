@@ -1,0 +1,3207 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> START
+Rule 1     START -> V PROC PROGRAM X PEND
+Rule 2     X -> V P S
+Rule 3     V -> DEF VARAUX X
+Rule 4     VARAUX -> ID AS VARTYPE
+Rule 5     VARAUX -> VECDEF
+Rule 6     VARAUX -> MATDEF
+Rule 7     VARAUX -> CUBEDEF
+Rule 8     VECDEF -> ID LBRACK NINT RBRACK AS VARTYPE
+Rule 9     MATDEF -> ID LBRACK NINT COMMA NINT RBRACK AS VARTYPE
+Rule 10    CUBEDEF -> ID LBRACK NINT COMMA NINT COMMA NINT RBRACK AS VARTYPE
+Rule 11    V -> LET VARASSIGN X
+Rule 12    VARASSIGN -> VARID EQUAL E
+Rule 13    VARASSIGN -> VARID LBRACK NUMTYPE RBRACK EQUAL E
+Rule 14    VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK EQUAL E
+Rule 15    VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK EQUAL E
+Rule 16    VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE RBRACK
+Rule 17    VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+Rule 18    VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK
+Rule 19    VARID -> ID
+Rule 20    VARTYPE -> INT
+Rule 21    VARTYPE -> FLOAT
+Rule 22    NUMTYPE -> NINT
+Rule 23    NUMTYPE -> ID
+Rule 24    VAR -> NINT
+Rule 25    VAR -> NFLOAT
+Rule 26    VAR -> ID
+Rule 27    V -> EMPTY
+Rule 28    P -> CALL SUBAUX X
+Rule 29    SUBAUX -> ID
+Rule 30    PROC -> PROCEDURE PROCAUX LCURL X RCURL PROCAUX2 PROC
+Rule 31    PROC -> <empty>
+Rule 32    PROCAUX -> ID
+Rule 33    PROCAUX2 -> <empty>
+Rule 34    P -> IN INPAUX X
+Rule 35    INPAUX -> LPAREN VARID RPAREN
+Rule 36    P -> PRINT PRINTAUX X
+Rule 37    PRINTAUX -> LPAREN VAR RPAREN
+Rule 38    PRINTAUX -> LPAREN APOS ID APOS RPAREN
+Rule 39    P -> EMPTY
+Rule 40    S -> IF IFAUX LCURL X RCURL IFAUX2 X
+Rule 41    IFAUX -> LPAREN LOGE RPAREN
+Rule 42    IFAUX2 -> IFELSE
+Rule 43    IFAUX2 -> IFAUX3
+Rule 44    IFAUX3 -> <empty>
+Rule 45    IFELSE -> ELSEAUX LCURL X RCURL IFAUX3
+Rule 46    ELSEAUX -> ELSE
+Rule 47    S -> WHILE WHILEAUX LCURL X RCURL WHILEAUX2 X
+Rule 48    WHILEAUX -> LPAREN LOGE RPAREN
+Rule 49    WHILEAUX2 -> <empty>
+Rule 50    S -> DO DOAUX LCURL X RCURL WHILE DOAUX2 X
+Rule 51    DOAUX -> <empty>
+Rule 52    DOAUX2 -> LPAREN LOGE RPAREN
+Rule 53    S -> FOR FORAUX LCURL X RCURL FORAUX2 X
+Rule 54    FORAUX -> LPAREN FORASSIGN COMMA LOGE RPAREN
+Rule 55    FORAUX2 -> <empty>
+Rule 56    FORASSIGN -> VARID EQUAL E
+Rule 57    S -> EMPTY
+Rule 58    EMPTY -> <empty>
+Rule 59    E -> E PLUS T
+Rule 60    E -> E MINUS T
+Rule 61    E -> T
+Rule 62    T -> T MULT F
+Rule 63    T -> T DIV F
+Rule 64    T -> F
+Rule 65    F -> LPAREN E RPAREN
+Rule 66    F -> NINT
+Rule 67    F -> NFLOAT
+Rule 68    F -> ID
+Rule 69    LOGE -> LOGE OR LOGT
+Rule 70    LOGE -> NOT LOGT
+Rule 71    LOGE -> LOGT
+Rule 72    LOGT -> LOGT AND LOGF
+Rule 73    LOGT -> LOGF
+Rule 74    LOGF -> VAR LT VAR
+Rule 75    LOGF -> VAR LE VAR
+Rule 76    LOGF -> VAR GT VAR
+Rule 77    LOGF -> VAR GE VAR
+Rule 78    LOGF -> VAR EQ VAR
+Rule 79    LOGF -> VAR NE VAR
+Rule 80    LOGF -> LPAREN LOGE RPAREN
+
+Terminals, with rules where they appear
+
+AND                  : 72
+APOS                 : 38 38
+AS                   : 4 8 9 10
+CALL                 : 28
+COMMA                : 9 10 10 14 15 15 17 18 18 54
+DEF                  : 3
+DIV                  : 63
+DO                   : 50
+ELSE                 : 46
+EQ                   : 78
+EQUAL                : 12 13 14 15 16 17 18 56
+FLOAT                : 21
+FOR                  : 53
+GE                   : 77
+GT                   : 76
+ID                   : 4 8 9 10 19 23 26 29 32 38 68
+IF                   : 40
+IN                   : 34
+INT                  : 20
+LBRACK               : 8 9 10 13 14 15 16 17 18
+LCURL                : 30 40 45 47 50 53
+LE                   : 75
+LET                  : 11
+LPAREN               : 35 37 38 41 48 52 54 65 80
+LT                   : 74
+MINUS                : 60
+MULT                 : 62
+NE                   : 79
+NFLOAT               : 25 67
+NINT                 : 8 9 9 10 10 10 22 24 66
+NOT                  : 70
+OR                   : 69
+PEND                 : 1
+PLUS                 : 59
+PRINT                : 36
+PROCEDURE            : 30
+PROGRAM              : 1
+RBRACK               : 8 9 10 13 14 15 16 17 18
+RCURL                : 30 40 45 47 50 53
+RPAREN               : 35 37 38 41 48 52 54 65 80
+WHILE                : 47 50
+error                : 
+
+Nonterminals, with rules where they appear
+
+CUBEDEF              : 7
+DOAUX                : 50
+DOAUX2               : 50
+E                    : 12 13 14 15 56 59 60 65
+ELSEAUX              : 45
+EMPTY                : 27 39 57
+F                    : 62 63 64
+FORASSIGN            : 54
+FORAUX               : 53
+FORAUX2              : 53
+IFAUX                : 40
+IFAUX2               : 40
+IFAUX3               : 43 45
+IFELSE               : 42
+INPAUX               : 34
+LOGE                 : 41 48 52 54 69 80
+LOGF                 : 72 73
+LOGT                 : 69 70 71 72
+MATDEF               : 6
+NUMTYPE              : 13 14 14 15 15 15 16 17 17 18 18 18
+P                    : 2
+PRINTAUX             : 36
+PROC                 : 1 30
+PROCAUX              : 30
+PROCAUX2             : 30
+S                    : 2
+START                : 0
+SUBAUX               : 28
+T                    : 59 60 61 62 63
+V                    : 1 2
+VAR                  : 37 74 74 75 75 76 76 77 77 78 78 79 79
+VARASSIGN            : 11
+VARAUX               : 3
+VARID                : 12 13 14 15 16 16 17 17 18 18 35 56
+VARTYPE              : 4 8 9 10
+VECDEF               : 5
+WHILEAUX             : 47
+WHILEAUX2            : 47
+X                    : 1 3 11 28 30 34 36 40 40 45 47 47 50 50 53 53
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . START
+    (1) START -> . V PROC PROGRAM X PEND
+    (3) V -> . DEF VARAUX X
+    (11) V -> . LET VARASSIGN X
+    (27) V -> . EMPTY
+    (58) EMPTY -> .
+
+    DEF             shift and go to state 3
+    LET             shift and go to state 4
+    PROCEDURE       reduce using rule 58 (EMPTY -> .)
+    PROGRAM         reduce using rule 58 (EMPTY -> .)
+
+    START                          shift and go to state 1
+    V                              shift and go to state 2
+    EMPTY                          shift and go to state 5
+
+state 1
+
+    (0) S' -> START .
+
+
+
+state 2
+
+    (1) START -> V . PROC PROGRAM X PEND
+    (30) PROC -> . PROCEDURE PROCAUX LCURL X RCURL PROCAUX2 PROC
+    (31) PROC -> .
+
+    PROCEDURE       shift and go to state 7
+    PROGRAM         reduce using rule 31 (PROC -> .)
+
+    PROC                           shift and go to state 6
+
+state 3
+
+    (3) V -> DEF . VARAUX X
+    (4) VARAUX -> . ID AS VARTYPE
+    (5) VARAUX -> . VECDEF
+    (6) VARAUX -> . MATDEF
+    (7) VARAUX -> . CUBEDEF
+    (8) VECDEF -> . ID LBRACK NINT RBRACK AS VARTYPE
+    (9) MATDEF -> . ID LBRACK NINT COMMA NINT RBRACK AS VARTYPE
+    (10) CUBEDEF -> . ID LBRACK NINT COMMA NINT COMMA NINT RBRACK AS VARTYPE
+
+    ID              shift and go to state 9
+
+    VARAUX                         shift and go to state 8
+    VECDEF                         shift and go to state 10
+    MATDEF                         shift and go to state 11
+    CUBEDEF                        shift and go to state 12
+
+state 4
+
+    (11) V -> LET . VARASSIGN X
+    (12) VARASSIGN -> . VARID EQUAL E
+    (13) VARASSIGN -> . VARID LBRACK NUMTYPE RBRACK EQUAL E
+    (14) VARASSIGN -> . VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK EQUAL E
+    (15) VARASSIGN -> . VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK EQUAL E
+    (16) VARASSIGN -> . VARID EQUAL VARID LBRACK NUMTYPE RBRACK
+    (17) VARASSIGN -> . VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+    (18) VARASSIGN -> . VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK
+    (19) VARID -> . ID
+
+    ID              shift and go to state 15
+
+    VARASSIGN                      shift and go to state 13
+    VARID                          shift and go to state 14
+
+state 5
+
+    (27) V -> EMPTY .
+
+    PROCEDURE       reduce using rule 27 (V -> EMPTY .)
+    PROGRAM         reduce using rule 27 (V -> EMPTY .)
+    CALL            reduce using rule 27 (V -> EMPTY .)
+    IN              reduce using rule 27 (V -> EMPTY .)
+    PRINT           reduce using rule 27 (V -> EMPTY .)
+    IF              reduce using rule 27 (V -> EMPTY .)
+    WHILE           reduce using rule 27 (V -> EMPTY .)
+    DO              reduce using rule 27 (V -> EMPTY .)
+    FOR             reduce using rule 27 (V -> EMPTY .)
+    PEND            reduce using rule 27 (V -> EMPTY .)
+    RCURL           reduce using rule 27 (V -> EMPTY .)
+
+
+state 6
+
+    (1) START -> V PROC . PROGRAM X PEND
+
+    PROGRAM         shift and go to state 16
+
+
+state 7
+
+    (30) PROC -> PROCEDURE . PROCAUX LCURL X RCURL PROCAUX2 PROC
+    (32) PROCAUX -> . ID
+
+    ID              shift and go to state 18
+
+    PROCAUX                        shift and go to state 17
+
+state 8
+
+    (3) V -> DEF VARAUX . X
+    (2) X -> . V P S
+    (3) V -> . DEF VARAUX X
+    (11) V -> . LET VARASSIGN X
+    (27) V -> . EMPTY
+    (58) EMPTY -> .
+
+    DEF             shift and go to state 3
+    LET             shift and go to state 4
+    CALL            reduce using rule 58 (EMPTY -> .)
+    IN              reduce using rule 58 (EMPTY -> .)
+    PRINT           reduce using rule 58 (EMPTY -> .)
+    IF              reduce using rule 58 (EMPTY -> .)
+    WHILE           reduce using rule 58 (EMPTY -> .)
+    DO              reduce using rule 58 (EMPTY -> .)
+    FOR             reduce using rule 58 (EMPTY -> .)
+    PROCEDURE       reduce using rule 58 (EMPTY -> .)
+    PROGRAM         reduce using rule 58 (EMPTY -> .)
+    PEND            reduce using rule 58 (EMPTY -> .)
+    RCURL           reduce using rule 58 (EMPTY -> .)
+
+    X                              shift and go to state 19
+    V                              shift and go to state 20
+    EMPTY                          shift and go to state 5
+
+state 9
+
+    (4) VARAUX -> ID . AS VARTYPE
+    (8) VECDEF -> ID . LBRACK NINT RBRACK AS VARTYPE
+    (9) MATDEF -> ID . LBRACK NINT COMMA NINT RBRACK AS VARTYPE
+    (10) CUBEDEF -> ID . LBRACK NINT COMMA NINT COMMA NINT RBRACK AS VARTYPE
+
+    AS              shift and go to state 21
+    LBRACK          shift and go to state 22
+
+
+state 10
+
+    (5) VARAUX -> VECDEF .
+
+    DEF             reduce using rule 5 (VARAUX -> VECDEF .)
+    LET             reduce using rule 5 (VARAUX -> VECDEF .)
+    CALL            reduce using rule 5 (VARAUX -> VECDEF .)
+    IN              reduce using rule 5 (VARAUX -> VECDEF .)
+    PRINT           reduce using rule 5 (VARAUX -> VECDEF .)
+    IF              reduce using rule 5 (VARAUX -> VECDEF .)
+    WHILE           reduce using rule 5 (VARAUX -> VECDEF .)
+    DO              reduce using rule 5 (VARAUX -> VECDEF .)
+    FOR             reduce using rule 5 (VARAUX -> VECDEF .)
+    PROCEDURE       reduce using rule 5 (VARAUX -> VECDEF .)
+    PROGRAM         reduce using rule 5 (VARAUX -> VECDEF .)
+    PEND            reduce using rule 5 (VARAUX -> VECDEF .)
+    RCURL           reduce using rule 5 (VARAUX -> VECDEF .)
+
+
+state 11
+
+    (6) VARAUX -> MATDEF .
+
+    DEF             reduce using rule 6 (VARAUX -> MATDEF .)
+    LET             reduce using rule 6 (VARAUX -> MATDEF .)
+    CALL            reduce using rule 6 (VARAUX -> MATDEF .)
+    IN              reduce using rule 6 (VARAUX -> MATDEF .)
+    PRINT           reduce using rule 6 (VARAUX -> MATDEF .)
+    IF              reduce using rule 6 (VARAUX -> MATDEF .)
+    WHILE           reduce using rule 6 (VARAUX -> MATDEF .)
+    DO              reduce using rule 6 (VARAUX -> MATDEF .)
+    FOR             reduce using rule 6 (VARAUX -> MATDEF .)
+    PROCEDURE       reduce using rule 6 (VARAUX -> MATDEF .)
+    PROGRAM         reduce using rule 6 (VARAUX -> MATDEF .)
+    PEND            reduce using rule 6 (VARAUX -> MATDEF .)
+    RCURL           reduce using rule 6 (VARAUX -> MATDEF .)
+
+
+state 12
+
+    (7) VARAUX -> CUBEDEF .
+
+    DEF             reduce using rule 7 (VARAUX -> CUBEDEF .)
+    LET             reduce using rule 7 (VARAUX -> CUBEDEF .)
+    CALL            reduce using rule 7 (VARAUX -> CUBEDEF .)
+    IN              reduce using rule 7 (VARAUX -> CUBEDEF .)
+    PRINT           reduce using rule 7 (VARAUX -> CUBEDEF .)
+    IF              reduce using rule 7 (VARAUX -> CUBEDEF .)
+    WHILE           reduce using rule 7 (VARAUX -> CUBEDEF .)
+    DO              reduce using rule 7 (VARAUX -> CUBEDEF .)
+    FOR             reduce using rule 7 (VARAUX -> CUBEDEF .)
+    PROCEDURE       reduce using rule 7 (VARAUX -> CUBEDEF .)
+    PROGRAM         reduce using rule 7 (VARAUX -> CUBEDEF .)
+    PEND            reduce using rule 7 (VARAUX -> CUBEDEF .)
+    RCURL           reduce using rule 7 (VARAUX -> CUBEDEF .)
+
+
+state 13
+
+    (11) V -> LET VARASSIGN . X
+    (2) X -> . V P S
+    (3) V -> . DEF VARAUX X
+    (11) V -> . LET VARASSIGN X
+    (27) V -> . EMPTY
+    (58) EMPTY -> .
+
+    DEF             shift and go to state 3
+    LET             shift and go to state 4
+    CALL            reduce using rule 58 (EMPTY -> .)
+    IN              reduce using rule 58 (EMPTY -> .)
+    PRINT           reduce using rule 58 (EMPTY -> .)
+    IF              reduce using rule 58 (EMPTY -> .)
+    WHILE           reduce using rule 58 (EMPTY -> .)
+    DO              reduce using rule 58 (EMPTY -> .)
+    FOR             reduce using rule 58 (EMPTY -> .)
+    PROCEDURE       reduce using rule 58 (EMPTY -> .)
+    PROGRAM         reduce using rule 58 (EMPTY -> .)
+    PEND            reduce using rule 58 (EMPTY -> .)
+    RCURL           reduce using rule 58 (EMPTY -> .)
+
+    X                              shift and go to state 23
+    V                              shift and go to state 20
+    EMPTY                          shift and go to state 5
+
+state 14
+
+    (12) VARASSIGN -> VARID . EQUAL E
+    (13) VARASSIGN -> VARID . LBRACK NUMTYPE RBRACK EQUAL E
+    (14) VARASSIGN -> VARID . LBRACK NUMTYPE COMMA NUMTYPE RBRACK EQUAL E
+    (15) VARASSIGN -> VARID . LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK EQUAL E
+    (16) VARASSIGN -> VARID . EQUAL VARID LBRACK NUMTYPE RBRACK
+    (17) VARASSIGN -> VARID . EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+    (18) VARASSIGN -> VARID . EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK
+
+    EQUAL           shift and go to state 24
+    LBRACK          shift and go to state 25
+
+
+state 15
+
+    (19) VARID -> ID .
+
+    EQUAL           reduce using rule 19 (VARID -> ID .)
+    LBRACK          reduce using rule 19 (VARID -> ID .)
+    RPAREN          reduce using rule 19 (VARID -> ID .)
+
+
+state 16
+
+    (1) START -> V PROC PROGRAM . X PEND
+    (2) X -> . V P S
+    (3) V -> . DEF VARAUX X
+    (11) V -> . LET VARASSIGN X
+    (27) V -> . EMPTY
+    (58) EMPTY -> .
+
+    DEF             shift and go to state 3
+    LET             shift and go to state 4
+    CALL            reduce using rule 58 (EMPTY -> .)
+    IN              reduce using rule 58 (EMPTY -> .)
+    PRINT           reduce using rule 58 (EMPTY -> .)
+    IF              reduce using rule 58 (EMPTY -> .)
+    WHILE           reduce using rule 58 (EMPTY -> .)
+    DO              reduce using rule 58 (EMPTY -> .)
+    FOR             reduce using rule 58 (EMPTY -> .)
+    PEND            reduce using rule 58 (EMPTY -> .)
+
+    V                              shift and go to state 20
+    X                              shift and go to state 26
+    EMPTY                          shift and go to state 5
+
+state 17
+
+    (30) PROC -> PROCEDURE PROCAUX . LCURL X RCURL PROCAUX2 PROC
+
+    LCURL           shift and go to state 27
+
+
+state 18
+
+    (32) PROCAUX -> ID .
+
+    LCURL           reduce using rule 32 (PROCAUX -> ID .)
+
+
+state 19
+
+    (3) V -> DEF VARAUX X .
+
+    PROCEDURE       reduce using rule 3 (V -> DEF VARAUX X .)
+    PROGRAM         reduce using rule 3 (V -> DEF VARAUX X .)
+    CALL            reduce using rule 3 (V -> DEF VARAUX X .)
+    IN              reduce using rule 3 (V -> DEF VARAUX X .)
+    PRINT           reduce using rule 3 (V -> DEF VARAUX X .)
+    IF              reduce using rule 3 (V -> DEF VARAUX X .)
+    WHILE           reduce using rule 3 (V -> DEF VARAUX X .)
+    DO              reduce using rule 3 (V -> DEF VARAUX X .)
+    FOR             reduce using rule 3 (V -> DEF VARAUX X .)
+    PEND            reduce using rule 3 (V -> DEF VARAUX X .)
+    RCURL           reduce using rule 3 (V -> DEF VARAUX X .)
+
+
+state 20
+
+    (2) X -> V . P S
+    (28) P -> . CALL SUBAUX X
+    (34) P -> . IN INPAUX X
+    (36) P -> . PRINT PRINTAUX X
+    (39) P -> . EMPTY
+    (58) EMPTY -> .
+
+  ! shift/reduce conflict for CALL resolved as shift
+  ! shift/reduce conflict for IN resolved as shift
+  ! shift/reduce conflict for PRINT resolved as shift
+    CALL            shift and go to state 29
+    IN              shift and go to state 30
+    PRINT           shift and go to state 31
+    IF              reduce using rule 58 (EMPTY -> .)
+    WHILE           reduce using rule 58 (EMPTY -> .)
+    DO              reduce using rule 58 (EMPTY -> .)
+    FOR             reduce using rule 58 (EMPTY -> .)
+    PROCEDURE       reduce using rule 58 (EMPTY -> .)
+    PROGRAM         reduce using rule 58 (EMPTY -> .)
+    PEND            reduce using rule 58 (EMPTY -> .)
+    RCURL           reduce using rule 58 (EMPTY -> .)
+
+  ! CALL            [ reduce using rule 58 (EMPTY -> .) ]
+  ! IN              [ reduce using rule 58 (EMPTY -> .) ]
+  ! PRINT           [ reduce using rule 58 (EMPTY -> .) ]
+
+    P                              shift and go to state 28
+    EMPTY                          shift and go to state 32
+
+state 21
+
+    (4) VARAUX -> ID AS . VARTYPE
+    (20) VARTYPE -> . INT
+    (21) VARTYPE -> . FLOAT
+
+    INT             shift and go to state 34
+    FLOAT           shift and go to state 35
+
+    VARTYPE                        shift and go to state 33
+
+state 22
+
+    (8) VECDEF -> ID LBRACK . NINT RBRACK AS VARTYPE
+    (9) MATDEF -> ID LBRACK . NINT COMMA NINT RBRACK AS VARTYPE
+    (10) CUBEDEF -> ID LBRACK . NINT COMMA NINT COMMA NINT RBRACK AS VARTYPE
+
+    NINT            shift and go to state 36
+
+
+state 23
+
+    (11) V -> LET VARASSIGN X .
+
+    PROCEDURE       reduce using rule 11 (V -> LET VARASSIGN X .)
+    PROGRAM         reduce using rule 11 (V -> LET VARASSIGN X .)
+    CALL            reduce using rule 11 (V -> LET VARASSIGN X .)
+    IN              reduce using rule 11 (V -> LET VARASSIGN X .)
+    PRINT           reduce using rule 11 (V -> LET VARASSIGN X .)
+    IF              reduce using rule 11 (V -> LET VARASSIGN X .)
+    WHILE           reduce using rule 11 (V -> LET VARASSIGN X .)
+    DO              reduce using rule 11 (V -> LET VARASSIGN X .)
+    FOR             reduce using rule 11 (V -> LET VARASSIGN X .)
+    PEND            reduce using rule 11 (V -> LET VARASSIGN X .)
+    RCURL           reduce using rule 11 (V -> LET VARASSIGN X .)
+
+
+state 24
+
+    (12) VARASSIGN -> VARID EQUAL . E
+    (16) VARASSIGN -> VARID EQUAL . VARID LBRACK NUMTYPE RBRACK
+    (17) VARASSIGN -> VARID EQUAL . VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+    (18) VARASSIGN -> VARID EQUAL . VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK
+    (59) E -> . E PLUS T
+    (60) E -> . E MINUS T
+    (61) E -> . T
+    (19) VARID -> . ID
+    (62) T -> . T MULT F
+    (63) T -> . T DIV F
+    (64) T -> . F
+    (65) F -> . LPAREN E RPAREN
+    (66) F -> . NINT
+    (67) F -> . NFLOAT
+    (68) F -> . ID
+
+    ID              shift and go to state 40
+    LPAREN          shift and go to state 42
+    NINT            shift and go to state 43
+    NFLOAT          shift and go to state 44
+
+    VARID                          shift and go to state 37
+    E                              shift and go to state 38
+    T                              shift and go to state 39
+    F                              shift and go to state 41
+
+state 25
+
+    (13) VARASSIGN -> VARID LBRACK . NUMTYPE RBRACK EQUAL E
+    (14) VARASSIGN -> VARID LBRACK . NUMTYPE COMMA NUMTYPE RBRACK EQUAL E
+    (15) VARASSIGN -> VARID LBRACK . NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK EQUAL E
+    (22) NUMTYPE -> . NINT
+    (23) NUMTYPE -> . ID
+
+    NINT            shift and go to state 46
+    ID              shift and go to state 47
+
+    NUMTYPE                        shift and go to state 45
+
+state 26
+
+    (1) START -> V PROC PROGRAM X . PEND
+
+    PEND            shift and go to state 48
+
+
+state 27
+
+    (30) PROC -> PROCEDURE PROCAUX LCURL . X RCURL PROCAUX2 PROC
+    (2) X -> . V P S
+    (3) V -> . DEF VARAUX X
+    (11) V -> . LET VARASSIGN X
+    (27) V -> . EMPTY
+    (58) EMPTY -> .
+
+    DEF             shift and go to state 3
+    LET             shift and go to state 4
+    CALL            reduce using rule 58 (EMPTY -> .)
+    IN              reduce using rule 58 (EMPTY -> .)
+    PRINT           reduce using rule 58 (EMPTY -> .)
+    IF              reduce using rule 58 (EMPTY -> .)
+    WHILE           reduce using rule 58 (EMPTY -> .)
+    DO              reduce using rule 58 (EMPTY -> .)
+    FOR             reduce using rule 58 (EMPTY -> .)
+    RCURL           reduce using rule 58 (EMPTY -> .)
+
+    X                              shift and go to state 49
+    V                              shift and go to state 20
+    EMPTY                          shift and go to state 5
+
+state 28
+
+    (2) X -> V P . S
+    (40) S -> . IF IFAUX LCURL X RCURL IFAUX2 X
+    (47) S -> . WHILE WHILEAUX LCURL X RCURL WHILEAUX2 X
+    (50) S -> . DO DOAUX LCURL X RCURL WHILE DOAUX2 X
+    (53) S -> . FOR FORAUX LCURL X RCURL FORAUX2 X
+    (57) S -> . EMPTY
+    (58) EMPTY -> .
+
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+  ! shift/reduce conflict for DO resolved as shift
+  ! shift/reduce conflict for FOR resolved as shift
+    IF              shift and go to state 51
+    WHILE           shift and go to state 52
+    DO              shift and go to state 53
+    FOR             shift and go to state 54
+    CALL            reduce using rule 58 (EMPTY -> .)
+    IN              reduce using rule 58 (EMPTY -> .)
+    PRINT           reduce using rule 58 (EMPTY -> .)
+    PROCEDURE       reduce using rule 58 (EMPTY -> .)
+    PROGRAM         reduce using rule 58 (EMPTY -> .)
+    PEND            reduce using rule 58 (EMPTY -> .)
+    RCURL           reduce using rule 58 (EMPTY -> .)
+
+  ! IF              [ reduce using rule 58 (EMPTY -> .) ]
+  ! WHILE           [ reduce using rule 58 (EMPTY -> .) ]
+  ! DO              [ reduce using rule 58 (EMPTY -> .) ]
+  ! FOR             [ reduce using rule 58 (EMPTY -> .) ]
+
+    S                              shift and go to state 50
+    EMPTY                          shift and go to state 55
+
+state 29
+
+    (28) P -> CALL . SUBAUX X
+    (29) SUBAUX -> . ID
+
+    ID              shift and go to state 57
+
+    SUBAUX                         shift and go to state 56
+
+state 30
+
+    (34) P -> IN . INPAUX X
+    (35) INPAUX -> . LPAREN VARID RPAREN
+
+    LPAREN          shift and go to state 59
+
+    INPAUX                         shift and go to state 58
+
+state 31
+
+    (36) P -> PRINT . PRINTAUX X
+    (37) PRINTAUX -> . LPAREN VAR RPAREN
+    (38) PRINTAUX -> . LPAREN APOS ID APOS RPAREN
+
+    LPAREN          shift and go to state 61
+
+    PRINTAUX                       shift and go to state 60
+
+state 32
+
+    (39) P -> EMPTY .
+
+    CALL            reduce using rule 39 (P -> EMPTY .)
+    IN              reduce using rule 39 (P -> EMPTY .)
+    PRINT           reduce using rule 39 (P -> EMPTY .)
+    IF              reduce using rule 39 (P -> EMPTY .)
+    WHILE           reduce using rule 39 (P -> EMPTY .)
+    DO              reduce using rule 39 (P -> EMPTY .)
+    FOR             reduce using rule 39 (P -> EMPTY .)
+    PROCEDURE       reduce using rule 39 (P -> EMPTY .)
+    PROGRAM         reduce using rule 39 (P -> EMPTY .)
+    PEND            reduce using rule 39 (P -> EMPTY .)
+    RCURL           reduce using rule 39 (P -> EMPTY .)
+
+
+state 33
+
+    (4) VARAUX -> ID AS VARTYPE .
+
+    DEF             reduce using rule 4 (VARAUX -> ID AS VARTYPE .)
+    LET             reduce using rule 4 (VARAUX -> ID AS VARTYPE .)
+    CALL            reduce using rule 4 (VARAUX -> ID AS VARTYPE .)
+    IN              reduce using rule 4 (VARAUX -> ID AS VARTYPE .)
+    PRINT           reduce using rule 4 (VARAUX -> ID AS VARTYPE .)
+    IF              reduce using rule 4 (VARAUX -> ID AS VARTYPE .)
+    WHILE           reduce using rule 4 (VARAUX -> ID AS VARTYPE .)
+    DO              reduce using rule 4 (VARAUX -> ID AS VARTYPE .)
+    FOR             reduce using rule 4 (VARAUX -> ID AS VARTYPE .)
+    PROCEDURE       reduce using rule 4 (VARAUX -> ID AS VARTYPE .)
+    PROGRAM         reduce using rule 4 (VARAUX -> ID AS VARTYPE .)
+    PEND            reduce using rule 4 (VARAUX -> ID AS VARTYPE .)
+    RCURL           reduce using rule 4 (VARAUX -> ID AS VARTYPE .)
+
+
+state 34
+
+    (20) VARTYPE -> INT .
+
+    DEF             reduce using rule 20 (VARTYPE -> INT .)
+    LET             reduce using rule 20 (VARTYPE -> INT .)
+    CALL            reduce using rule 20 (VARTYPE -> INT .)
+    IN              reduce using rule 20 (VARTYPE -> INT .)
+    PRINT           reduce using rule 20 (VARTYPE -> INT .)
+    IF              reduce using rule 20 (VARTYPE -> INT .)
+    WHILE           reduce using rule 20 (VARTYPE -> INT .)
+    DO              reduce using rule 20 (VARTYPE -> INT .)
+    FOR             reduce using rule 20 (VARTYPE -> INT .)
+    PROCEDURE       reduce using rule 20 (VARTYPE -> INT .)
+    PROGRAM         reduce using rule 20 (VARTYPE -> INT .)
+    PEND            reduce using rule 20 (VARTYPE -> INT .)
+    RCURL           reduce using rule 20 (VARTYPE -> INT .)
+
+
+state 35
+
+    (21) VARTYPE -> FLOAT .
+
+    DEF             reduce using rule 21 (VARTYPE -> FLOAT .)
+    LET             reduce using rule 21 (VARTYPE -> FLOAT .)
+    CALL            reduce using rule 21 (VARTYPE -> FLOAT .)
+    IN              reduce using rule 21 (VARTYPE -> FLOAT .)
+    PRINT           reduce using rule 21 (VARTYPE -> FLOAT .)
+    IF              reduce using rule 21 (VARTYPE -> FLOAT .)
+    WHILE           reduce using rule 21 (VARTYPE -> FLOAT .)
+    DO              reduce using rule 21 (VARTYPE -> FLOAT .)
+    FOR             reduce using rule 21 (VARTYPE -> FLOAT .)
+    PROCEDURE       reduce using rule 21 (VARTYPE -> FLOAT .)
+    PROGRAM         reduce using rule 21 (VARTYPE -> FLOAT .)
+    PEND            reduce using rule 21 (VARTYPE -> FLOAT .)
+    RCURL           reduce using rule 21 (VARTYPE -> FLOAT .)
+
+
+state 36
+
+    (8) VECDEF -> ID LBRACK NINT . RBRACK AS VARTYPE
+    (9) MATDEF -> ID LBRACK NINT . COMMA NINT RBRACK AS VARTYPE
+    (10) CUBEDEF -> ID LBRACK NINT . COMMA NINT COMMA NINT RBRACK AS VARTYPE
+
+    RBRACK          shift and go to state 62
+    COMMA           shift and go to state 63
+
+
+state 37
+
+    (16) VARASSIGN -> VARID EQUAL VARID . LBRACK NUMTYPE RBRACK
+    (17) VARASSIGN -> VARID EQUAL VARID . LBRACK NUMTYPE COMMA NUMTYPE RBRACK
+    (18) VARASSIGN -> VARID EQUAL VARID . LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK
+
+    LBRACK          shift and go to state 64
+
+
+state 38
+
+    (12) VARASSIGN -> VARID EQUAL E .
+    (59) E -> E . PLUS T
+    (60) E -> E . MINUS T
+
+    DEF             reduce using rule 12 (VARASSIGN -> VARID EQUAL E .)
+    LET             reduce using rule 12 (VARASSIGN -> VARID EQUAL E .)
+    CALL            reduce using rule 12 (VARASSIGN -> VARID EQUAL E .)
+    IN              reduce using rule 12 (VARASSIGN -> VARID EQUAL E .)
+    PRINT           reduce using rule 12 (VARASSIGN -> VARID EQUAL E .)
+    IF              reduce using rule 12 (VARASSIGN -> VARID EQUAL E .)
+    WHILE           reduce using rule 12 (VARASSIGN -> VARID EQUAL E .)
+    DO              reduce using rule 12 (VARASSIGN -> VARID EQUAL E .)
+    FOR             reduce using rule 12 (VARASSIGN -> VARID EQUAL E .)
+    PROCEDURE       reduce using rule 12 (VARASSIGN -> VARID EQUAL E .)
+    PROGRAM         reduce using rule 12 (VARASSIGN -> VARID EQUAL E .)
+    PEND            reduce using rule 12 (VARASSIGN -> VARID EQUAL E .)
+    RCURL           reduce using rule 12 (VARASSIGN -> VARID EQUAL E .)
+    PLUS            shift and go to state 65
+    MINUS           shift and go to state 66
+
+
+state 39
+
+    (61) E -> T .
+    (62) T -> T . MULT F
+    (63) T -> T . DIV F
+
+    PLUS            reduce using rule 61 (E -> T .)
+    MINUS           reduce using rule 61 (E -> T .)
+    DEF             reduce using rule 61 (E -> T .)
+    LET             reduce using rule 61 (E -> T .)
+    CALL            reduce using rule 61 (E -> T .)
+    IN              reduce using rule 61 (E -> T .)
+    PRINT           reduce using rule 61 (E -> T .)
+    IF              reduce using rule 61 (E -> T .)
+    WHILE           reduce using rule 61 (E -> T .)
+    DO              reduce using rule 61 (E -> T .)
+    FOR             reduce using rule 61 (E -> T .)
+    PROCEDURE       reduce using rule 61 (E -> T .)
+    PROGRAM         reduce using rule 61 (E -> T .)
+    PEND            reduce using rule 61 (E -> T .)
+    RCURL           reduce using rule 61 (E -> T .)
+    RPAREN          reduce using rule 61 (E -> T .)
+    COMMA           reduce using rule 61 (E -> T .)
+    MULT            shift and go to state 67
+    DIV             shift and go to state 68
+
+
+state 40
+
+    (19) VARID -> ID .
+    (68) F -> ID .
+
+    LBRACK          reduce using rule 19 (VARID -> ID .)
+    MULT            reduce using rule 68 (F -> ID .)
+    DIV             reduce using rule 68 (F -> ID .)
+    PLUS            reduce using rule 68 (F -> ID .)
+    MINUS           reduce using rule 68 (F -> ID .)
+    DEF             reduce using rule 68 (F -> ID .)
+    LET             reduce using rule 68 (F -> ID .)
+    CALL            reduce using rule 68 (F -> ID .)
+    IN              reduce using rule 68 (F -> ID .)
+    PRINT           reduce using rule 68 (F -> ID .)
+    IF              reduce using rule 68 (F -> ID .)
+    WHILE           reduce using rule 68 (F -> ID .)
+    DO              reduce using rule 68 (F -> ID .)
+    FOR             reduce using rule 68 (F -> ID .)
+    PROCEDURE       reduce using rule 68 (F -> ID .)
+    PROGRAM         reduce using rule 68 (F -> ID .)
+    PEND            reduce using rule 68 (F -> ID .)
+    RCURL           reduce using rule 68 (F -> ID .)
+
+
+state 41
+
+    (64) T -> F .
+
+    MULT            reduce using rule 64 (T -> F .)
+    DIV             reduce using rule 64 (T -> F .)
+    PLUS            reduce using rule 64 (T -> F .)
+    MINUS           reduce using rule 64 (T -> F .)
+    DEF             reduce using rule 64 (T -> F .)
+    LET             reduce using rule 64 (T -> F .)
+    CALL            reduce using rule 64 (T -> F .)
+    IN              reduce using rule 64 (T -> F .)
+    PRINT           reduce using rule 64 (T -> F .)
+    IF              reduce using rule 64 (T -> F .)
+    WHILE           reduce using rule 64 (T -> F .)
+    DO              reduce using rule 64 (T -> F .)
+    FOR             reduce using rule 64 (T -> F .)
+    PROCEDURE       reduce using rule 64 (T -> F .)
+    PROGRAM         reduce using rule 64 (T -> F .)
+    PEND            reduce using rule 64 (T -> F .)
+    RCURL           reduce using rule 64 (T -> F .)
+    RPAREN          reduce using rule 64 (T -> F .)
+    COMMA           reduce using rule 64 (T -> F .)
+
+
+state 42
+
+    (65) F -> LPAREN . E RPAREN
+    (59) E -> . E PLUS T
+    (60) E -> . E MINUS T
+    (61) E -> . T
+    (62) T -> . T MULT F
+    (63) T -> . T DIV F
+    (64) T -> . F
+    (65) F -> . LPAREN E RPAREN
+    (66) F -> . NINT
+    (67) F -> . NFLOAT
+    (68) F -> . ID
+
+    LPAREN          shift and go to state 42
+    NINT            shift and go to state 43
+    NFLOAT          shift and go to state 44
+    ID              shift and go to state 70
+
+    E                              shift and go to state 69
+    T                              shift and go to state 39
+    F                              shift and go to state 41
+
+state 43
+
+    (66) F -> NINT .
+
+    MULT            reduce using rule 66 (F -> NINT .)
+    DIV             reduce using rule 66 (F -> NINT .)
+    PLUS            reduce using rule 66 (F -> NINT .)
+    MINUS           reduce using rule 66 (F -> NINT .)
+    DEF             reduce using rule 66 (F -> NINT .)
+    LET             reduce using rule 66 (F -> NINT .)
+    CALL            reduce using rule 66 (F -> NINT .)
+    IN              reduce using rule 66 (F -> NINT .)
+    PRINT           reduce using rule 66 (F -> NINT .)
+    IF              reduce using rule 66 (F -> NINT .)
+    WHILE           reduce using rule 66 (F -> NINT .)
+    DO              reduce using rule 66 (F -> NINT .)
+    FOR             reduce using rule 66 (F -> NINT .)
+    PROCEDURE       reduce using rule 66 (F -> NINT .)
+    PROGRAM         reduce using rule 66 (F -> NINT .)
+    PEND            reduce using rule 66 (F -> NINT .)
+    RCURL           reduce using rule 66 (F -> NINT .)
+    RPAREN          reduce using rule 66 (F -> NINT .)
+    COMMA           reduce using rule 66 (F -> NINT .)
+
+
+state 44
+
+    (67) F -> NFLOAT .
+
+    MULT            reduce using rule 67 (F -> NFLOAT .)
+    DIV             reduce using rule 67 (F -> NFLOAT .)
+    PLUS            reduce using rule 67 (F -> NFLOAT .)
+    MINUS           reduce using rule 67 (F -> NFLOAT .)
+    DEF             reduce using rule 67 (F -> NFLOAT .)
+    LET             reduce using rule 67 (F -> NFLOAT .)
+    CALL            reduce using rule 67 (F -> NFLOAT .)
+    IN              reduce using rule 67 (F -> NFLOAT .)
+    PRINT           reduce using rule 67 (F -> NFLOAT .)
+    IF              reduce using rule 67 (F -> NFLOAT .)
+    WHILE           reduce using rule 67 (F -> NFLOAT .)
+    DO              reduce using rule 67 (F -> NFLOAT .)
+    FOR             reduce using rule 67 (F -> NFLOAT .)
+    PROCEDURE       reduce using rule 67 (F -> NFLOAT .)
+    PROGRAM         reduce using rule 67 (F -> NFLOAT .)
+    PEND            reduce using rule 67 (F -> NFLOAT .)
+    RCURL           reduce using rule 67 (F -> NFLOAT .)
+    RPAREN          reduce using rule 67 (F -> NFLOAT .)
+    COMMA           reduce using rule 67 (F -> NFLOAT .)
+
+
+state 45
+
+    (13) VARASSIGN -> VARID LBRACK NUMTYPE . RBRACK EQUAL E
+    (14) VARASSIGN -> VARID LBRACK NUMTYPE . COMMA NUMTYPE RBRACK EQUAL E
+    (15) VARASSIGN -> VARID LBRACK NUMTYPE . COMMA NUMTYPE COMMA NUMTYPE RBRACK EQUAL E
+
+    RBRACK          shift and go to state 71
+    COMMA           shift and go to state 72
+
+
+state 46
+
+    (22) NUMTYPE -> NINT .
+
+    RBRACK          reduce using rule 22 (NUMTYPE -> NINT .)
+    COMMA           reduce using rule 22 (NUMTYPE -> NINT .)
+
+
+state 47
+
+    (23) NUMTYPE -> ID .
+
+    RBRACK          reduce using rule 23 (NUMTYPE -> ID .)
+    COMMA           reduce using rule 23 (NUMTYPE -> ID .)
+
+
+state 48
+
+    (1) START -> V PROC PROGRAM X PEND .
+
+    $end            reduce using rule 1 (START -> V PROC PROGRAM X PEND .)
+
+
+state 49
+
+    (30) PROC -> PROCEDURE PROCAUX LCURL X . RCURL PROCAUX2 PROC
+
+    RCURL           shift and go to state 73
+
+
+state 50
+
+    (2) X -> V P S .
+
+    CALL            reduce using rule 2 (X -> V P S .)
+    IN              reduce using rule 2 (X -> V P S .)
+    PRINT           reduce using rule 2 (X -> V P S .)
+    IF              reduce using rule 2 (X -> V P S .)
+    WHILE           reduce using rule 2 (X -> V P S .)
+    DO              reduce using rule 2 (X -> V P S .)
+    FOR             reduce using rule 2 (X -> V P S .)
+    PROCEDURE       reduce using rule 2 (X -> V P S .)
+    PROGRAM         reduce using rule 2 (X -> V P S .)
+    PEND            reduce using rule 2 (X -> V P S .)
+    RCURL           reduce using rule 2 (X -> V P S .)
+
+
+state 51
+
+    (40) S -> IF . IFAUX LCURL X RCURL IFAUX2 X
+    (41) IFAUX -> . LPAREN LOGE RPAREN
+
+    LPAREN          shift and go to state 75
+
+    IFAUX                          shift and go to state 74
+
+state 52
+
+    (47) S -> WHILE . WHILEAUX LCURL X RCURL WHILEAUX2 X
+    (48) WHILEAUX -> . LPAREN LOGE RPAREN
+
+    LPAREN          shift and go to state 77
+
+    WHILEAUX                       shift and go to state 76
+
+state 53
+
+    (50) S -> DO . DOAUX LCURL X RCURL WHILE DOAUX2 X
+    (51) DOAUX -> .
+
+    LCURL           reduce using rule 51 (DOAUX -> .)
+
+    DOAUX                          shift and go to state 78
+
+state 54
+
+    (53) S -> FOR . FORAUX LCURL X RCURL FORAUX2 X
+    (54) FORAUX -> . LPAREN FORASSIGN COMMA LOGE RPAREN
+
+    LPAREN          shift and go to state 80
+
+    FORAUX                         shift and go to state 79
+
+state 55
+
+    (57) S -> EMPTY .
+
+    CALL            reduce using rule 57 (S -> EMPTY .)
+    IN              reduce using rule 57 (S -> EMPTY .)
+    PRINT           reduce using rule 57 (S -> EMPTY .)
+    IF              reduce using rule 57 (S -> EMPTY .)
+    WHILE           reduce using rule 57 (S -> EMPTY .)
+    DO              reduce using rule 57 (S -> EMPTY .)
+    FOR             reduce using rule 57 (S -> EMPTY .)
+    PROCEDURE       reduce using rule 57 (S -> EMPTY .)
+    PROGRAM         reduce using rule 57 (S -> EMPTY .)
+    PEND            reduce using rule 57 (S -> EMPTY .)
+    RCURL           reduce using rule 57 (S -> EMPTY .)
+
+
+state 56
+
+    (28) P -> CALL SUBAUX . X
+    (2) X -> . V P S
+    (3) V -> . DEF VARAUX X
+    (11) V -> . LET VARASSIGN X
+    (27) V -> . EMPTY
+    (58) EMPTY -> .
+
+    DEF             shift and go to state 3
+    LET             shift and go to state 4
+    CALL            reduce using rule 58 (EMPTY -> .)
+    IN              reduce using rule 58 (EMPTY -> .)
+    PRINT           reduce using rule 58 (EMPTY -> .)
+    IF              reduce using rule 58 (EMPTY -> .)
+    WHILE           reduce using rule 58 (EMPTY -> .)
+    DO              reduce using rule 58 (EMPTY -> .)
+    FOR             reduce using rule 58 (EMPTY -> .)
+    PROCEDURE       reduce using rule 58 (EMPTY -> .)
+    PROGRAM         reduce using rule 58 (EMPTY -> .)
+    PEND            reduce using rule 58 (EMPTY -> .)
+    RCURL           reduce using rule 58 (EMPTY -> .)
+
+    X                              shift and go to state 81
+    V                              shift and go to state 20
+    EMPTY                          shift and go to state 5
+
+state 57
+
+    (29) SUBAUX -> ID .
+
+    DEF             reduce using rule 29 (SUBAUX -> ID .)
+    LET             reduce using rule 29 (SUBAUX -> ID .)
+    CALL            reduce using rule 29 (SUBAUX -> ID .)
+    IN              reduce using rule 29 (SUBAUX -> ID .)
+    PRINT           reduce using rule 29 (SUBAUX -> ID .)
+    IF              reduce using rule 29 (SUBAUX -> ID .)
+    WHILE           reduce using rule 29 (SUBAUX -> ID .)
+    DO              reduce using rule 29 (SUBAUX -> ID .)
+    FOR             reduce using rule 29 (SUBAUX -> ID .)
+    PROCEDURE       reduce using rule 29 (SUBAUX -> ID .)
+    PROGRAM         reduce using rule 29 (SUBAUX -> ID .)
+    PEND            reduce using rule 29 (SUBAUX -> ID .)
+    RCURL           reduce using rule 29 (SUBAUX -> ID .)
+
+
+state 58
+
+    (34) P -> IN INPAUX . X
+    (2) X -> . V P S
+    (3) V -> . DEF VARAUX X
+    (11) V -> . LET VARASSIGN X
+    (27) V -> . EMPTY
+    (58) EMPTY -> .
+
+    DEF             shift and go to state 3
+    LET             shift and go to state 4
+    CALL            reduce using rule 58 (EMPTY -> .)
+    IN              reduce using rule 58 (EMPTY -> .)
+    PRINT           reduce using rule 58 (EMPTY -> .)
+    IF              reduce using rule 58 (EMPTY -> .)
+    WHILE           reduce using rule 58 (EMPTY -> .)
+    DO              reduce using rule 58 (EMPTY -> .)
+    FOR             reduce using rule 58 (EMPTY -> .)
+    PROCEDURE       reduce using rule 58 (EMPTY -> .)
+    PROGRAM         reduce using rule 58 (EMPTY -> .)
+    PEND            reduce using rule 58 (EMPTY -> .)
+    RCURL           reduce using rule 58 (EMPTY -> .)
+
+    X                              shift and go to state 82
+    V                              shift and go to state 20
+    EMPTY                          shift and go to state 5
+
+state 59
+
+    (35) INPAUX -> LPAREN . VARID RPAREN
+    (19) VARID -> . ID
+
+    ID              shift and go to state 15
+
+    VARID                          shift and go to state 83
+
+state 60
+
+    (36) P -> PRINT PRINTAUX . X
+    (2) X -> . V P S
+    (3) V -> . DEF VARAUX X
+    (11) V -> . LET VARASSIGN X
+    (27) V -> . EMPTY
+    (58) EMPTY -> .
+
+    DEF             shift and go to state 3
+    LET             shift and go to state 4
+    CALL            reduce using rule 58 (EMPTY -> .)
+    IN              reduce using rule 58 (EMPTY -> .)
+    PRINT           reduce using rule 58 (EMPTY -> .)
+    IF              reduce using rule 58 (EMPTY -> .)
+    WHILE           reduce using rule 58 (EMPTY -> .)
+    DO              reduce using rule 58 (EMPTY -> .)
+    FOR             reduce using rule 58 (EMPTY -> .)
+    PROCEDURE       reduce using rule 58 (EMPTY -> .)
+    PROGRAM         reduce using rule 58 (EMPTY -> .)
+    PEND            reduce using rule 58 (EMPTY -> .)
+    RCURL           reduce using rule 58 (EMPTY -> .)
+
+    X                              shift and go to state 84
+    V                              shift and go to state 20
+    EMPTY                          shift and go to state 5
+
+state 61
+
+    (37) PRINTAUX -> LPAREN . VAR RPAREN
+    (38) PRINTAUX -> LPAREN . APOS ID APOS RPAREN
+    (24) VAR -> . NINT
+    (25) VAR -> . NFLOAT
+    (26) VAR -> . ID
+
+    APOS            shift and go to state 86
+    NINT            shift and go to state 88
+    NFLOAT          shift and go to state 89
+    ID              shift and go to state 87
+
+    VAR                            shift and go to state 85
+
+state 62
+
+    (8) VECDEF -> ID LBRACK NINT RBRACK . AS VARTYPE
+
+    AS              shift and go to state 90
+
+
+state 63
+
+    (9) MATDEF -> ID LBRACK NINT COMMA . NINT RBRACK AS VARTYPE
+    (10) CUBEDEF -> ID LBRACK NINT COMMA . NINT COMMA NINT RBRACK AS VARTYPE
+
+    NINT            shift and go to state 91
+
+
+state 64
+
+    (16) VARASSIGN -> VARID EQUAL VARID LBRACK . NUMTYPE RBRACK
+    (17) VARASSIGN -> VARID EQUAL VARID LBRACK . NUMTYPE COMMA NUMTYPE RBRACK
+    (18) VARASSIGN -> VARID EQUAL VARID LBRACK . NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK
+    (22) NUMTYPE -> . NINT
+    (23) NUMTYPE -> . ID
+
+    NINT            shift and go to state 46
+    ID              shift and go to state 47
+
+    NUMTYPE                        shift and go to state 92
+
+state 65
+
+    (59) E -> E PLUS . T
+    (62) T -> . T MULT F
+    (63) T -> . T DIV F
+    (64) T -> . F
+    (65) F -> . LPAREN E RPAREN
+    (66) F -> . NINT
+    (67) F -> . NFLOAT
+    (68) F -> . ID
+
+    LPAREN          shift and go to state 42
+    NINT            shift and go to state 43
+    NFLOAT          shift and go to state 44
+    ID              shift and go to state 70
+
+    T                              shift and go to state 93
+    F                              shift and go to state 41
+
+state 66
+
+    (60) E -> E MINUS . T
+    (62) T -> . T MULT F
+    (63) T -> . T DIV F
+    (64) T -> . F
+    (65) F -> . LPAREN E RPAREN
+    (66) F -> . NINT
+    (67) F -> . NFLOAT
+    (68) F -> . ID
+
+    LPAREN          shift and go to state 42
+    NINT            shift and go to state 43
+    NFLOAT          shift and go to state 44
+    ID              shift and go to state 70
+
+    T                              shift and go to state 94
+    F                              shift and go to state 41
+
+state 67
+
+    (62) T -> T MULT . F
+    (65) F -> . LPAREN E RPAREN
+    (66) F -> . NINT
+    (67) F -> . NFLOAT
+    (68) F -> . ID
+
+    LPAREN          shift and go to state 42
+    NINT            shift and go to state 43
+    NFLOAT          shift and go to state 44
+    ID              shift and go to state 70
+
+    F                              shift and go to state 95
+
+state 68
+
+    (63) T -> T DIV . F
+    (65) F -> . LPAREN E RPAREN
+    (66) F -> . NINT
+    (67) F -> . NFLOAT
+    (68) F -> . ID
+
+    LPAREN          shift and go to state 42
+    NINT            shift and go to state 43
+    NFLOAT          shift and go to state 44
+    ID              shift and go to state 70
+
+    F                              shift and go to state 96
+
+state 69
+
+    (65) F -> LPAREN E . RPAREN
+    (59) E -> E . PLUS T
+    (60) E -> E . MINUS T
+
+    RPAREN          shift and go to state 97
+    PLUS            shift and go to state 65
+    MINUS           shift and go to state 66
+
+
+state 70
+
+    (68) F -> ID .
+
+    MULT            reduce using rule 68 (F -> ID .)
+    DIV             reduce using rule 68 (F -> ID .)
+    RPAREN          reduce using rule 68 (F -> ID .)
+    PLUS            reduce using rule 68 (F -> ID .)
+    MINUS           reduce using rule 68 (F -> ID .)
+    DEF             reduce using rule 68 (F -> ID .)
+    LET             reduce using rule 68 (F -> ID .)
+    CALL            reduce using rule 68 (F -> ID .)
+    IN              reduce using rule 68 (F -> ID .)
+    PRINT           reduce using rule 68 (F -> ID .)
+    IF              reduce using rule 68 (F -> ID .)
+    WHILE           reduce using rule 68 (F -> ID .)
+    DO              reduce using rule 68 (F -> ID .)
+    FOR             reduce using rule 68 (F -> ID .)
+    PROCEDURE       reduce using rule 68 (F -> ID .)
+    PROGRAM         reduce using rule 68 (F -> ID .)
+    PEND            reduce using rule 68 (F -> ID .)
+    RCURL           reduce using rule 68 (F -> ID .)
+    COMMA           reduce using rule 68 (F -> ID .)
+
+
+state 71
+
+    (13) VARASSIGN -> VARID LBRACK NUMTYPE RBRACK . EQUAL E
+
+    EQUAL           shift and go to state 98
+
+
+state 72
+
+    (14) VARASSIGN -> VARID LBRACK NUMTYPE COMMA . NUMTYPE RBRACK EQUAL E
+    (15) VARASSIGN -> VARID LBRACK NUMTYPE COMMA . NUMTYPE COMMA NUMTYPE RBRACK EQUAL E
+    (22) NUMTYPE -> . NINT
+    (23) NUMTYPE -> . ID
+
+    NINT            shift and go to state 46
+    ID              shift and go to state 47
+
+    NUMTYPE                        shift and go to state 99
+
+state 73
+
+    (30) PROC -> PROCEDURE PROCAUX LCURL X RCURL . PROCAUX2 PROC
+    (33) PROCAUX2 -> .
+
+    PROCEDURE       reduce using rule 33 (PROCAUX2 -> .)
+    PROGRAM         reduce using rule 33 (PROCAUX2 -> .)
+
+    PROCAUX2                       shift and go to state 100
+
+state 74
+
+    (40) S -> IF IFAUX . LCURL X RCURL IFAUX2 X
+
+    LCURL           shift and go to state 101
+
+
+state 75
+
+    (41) IFAUX -> LPAREN . LOGE RPAREN
+    (69) LOGE -> . LOGE OR LOGT
+    (70) LOGE -> . NOT LOGT
+    (71) LOGE -> . LOGT
+    (72) LOGT -> . LOGT AND LOGF
+    (73) LOGT -> . LOGF
+    (74) LOGF -> . VAR LT VAR
+    (75) LOGF -> . VAR LE VAR
+    (76) LOGF -> . VAR GT VAR
+    (77) LOGF -> . VAR GE VAR
+    (78) LOGF -> . VAR EQ VAR
+    (79) LOGF -> . VAR NE VAR
+    (80) LOGF -> . LPAREN LOGE RPAREN
+    (24) VAR -> . NINT
+    (25) VAR -> . NFLOAT
+    (26) VAR -> . ID
+
+    NOT             shift and go to state 105
+    LPAREN          shift and go to state 102
+    NINT            shift and go to state 88
+    NFLOAT          shift and go to state 89
+    ID              shift and go to state 87
+
+    LOGE                           shift and go to state 103
+    LOGT                           shift and go to state 104
+    LOGF                           shift and go to state 106
+    VAR                            shift and go to state 107
+
+state 76
+
+    (47) S -> WHILE WHILEAUX . LCURL X RCURL WHILEAUX2 X
+
+    LCURL           shift and go to state 108
+
+
+state 77
+
+    (48) WHILEAUX -> LPAREN . LOGE RPAREN
+    (69) LOGE -> . LOGE OR LOGT
+    (70) LOGE -> . NOT LOGT
+    (71) LOGE -> . LOGT
+    (72) LOGT -> . LOGT AND LOGF
+    (73) LOGT -> . LOGF
+    (74) LOGF -> . VAR LT VAR
+    (75) LOGF -> . VAR LE VAR
+    (76) LOGF -> . VAR GT VAR
+    (77) LOGF -> . VAR GE VAR
+    (78) LOGF -> . VAR EQ VAR
+    (79) LOGF -> . VAR NE VAR
+    (80) LOGF -> . LPAREN LOGE RPAREN
+    (24) VAR -> . NINT
+    (25) VAR -> . NFLOAT
+    (26) VAR -> . ID
+
+    NOT             shift and go to state 105
+    LPAREN          shift and go to state 102
+    NINT            shift and go to state 88
+    NFLOAT          shift and go to state 89
+    ID              shift and go to state 87
+
+    LOGE                           shift and go to state 109
+    LOGT                           shift and go to state 104
+    LOGF                           shift and go to state 106
+    VAR                            shift and go to state 107
+
+state 78
+
+    (50) S -> DO DOAUX . LCURL X RCURL WHILE DOAUX2 X
+
+    LCURL           shift and go to state 110
+
+
+state 79
+
+    (53) S -> FOR FORAUX . LCURL X RCURL FORAUX2 X
+
+    LCURL           shift and go to state 111
+
+
+state 80
+
+    (54) FORAUX -> LPAREN . FORASSIGN COMMA LOGE RPAREN
+    (56) FORASSIGN -> . VARID EQUAL E
+    (19) VARID -> . ID
+
+    ID              shift and go to state 15
+
+    FORASSIGN                      shift and go to state 112
+    VARID                          shift and go to state 113
+
+state 81
+
+    (28) P -> CALL SUBAUX X .
+
+    CALL            reduce using rule 28 (P -> CALL SUBAUX X .)
+    IN              reduce using rule 28 (P -> CALL SUBAUX X .)
+    PRINT           reduce using rule 28 (P -> CALL SUBAUX X .)
+    IF              reduce using rule 28 (P -> CALL SUBAUX X .)
+    WHILE           reduce using rule 28 (P -> CALL SUBAUX X .)
+    DO              reduce using rule 28 (P -> CALL SUBAUX X .)
+    FOR             reduce using rule 28 (P -> CALL SUBAUX X .)
+    PROCEDURE       reduce using rule 28 (P -> CALL SUBAUX X .)
+    PROGRAM         reduce using rule 28 (P -> CALL SUBAUX X .)
+    PEND            reduce using rule 28 (P -> CALL SUBAUX X .)
+    RCURL           reduce using rule 28 (P -> CALL SUBAUX X .)
+
+
+state 82
+
+    (34) P -> IN INPAUX X .
+
+    CALL            reduce using rule 34 (P -> IN INPAUX X .)
+    IN              reduce using rule 34 (P -> IN INPAUX X .)
+    PRINT           reduce using rule 34 (P -> IN INPAUX X .)
+    IF              reduce using rule 34 (P -> IN INPAUX X .)
+    WHILE           reduce using rule 34 (P -> IN INPAUX X .)
+    DO              reduce using rule 34 (P -> IN INPAUX X .)
+    FOR             reduce using rule 34 (P -> IN INPAUX X .)
+    PROCEDURE       reduce using rule 34 (P -> IN INPAUX X .)
+    PROGRAM         reduce using rule 34 (P -> IN INPAUX X .)
+    PEND            reduce using rule 34 (P -> IN INPAUX X .)
+    RCURL           reduce using rule 34 (P -> IN INPAUX X .)
+
+
+state 83
+
+    (35) INPAUX -> LPAREN VARID . RPAREN
+
+    RPAREN          shift and go to state 114
+
+
+state 84
+
+    (36) P -> PRINT PRINTAUX X .
+
+    CALL            reduce using rule 36 (P -> PRINT PRINTAUX X .)
+    IN              reduce using rule 36 (P -> PRINT PRINTAUX X .)
+    PRINT           reduce using rule 36 (P -> PRINT PRINTAUX X .)
+    IF              reduce using rule 36 (P -> PRINT PRINTAUX X .)
+    WHILE           reduce using rule 36 (P -> PRINT PRINTAUX X .)
+    DO              reduce using rule 36 (P -> PRINT PRINTAUX X .)
+    FOR             reduce using rule 36 (P -> PRINT PRINTAUX X .)
+    PROCEDURE       reduce using rule 36 (P -> PRINT PRINTAUX X .)
+    PROGRAM         reduce using rule 36 (P -> PRINT PRINTAUX X .)
+    PEND            reduce using rule 36 (P -> PRINT PRINTAUX X .)
+    RCURL           reduce using rule 36 (P -> PRINT PRINTAUX X .)
+
+
+state 85
+
+    (37) PRINTAUX -> LPAREN VAR . RPAREN
+
+    RPAREN          shift and go to state 115
+
+
+state 86
+
+    (38) PRINTAUX -> LPAREN APOS . ID APOS RPAREN
+
+    ID              shift and go to state 116
+
+
+state 87
+
+    (26) VAR -> ID .
+
+    RPAREN          reduce using rule 26 (VAR -> ID .)
+    LT              reduce using rule 26 (VAR -> ID .)
+    LE              reduce using rule 26 (VAR -> ID .)
+    GT              reduce using rule 26 (VAR -> ID .)
+    GE              reduce using rule 26 (VAR -> ID .)
+    EQ              reduce using rule 26 (VAR -> ID .)
+    NE              reduce using rule 26 (VAR -> ID .)
+    AND             reduce using rule 26 (VAR -> ID .)
+    OR              reduce using rule 26 (VAR -> ID .)
+
+
+state 88
+
+    (24) VAR -> NINT .
+
+    RPAREN          reduce using rule 24 (VAR -> NINT .)
+    LT              reduce using rule 24 (VAR -> NINT .)
+    LE              reduce using rule 24 (VAR -> NINT .)
+    GT              reduce using rule 24 (VAR -> NINT .)
+    GE              reduce using rule 24 (VAR -> NINT .)
+    EQ              reduce using rule 24 (VAR -> NINT .)
+    NE              reduce using rule 24 (VAR -> NINT .)
+    AND             reduce using rule 24 (VAR -> NINT .)
+    OR              reduce using rule 24 (VAR -> NINT .)
+
+
+state 89
+
+    (25) VAR -> NFLOAT .
+
+    RPAREN          reduce using rule 25 (VAR -> NFLOAT .)
+    LT              reduce using rule 25 (VAR -> NFLOAT .)
+    LE              reduce using rule 25 (VAR -> NFLOAT .)
+    GT              reduce using rule 25 (VAR -> NFLOAT .)
+    GE              reduce using rule 25 (VAR -> NFLOAT .)
+    EQ              reduce using rule 25 (VAR -> NFLOAT .)
+    NE              reduce using rule 25 (VAR -> NFLOAT .)
+    AND             reduce using rule 25 (VAR -> NFLOAT .)
+    OR              reduce using rule 25 (VAR -> NFLOAT .)
+
+
+state 90
+
+    (8) VECDEF -> ID LBRACK NINT RBRACK AS . VARTYPE
+    (20) VARTYPE -> . INT
+    (21) VARTYPE -> . FLOAT
+
+    INT             shift and go to state 34
+    FLOAT           shift and go to state 35
+
+    VARTYPE                        shift and go to state 117
+
+state 91
+
+    (9) MATDEF -> ID LBRACK NINT COMMA NINT . RBRACK AS VARTYPE
+    (10) CUBEDEF -> ID LBRACK NINT COMMA NINT . COMMA NINT RBRACK AS VARTYPE
+
+    RBRACK          shift and go to state 119
+    COMMA           shift and go to state 118
+
+
+state 92
+
+    (16) VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE . RBRACK
+    (17) VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE . COMMA NUMTYPE RBRACK
+    (18) VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE . COMMA NUMTYPE COMMA NUMTYPE RBRACK
+
+    RBRACK          shift and go to state 120
+    COMMA           shift and go to state 121
+
+
+state 93
+
+    (59) E -> E PLUS T .
+    (62) T -> T . MULT F
+    (63) T -> T . DIV F
+
+    PLUS            reduce using rule 59 (E -> E PLUS T .)
+    MINUS           reduce using rule 59 (E -> E PLUS T .)
+    DEF             reduce using rule 59 (E -> E PLUS T .)
+    LET             reduce using rule 59 (E -> E PLUS T .)
+    CALL            reduce using rule 59 (E -> E PLUS T .)
+    IN              reduce using rule 59 (E -> E PLUS T .)
+    PRINT           reduce using rule 59 (E -> E PLUS T .)
+    IF              reduce using rule 59 (E -> E PLUS T .)
+    WHILE           reduce using rule 59 (E -> E PLUS T .)
+    DO              reduce using rule 59 (E -> E PLUS T .)
+    FOR             reduce using rule 59 (E -> E PLUS T .)
+    PROCEDURE       reduce using rule 59 (E -> E PLUS T .)
+    PROGRAM         reduce using rule 59 (E -> E PLUS T .)
+    PEND            reduce using rule 59 (E -> E PLUS T .)
+    RCURL           reduce using rule 59 (E -> E PLUS T .)
+    RPAREN          reduce using rule 59 (E -> E PLUS T .)
+    COMMA           reduce using rule 59 (E -> E PLUS T .)
+    MULT            shift and go to state 67
+    DIV             shift and go to state 68
+
+
+state 94
+
+    (60) E -> E MINUS T .
+    (62) T -> T . MULT F
+    (63) T -> T . DIV F
+
+    PLUS            reduce using rule 60 (E -> E MINUS T .)
+    MINUS           reduce using rule 60 (E -> E MINUS T .)
+    DEF             reduce using rule 60 (E -> E MINUS T .)
+    LET             reduce using rule 60 (E -> E MINUS T .)
+    CALL            reduce using rule 60 (E -> E MINUS T .)
+    IN              reduce using rule 60 (E -> E MINUS T .)
+    PRINT           reduce using rule 60 (E -> E MINUS T .)
+    IF              reduce using rule 60 (E -> E MINUS T .)
+    WHILE           reduce using rule 60 (E -> E MINUS T .)
+    DO              reduce using rule 60 (E -> E MINUS T .)
+    FOR             reduce using rule 60 (E -> E MINUS T .)
+    PROCEDURE       reduce using rule 60 (E -> E MINUS T .)
+    PROGRAM         reduce using rule 60 (E -> E MINUS T .)
+    PEND            reduce using rule 60 (E -> E MINUS T .)
+    RCURL           reduce using rule 60 (E -> E MINUS T .)
+    RPAREN          reduce using rule 60 (E -> E MINUS T .)
+    COMMA           reduce using rule 60 (E -> E MINUS T .)
+    MULT            shift and go to state 67
+    DIV             shift and go to state 68
+
+
+state 95
+
+    (62) T -> T MULT F .
+
+    MULT            reduce using rule 62 (T -> T MULT F .)
+    DIV             reduce using rule 62 (T -> T MULT F .)
+    PLUS            reduce using rule 62 (T -> T MULT F .)
+    MINUS           reduce using rule 62 (T -> T MULT F .)
+    DEF             reduce using rule 62 (T -> T MULT F .)
+    LET             reduce using rule 62 (T -> T MULT F .)
+    CALL            reduce using rule 62 (T -> T MULT F .)
+    IN              reduce using rule 62 (T -> T MULT F .)
+    PRINT           reduce using rule 62 (T -> T MULT F .)
+    IF              reduce using rule 62 (T -> T MULT F .)
+    WHILE           reduce using rule 62 (T -> T MULT F .)
+    DO              reduce using rule 62 (T -> T MULT F .)
+    FOR             reduce using rule 62 (T -> T MULT F .)
+    PROCEDURE       reduce using rule 62 (T -> T MULT F .)
+    PROGRAM         reduce using rule 62 (T -> T MULT F .)
+    PEND            reduce using rule 62 (T -> T MULT F .)
+    RCURL           reduce using rule 62 (T -> T MULT F .)
+    RPAREN          reduce using rule 62 (T -> T MULT F .)
+    COMMA           reduce using rule 62 (T -> T MULT F .)
+
+
+state 96
+
+    (63) T -> T DIV F .
+
+    MULT            reduce using rule 63 (T -> T DIV F .)
+    DIV             reduce using rule 63 (T -> T DIV F .)
+    PLUS            reduce using rule 63 (T -> T DIV F .)
+    MINUS           reduce using rule 63 (T -> T DIV F .)
+    DEF             reduce using rule 63 (T -> T DIV F .)
+    LET             reduce using rule 63 (T -> T DIV F .)
+    CALL            reduce using rule 63 (T -> T DIV F .)
+    IN              reduce using rule 63 (T -> T DIV F .)
+    PRINT           reduce using rule 63 (T -> T DIV F .)
+    IF              reduce using rule 63 (T -> T DIV F .)
+    WHILE           reduce using rule 63 (T -> T DIV F .)
+    DO              reduce using rule 63 (T -> T DIV F .)
+    FOR             reduce using rule 63 (T -> T DIV F .)
+    PROCEDURE       reduce using rule 63 (T -> T DIV F .)
+    PROGRAM         reduce using rule 63 (T -> T DIV F .)
+    PEND            reduce using rule 63 (T -> T DIV F .)
+    RCURL           reduce using rule 63 (T -> T DIV F .)
+    RPAREN          reduce using rule 63 (T -> T DIV F .)
+    COMMA           reduce using rule 63 (T -> T DIV F .)
+
+
+state 97
+
+    (65) F -> LPAREN E RPAREN .
+
+    MULT            reduce using rule 65 (F -> LPAREN E RPAREN .)
+    DIV             reduce using rule 65 (F -> LPAREN E RPAREN .)
+    PLUS            reduce using rule 65 (F -> LPAREN E RPAREN .)
+    MINUS           reduce using rule 65 (F -> LPAREN E RPAREN .)
+    DEF             reduce using rule 65 (F -> LPAREN E RPAREN .)
+    LET             reduce using rule 65 (F -> LPAREN E RPAREN .)
+    CALL            reduce using rule 65 (F -> LPAREN E RPAREN .)
+    IN              reduce using rule 65 (F -> LPAREN E RPAREN .)
+    PRINT           reduce using rule 65 (F -> LPAREN E RPAREN .)
+    IF              reduce using rule 65 (F -> LPAREN E RPAREN .)
+    WHILE           reduce using rule 65 (F -> LPAREN E RPAREN .)
+    DO              reduce using rule 65 (F -> LPAREN E RPAREN .)
+    FOR             reduce using rule 65 (F -> LPAREN E RPAREN .)
+    PROCEDURE       reduce using rule 65 (F -> LPAREN E RPAREN .)
+    PROGRAM         reduce using rule 65 (F -> LPAREN E RPAREN .)
+    PEND            reduce using rule 65 (F -> LPAREN E RPAREN .)
+    RCURL           reduce using rule 65 (F -> LPAREN E RPAREN .)
+    RPAREN          reduce using rule 65 (F -> LPAREN E RPAREN .)
+    COMMA           reduce using rule 65 (F -> LPAREN E RPAREN .)
+
+
+state 98
+
+    (13) VARASSIGN -> VARID LBRACK NUMTYPE RBRACK EQUAL . E
+    (59) E -> . E PLUS T
+    (60) E -> . E MINUS T
+    (61) E -> . T
+    (62) T -> . T MULT F
+    (63) T -> . T DIV F
+    (64) T -> . F
+    (65) F -> . LPAREN E RPAREN
+    (66) F -> . NINT
+    (67) F -> . NFLOAT
+    (68) F -> . ID
+
+    LPAREN          shift and go to state 42
+    NINT            shift and go to state 43
+    NFLOAT          shift and go to state 44
+    ID              shift and go to state 70
+
+    E                              shift and go to state 122
+    T                              shift and go to state 39
+    F                              shift and go to state 41
+
+state 99
+
+    (14) VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE . RBRACK EQUAL E
+    (15) VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE . COMMA NUMTYPE RBRACK EQUAL E
+
+    RBRACK          shift and go to state 124
+    COMMA           shift and go to state 123
+
+
+state 100
+
+    (30) PROC -> PROCEDURE PROCAUX LCURL X RCURL PROCAUX2 . PROC
+    (30) PROC -> . PROCEDURE PROCAUX LCURL X RCURL PROCAUX2 PROC
+    (31) PROC -> .
+
+    PROCEDURE       shift and go to state 7
+    PROGRAM         reduce using rule 31 (PROC -> .)
+
+    PROC                           shift and go to state 125
+
+state 101
+
+    (40) S -> IF IFAUX LCURL . X RCURL IFAUX2 X
+    (2) X -> . V P S
+    (3) V -> . DEF VARAUX X
+    (11) V -> . LET VARASSIGN X
+    (27) V -> . EMPTY
+    (58) EMPTY -> .
+
+    DEF             shift and go to state 3
+    LET             shift and go to state 4
+    CALL            reduce using rule 58 (EMPTY -> .)
+    IN              reduce using rule 58 (EMPTY -> .)
+    PRINT           reduce using rule 58 (EMPTY -> .)
+    IF              reduce using rule 58 (EMPTY -> .)
+    WHILE           reduce using rule 58 (EMPTY -> .)
+    DO              reduce using rule 58 (EMPTY -> .)
+    FOR             reduce using rule 58 (EMPTY -> .)
+    RCURL           reduce using rule 58 (EMPTY -> .)
+
+    X                              shift and go to state 126
+    V                              shift and go to state 20
+    EMPTY                          shift and go to state 5
+
+state 102
+
+    (80) LOGF -> LPAREN . LOGE RPAREN
+    (69) LOGE -> . LOGE OR LOGT
+    (70) LOGE -> . NOT LOGT
+    (71) LOGE -> . LOGT
+    (72) LOGT -> . LOGT AND LOGF
+    (73) LOGT -> . LOGF
+    (74) LOGF -> . VAR LT VAR
+    (75) LOGF -> . VAR LE VAR
+    (76) LOGF -> . VAR GT VAR
+    (77) LOGF -> . VAR GE VAR
+    (78) LOGF -> . VAR EQ VAR
+    (79) LOGF -> . VAR NE VAR
+    (80) LOGF -> . LPAREN LOGE RPAREN
+    (24) VAR -> . NINT
+    (25) VAR -> . NFLOAT
+    (26) VAR -> . ID
+
+    NOT             shift and go to state 105
+    LPAREN          shift and go to state 102
+    NINT            shift and go to state 88
+    NFLOAT          shift and go to state 89
+    ID              shift and go to state 87
+
+    LOGE                           shift and go to state 127
+    LOGT                           shift and go to state 104
+    LOGF                           shift and go to state 106
+    VAR                            shift and go to state 107
+
+state 103
+
+    (41) IFAUX -> LPAREN LOGE . RPAREN
+    (69) LOGE -> LOGE . OR LOGT
+
+    RPAREN          shift and go to state 128
+    OR              shift and go to state 129
+
+
+state 104
+
+    (71) LOGE -> LOGT .
+    (72) LOGT -> LOGT . AND LOGF
+
+    RPAREN          reduce using rule 71 (LOGE -> LOGT .)
+    OR              reduce using rule 71 (LOGE -> LOGT .)
+    AND             shift and go to state 130
+
+
+state 105
+
+    (70) LOGE -> NOT . LOGT
+    (72) LOGT -> . LOGT AND LOGF
+    (73) LOGT -> . LOGF
+    (74) LOGF -> . VAR LT VAR
+    (75) LOGF -> . VAR LE VAR
+    (76) LOGF -> . VAR GT VAR
+    (77) LOGF -> . VAR GE VAR
+    (78) LOGF -> . VAR EQ VAR
+    (79) LOGF -> . VAR NE VAR
+    (80) LOGF -> . LPAREN LOGE RPAREN
+    (24) VAR -> . NINT
+    (25) VAR -> . NFLOAT
+    (26) VAR -> . ID
+
+    LPAREN          shift and go to state 102
+    NINT            shift and go to state 88
+    NFLOAT          shift and go to state 89
+    ID              shift and go to state 87
+
+    LOGT                           shift and go to state 131
+    LOGF                           shift and go to state 106
+    VAR                            shift and go to state 107
+
+state 106
+
+    (73) LOGT -> LOGF .
+
+    AND             reduce using rule 73 (LOGT -> LOGF .)
+    RPAREN          reduce using rule 73 (LOGT -> LOGF .)
+    OR              reduce using rule 73 (LOGT -> LOGF .)
+
+
+state 107
+
+    (74) LOGF -> VAR . LT VAR
+    (75) LOGF -> VAR . LE VAR
+    (76) LOGF -> VAR . GT VAR
+    (77) LOGF -> VAR . GE VAR
+    (78) LOGF -> VAR . EQ VAR
+    (79) LOGF -> VAR . NE VAR
+
+    LT              shift and go to state 132
+    LE              shift and go to state 133
+    GT              shift and go to state 134
+    GE              shift and go to state 135
+    EQ              shift and go to state 136
+    NE              shift and go to state 137
+
+
+state 108
+
+    (47) S -> WHILE WHILEAUX LCURL . X RCURL WHILEAUX2 X
+    (2) X -> . V P S
+    (3) V -> . DEF VARAUX X
+    (11) V -> . LET VARASSIGN X
+    (27) V -> . EMPTY
+    (58) EMPTY -> .
+
+    DEF             shift and go to state 3
+    LET             shift and go to state 4
+    CALL            reduce using rule 58 (EMPTY -> .)
+    IN              reduce using rule 58 (EMPTY -> .)
+    PRINT           reduce using rule 58 (EMPTY -> .)
+    IF              reduce using rule 58 (EMPTY -> .)
+    WHILE           reduce using rule 58 (EMPTY -> .)
+    DO              reduce using rule 58 (EMPTY -> .)
+    FOR             reduce using rule 58 (EMPTY -> .)
+    RCURL           reduce using rule 58 (EMPTY -> .)
+
+    X                              shift and go to state 138
+    V                              shift and go to state 20
+    EMPTY                          shift and go to state 5
+
+state 109
+
+    (48) WHILEAUX -> LPAREN LOGE . RPAREN
+    (69) LOGE -> LOGE . OR LOGT
+
+    RPAREN          shift and go to state 139
+    OR              shift and go to state 129
+
+
+state 110
+
+    (50) S -> DO DOAUX LCURL . X RCURL WHILE DOAUX2 X
+    (2) X -> . V P S
+    (3) V -> . DEF VARAUX X
+    (11) V -> . LET VARASSIGN X
+    (27) V -> . EMPTY
+    (58) EMPTY -> .
+
+    DEF             shift and go to state 3
+    LET             shift and go to state 4
+    CALL            reduce using rule 58 (EMPTY -> .)
+    IN              reduce using rule 58 (EMPTY -> .)
+    PRINT           reduce using rule 58 (EMPTY -> .)
+    IF              reduce using rule 58 (EMPTY -> .)
+    WHILE           reduce using rule 58 (EMPTY -> .)
+    DO              reduce using rule 58 (EMPTY -> .)
+    FOR             reduce using rule 58 (EMPTY -> .)
+    RCURL           reduce using rule 58 (EMPTY -> .)
+
+    X                              shift and go to state 140
+    V                              shift and go to state 20
+    EMPTY                          shift and go to state 5
+
+state 111
+
+    (53) S -> FOR FORAUX LCURL . X RCURL FORAUX2 X
+    (2) X -> . V P S
+    (3) V -> . DEF VARAUX X
+    (11) V -> . LET VARASSIGN X
+    (27) V -> . EMPTY
+    (58) EMPTY -> .
+
+    DEF             shift and go to state 3
+    LET             shift and go to state 4
+    CALL            reduce using rule 58 (EMPTY -> .)
+    IN              reduce using rule 58 (EMPTY -> .)
+    PRINT           reduce using rule 58 (EMPTY -> .)
+    IF              reduce using rule 58 (EMPTY -> .)
+    WHILE           reduce using rule 58 (EMPTY -> .)
+    DO              reduce using rule 58 (EMPTY -> .)
+    FOR             reduce using rule 58 (EMPTY -> .)
+    RCURL           reduce using rule 58 (EMPTY -> .)
+
+    X                              shift and go to state 141
+    V                              shift and go to state 20
+    EMPTY                          shift and go to state 5
+
+state 112
+
+    (54) FORAUX -> LPAREN FORASSIGN . COMMA LOGE RPAREN
+
+    COMMA           shift and go to state 142
+
+
+state 113
+
+    (56) FORASSIGN -> VARID . EQUAL E
+
+    EQUAL           shift and go to state 143
+
+
+state 114
+
+    (35) INPAUX -> LPAREN VARID RPAREN .
+
+    DEF             reduce using rule 35 (INPAUX -> LPAREN VARID RPAREN .)
+    LET             reduce using rule 35 (INPAUX -> LPAREN VARID RPAREN .)
+    CALL            reduce using rule 35 (INPAUX -> LPAREN VARID RPAREN .)
+    IN              reduce using rule 35 (INPAUX -> LPAREN VARID RPAREN .)
+    PRINT           reduce using rule 35 (INPAUX -> LPAREN VARID RPAREN .)
+    IF              reduce using rule 35 (INPAUX -> LPAREN VARID RPAREN .)
+    WHILE           reduce using rule 35 (INPAUX -> LPAREN VARID RPAREN .)
+    DO              reduce using rule 35 (INPAUX -> LPAREN VARID RPAREN .)
+    FOR             reduce using rule 35 (INPAUX -> LPAREN VARID RPAREN .)
+    PROCEDURE       reduce using rule 35 (INPAUX -> LPAREN VARID RPAREN .)
+    PROGRAM         reduce using rule 35 (INPAUX -> LPAREN VARID RPAREN .)
+    PEND            reduce using rule 35 (INPAUX -> LPAREN VARID RPAREN .)
+    RCURL           reduce using rule 35 (INPAUX -> LPAREN VARID RPAREN .)
+
+
+state 115
+
+    (37) PRINTAUX -> LPAREN VAR RPAREN .
+
+    DEF             reduce using rule 37 (PRINTAUX -> LPAREN VAR RPAREN .)
+    LET             reduce using rule 37 (PRINTAUX -> LPAREN VAR RPAREN .)
+    CALL            reduce using rule 37 (PRINTAUX -> LPAREN VAR RPAREN .)
+    IN              reduce using rule 37 (PRINTAUX -> LPAREN VAR RPAREN .)
+    PRINT           reduce using rule 37 (PRINTAUX -> LPAREN VAR RPAREN .)
+    IF              reduce using rule 37 (PRINTAUX -> LPAREN VAR RPAREN .)
+    WHILE           reduce using rule 37 (PRINTAUX -> LPAREN VAR RPAREN .)
+    DO              reduce using rule 37 (PRINTAUX -> LPAREN VAR RPAREN .)
+    FOR             reduce using rule 37 (PRINTAUX -> LPAREN VAR RPAREN .)
+    PROCEDURE       reduce using rule 37 (PRINTAUX -> LPAREN VAR RPAREN .)
+    PROGRAM         reduce using rule 37 (PRINTAUX -> LPAREN VAR RPAREN .)
+    PEND            reduce using rule 37 (PRINTAUX -> LPAREN VAR RPAREN .)
+    RCURL           reduce using rule 37 (PRINTAUX -> LPAREN VAR RPAREN .)
+
+
+state 116
+
+    (38) PRINTAUX -> LPAREN APOS ID . APOS RPAREN
+
+    APOS            shift and go to state 144
+
+
+state 117
+
+    (8) VECDEF -> ID LBRACK NINT RBRACK AS VARTYPE .
+
+    DEF             reduce using rule 8 (VECDEF -> ID LBRACK NINT RBRACK AS VARTYPE .)
+    LET             reduce using rule 8 (VECDEF -> ID LBRACK NINT RBRACK AS VARTYPE .)
+    CALL            reduce using rule 8 (VECDEF -> ID LBRACK NINT RBRACK AS VARTYPE .)
+    IN              reduce using rule 8 (VECDEF -> ID LBRACK NINT RBRACK AS VARTYPE .)
+    PRINT           reduce using rule 8 (VECDEF -> ID LBRACK NINT RBRACK AS VARTYPE .)
+    IF              reduce using rule 8 (VECDEF -> ID LBRACK NINT RBRACK AS VARTYPE .)
+    WHILE           reduce using rule 8 (VECDEF -> ID LBRACK NINT RBRACK AS VARTYPE .)
+    DO              reduce using rule 8 (VECDEF -> ID LBRACK NINT RBRACK AS VARTYPE .)
+    FOR             reduce using rule 8 (VECDEF -> ID LBRACK NINT RBRACK AS VARTYPE .)
+    PROCEDURE       reduce using rule 8 (VECDEF -> ID LBRACK NINT RBRACK AS VARTYPE .)
+    PROGRAM         reduce using rule 8 (VECDEF -> ID LBRACK NINT RBRACK AS VARTYPE .)
+    PEND            reduce using rule 8 (VECDEF -> ID LBRACK NINT RBRACK AS VARTYPE .)
+    RCURL           reduce using rule 8 (VECDEF -> ID LBRACK NINT RBRACK AS VARTYPE .)
+
+
+state 118
+
+    (10) CUBEDEF -> ID LBRACK NINT COMMA NINT COMMA . NINT RBRACK AS VARTYPE
+
+    NINT            shift and go to state 145
+
+
+state 119
+
+    (9) MATDEF -> ID LBRACK NINT COMMA NINT RBRACK . AS VARTYPE
+
+    AS              shift and go to state 146
+
+
+state 120
+
+    (16) VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE RBRACK .
+
+    DEF             reduce using rule 16 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE RBRACK .)
+    LET             reduce using rule 16 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE RBRACK .)
+    CALL            reduce using rule 16 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE RBRACK .)
+    IN              reduce using rule 16 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE RBRACK .)
+    PRINT           reduce using rule 16 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE RBRACK .)
+    IF              reduce using rule 16 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE RBRACK .)
+    WHILE           reduce using rule 16 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE RBRACK .)
+    DO              reduce using rule 16 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE RBRACK .)
+    FOR             reduce using rule 16 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE RBRACK .)
+    PROCEDURE       reduce using rule 16 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE RBRACK .)
+    PROGRAM         reduce using rule 16 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE RBRACK .)
+    PEND            reduce using rule 16 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE RBRACK .)
+    RCURL           reduce using rule 16 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE RBRACK .)
+
+
+state 121
+
+    (17) VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA . NUMTYPE RBRACK
+    (18) VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA . NUMTYPE COMMA NUMTYPE RBRACK
+    (22) NUMTYPE -> . NINT
+    (23) NUMTYPE -> . ID
+
+    NINT            shift and go to state 46
+    ID              shift and go to state 47
+
+    NUMTYPE                        shift and go to state 147
+
+state 122
+
+    (13) VARASSIGN -> VARID LBRACK NUMTYPE RBRACK EQUAL E .
+    (59) E -> E . PLUS T
+    (60) E -> E . MINUS T
+
+    DEF             reduce using rule 13 (VARASSIGN -> VARID LBRACK NUMTYPE RBRACK EQUAL E .)
+    LET             reduce using rule 13 (VARASSIGN -> VARID LBRACK NUMTYPE RBRACK EQUAL E .)
+    CALL            reduce using rule 13 (VARASSIGN -> VARID LBRACK NUMTYPE RBRACK EQUAL E .)
+    IN              reduce using rule 13 (VARASSIGN -> VARID LBRACK NUMTYPE RBRACK EQUAL E .)
+    PRINT           reduce using rule 13 (VARASSIGN -> VARID LBRACK NUMTYPE RBRACK EQUAL E .)
+    IF              reduce using rule 13 (VARASSIGN -> VARID LBRACK NUMTYPE RBRACK EQUAL E .)
+    WHILE           reduce using rule 13 (VARASSIGN -> VARID LBRACK NUMTYPE RBRACK EQUAL E .)
+    DO              reduce using rule 13 (VARASSIGN -> VARID LBRACK NUMTYPE RBRACK EQUAL E .)
+    FOR             reduce using rule 13 (VARASSIGN -> VARID LBRACK NUMTYPE RBRACK EQUAL E .)
+    PROCEDURE       reduce using rule 13 (VARASSIGN -> VARID LBRACK NUMTYPE RBRACK EQUAL E .)
+    PROGRAM         reduce using rule 13 (VARASSIGN -> VARID LBRACK NUMTYPE RBRACK EQUAL E .)
+    PEND            reduce using rule 13 (VARASSIGN -> VARID LBRACK NUMTYPE RBRACK EQUAL E .)
+    RCURL           reduce using rule 13 (VARASSIGN -> VARID LBRACK NUMTYPE RBRACK EQUAL E .)
+    PLUS            shift and go to state 65
+    MINUS           shift and go to state 66
+
+
+state 123
+
+    (15) VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA . NUMTYPE RBRACK EQUAL E
+    (22) NUMTYPE -> . NINT
+    (23) NUMTYPE -> . ID
+
+    NINT            shift and go to state 46
+    ID              shift and go to state 47
+
+    NUMTYPE                        shift and go to state 148
+
+state 124
+
+    (14) VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK . EQUAL E
+
+    EQUAL           shift and go to state 149
+
+
+state 125
+
+    (30) PROC -> PROCEDURE PROCAUX LCURL X RCURL PROCAUX2 PROC .
+
+    PROGRAM         reduce using rule 30 (PROC -> PROCEDURE PROCAUX LCURL X RCURL PROCAUX2 PROC .)
+
+
+state 126
+
+    (40) S -> IF IFAUX LCURL X . RCURL IFAUX2 X
+
+    RCURL           shift and go to state 150
+
+
+state 127
+
+    (80) LOGF -> LPAREN LOGE . RPAREN
+    (69) LOGE -> LOGE . OR LOGT
+
+    RPAREN          shift and go to state 151
+    OR              shift and go to state 129
+
+
+state 128
+
+    (41) IFAUX -> LPAREN LOGE RPAREN .
+
+    LCURL           reduce using rule 41 (IFAUX -> LPAREN LOGE RPAREN .)
+
+
+state 129
+
+    (69) LOGE -> LOGE OR . LOGT
+    (72) LOGT -> . LOGT AND LOGF
+    (73) LOGT -> . LOGF
+    (74) LOGF -> . VAR LT VAR
+    (75) LOGF -> . VAR LE VAR
+    (76) LOGF -> . VAR GT VAR
+    (77) LOGF -> . VAR GE VAR
+    (78) LOGF -> . VAR EQ VAR
+    (79) LOGF -> . VAR NE VAR
+    (80) LOGF -> . LPAREN LOGE RPAREN
+    (24) VAR -> . NINT
+    (25) VAR -> . NFLOAT
+    (26) VAR -> . ID
+
+    LPAREN          shift and go to state 102
+    NINT            shift and go to state 88
+    NFLOAT          shift and go to state 89
+    ID              shift and go to state 87
+
+    LOGT                           shift and go to state 152
+    LOGF                           shift and go to state 106
+    VAR                            shift and go to state 107
+
+state 130
+
+    (72) LOGT -> LOGT AND . LOGF
+    (74) LOGF -> . VAR LT VAR
+    (75) LOGF -> . VAR LE VAR
+    (76) LOGF -> . VAR GT VAR
+    (77) LOGF -> . VAR GE VAR
+    (78) LOGF -> . VAR EQ VAR
+    (79) LOGF -> . VAR NE VAR
+    (80) LOGF -> . LPAREN LOGE RPAREN
+    (24) VAR -> . NINT
+    (25) VAR -> . NFLOAT
+    (26) VAR -> . ID
+
+    LPAREN          shift and go to state 102
+    NINT            shift and go to state 88
+    NFLOAT          shift and go to state 89
+    ID              shift and go to state 87
+
+    LOGF                           shift and go to state 153
+    VAR                            shift and go to state 107
+
+state 131
+
+    (70) LOGE -> NOT LOGT .
+    (72) LOGT -> LOGT . AND LOGF
+
+    RPAREN          reduce using rule 70 (LOGE -> NOT LOGT .)
+    OR              reduce using rule 70 (LOGE -> NOT LOGT .)
+    AND             shift and go to state 130
+
+
+state 132
+
+    (74) LOGF -> VAR LT . VAR
+    (24) VAR -> . NINT
+    (25) VAR -> . NFLOAT
+    (26) VAR -> . ID
+
+    NINT            shift and go to state 88
+    NFLOAT          shift and go to state 89
+    ID              shift and go to state 87
+
+    VAR                            shift and go to state 154
+
+state 133
+
+    (75) LOGF -> VAR LE . VAR
+    (24) VAR -> . NINT
+    (25) VAR -> . NFLOAT
+    (26) VAR -> . ID
+
+    NINT            shift and go to state 88
+    NFLOAT          shift and go to state 89
+    ID              shift and go to state 87
+
+    VAR                            shift and go to state 155
+
+state 134
+
+    (76) LOGF -> VAR GT . VAR
+    (24) VAR -> . NINT
+    (25) VAR -> . NFLOAT
+    (26) VAR -> . ID
+
+    NINT            shift and go to state 88
+    NFLOAT          shift and go to state 89
+    ID              shift and go to state 87
+
+    VAR                            shift and go to state 156
+
+state 135
+
+    (77) LOGF -> VAR GE . VAR
+    (24) VAR -> . NINT
+    (25) VAR -> . NFLOAT
+    (26) VAR -> . ID
+
+    NINT            shift and go to state 88
+    NFLOAT          shift and go to state 89
+    ID              shift and go to state 87
+
+    VAR                            shift and go to state 157
+
+state 136
+
+    (78) LOGF -> VAR EQ . VAR
+    (24) VAR -> . NINT
+    (25) VAR -> . NFLOAT
+    (26) VAR -> . ID
+
+    NINT            shift and go to state 88
+    NFLOAT          shift and go to state 89
+    ID              shift and go to state 87
+
+    VAR                            shift and go to state 158
+
+state 137
+
+    (79) LOGF -> VAR NE . VAR
+    (24) VAR -> . NINT
+    (25) VAR -> . NFLOAT
+    (26) VAR -> . ID
+
+    NINT            shift and go to state 88
+    NFLOAT          shift and go to state 89
+    ID              shift and go to state 87
+
+    VAR                            shift and go to state 159
+
+state 138
+
+    (47) S -> WHILE WHILEAUX LCURL X . RCURL WHILEAUX2 X
+
+    RCURL           shift and go to state 160
+
+
+state 139
+
+    (48) WHILEAUX -> LPAREN LOGE RPAREN .
+
+    LCURL           reduce using rule 48 (WHILEAUX -> LPAREN LOGE RPAREN .)
+
+
+state 140
+
+    (50) S -> DO DOAUX LCURL X . RCURL WHILE DOAUX2 X
+
+    RCURL           shift and go to state 161
+
+
+state 141
+
+    (53) S -> FOR FORAUX LCURL X . RCURL FORAUX2 X
+
+    RCURL           shift and go to state 162
+
+
+state 142
+
+    (54) FORAUX -> LPAREN FORASSIGN COMMA . LOGE RPAREN
+    (69) LOGE -> . LOGE OR LOGT
+    (70) LOGE -> . NOT LOGT
+    (71) LOGE -> . LOGT
+    (72) LOGT -> . LOGT AND LOGF
+    (73) LOGT -> . LOGF
+    (74) LOGF -> . VAR LT VAR
+    (75) LOGF -> . VAR LE VAR
+    (76) LOGF -> . VAR GT VAR
+    (77) LOGF -> . VAR GE VAR
+    (78) LOGF -> . VAR EQ VAR
+    (79) LOGF -> . VAR NE VAR
+    (80) LOGF -> . LPAREN LOGE RPAREN
+    (24) VAR -> . NINT
+    (25) VAR -> . NFLOAT
+    (26) VAR -> . ID
+
+    NOT             shift and go to state 105
+    LPAREN          shift and go to state 102
+    NINT            shift and go to state 88
+    NFLOAT          shift and go to state 89
+    ID              shift and go to state 87
+
+    LOGE                           shift and go to state 163
+    LOGT                           shift and go to state 104
+    LOGF                           shift and go to state 106
+    VAR                            shift and go to state 107
+
+state 143
+
+    (56) FORASSIGN -> VARID EQUAL . E
+    (59) E -> . E PLUS T
+    (60) E -> . E MINUS T
+    (61) E -> . T
+    (62) T -> . T MULT F
+    (63) T -> . T DIV F
+    (64) T -> . F
+    (65) F -> . LPAREN E RPAREN
+    (66) F -> . NINT
+    (67) F -> . NFLOAT
+    (68) F -> . ID
+
+    LPAREN          shift and go to state 42
+    NINT            shift and go to state 43
+    NFLOAT          shift and go to state 44
+    ID              shift and go to state 70
+
+    E                              shift and go to state 164
+    T                              shift and go to state 39
+    F                              shift and go to state 41
+
+state 144
+
+    (38) PRINTAUX -> LPAREN APOS ID APOS . RPAREN
+
+    RPAREN          shift and go to state 165
+
+
+state 145
+
+    (10) CUBEDEF -> ID LBRACK NINT COMMA NINT COMMA NINT . RBRACK AS VARTYPE
+
+    RBRACK          shift and go to state 166
+
+
+state 146
+
+    (9) MATDEF -> ID LBRACK NINT COMMA NINT RBRACK AS . VARTYPE
+    (20) VARTYPE -> . INT
+    (21) VARTYPE -> . FLOAT
+
+    INT             shift and go to state 34
+    FLOAT           shift and go to state 35
+
+    VARTYPE                        shift and go to state 167
+
+state 147
+
+    (17) VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE . RBRACK
+    (18) VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE . COMMA NUMTYPE RBRACK
+
+    RBRACK          shift and go to state 169
+    COMMA           shift and go to state 168
+
+
+state 148
+
+    (15) VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE . RBRACK EQUAL E
+
+    RBRACK          shift and go to state 170
+
+
+state 149
+
+    (14) VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK EQUAL . E
+    (59) E -> . E PLUS T
+    (60) E -> . E MINUS T
+    (61) E -> . T
+    (62) T -> . T MULT F
+    (63) T -> . T DIV F
+    (64) T -> . F
+    (65) F -> . LPAREN E RPAREN
+    (66) F -> . NINT
+    (67) F -> . NFLOAT
+    (68) F -> . ID
+
+    LPAREN          shift and go to state 42
+    NINT            shift and go to state 43
+    NFLOAT          shift and go to state 44
+    ID              shift and go to state 70
+
+    E                              shift and go to state 171
+    T                              shift and go to state 39
+    F                              shift and go to state 41
+
+state 150
+
+    (40) S -> IF IFAUX LCURL X RCURL . IFAUX2 X
+    (42) IFAUX2 -> . IFELSE
+    (43) IFAUX2 -> . IFAUX3
+    (45) IFELSE -> . ELSEAUX LCURL X RCURL IFAUX3
+    (44) IFAUX3 -> .
+    (46) ELSEAUX -> . ELSE
+
+    DEF             reduce using rule 44 (IFAUX3 -> .)
+    LET             reduce using rule 44 (IFAUX3 -> .)
+    CALL            reduce using rule 44 (IFAUX3 -> .)
+    IN              reduce using rule 44 (IFAUX3 -> .)
+    PRINT           reduce using rule 44 (IFAUX3 -> .)
+    IF              reduce using rule 44 (IFAUX3 -> .)
+    WHILE           reduce using rule 44 (IFAUX3 -> .)
+    DO              reduce using rule 44 (IFAUX3 -> .)
+    FOR             reduce using rule 44 (IFAUX3 -> .)
+    PROCEDURE       reduce using rule 44 (IFAUX3 -> .)
+    PROGRAM         reduce using rule 44 (IFAUX3 -> .)
+    PEND            reduce using rule 44 (IFAUX3 -> .)
+    RCURL           reduce using rule 44 (IFAUX3 -> .)
+    ELSE            shift and go to state 176
+
+    IFAUX2                         shift and go to state 172
+    IFELSE                         shift and go to state 173
+    IFAUX3                         shift and go to state 174
+    ELSEAUX                        shift and go to state 175
+
+state 151
+
+    (80) LOGF -> LPAREN LOGE RPAREN .
+
+    AND             reduce using rule 80 (LOGF -> LPAREN LOGE RPAREN .)
+    RPAREN          reduce using rule 80 (LOGF -> LPAREN LOGE RPAREN .)
+    OR              reduce using rule 80 (LOGF -> LPAREN LOGE RPAREN .)
+
+
+state 152
+
+    (69) LOGE -> LOGE OR LOGT .
+    (72) LOGT -> LOGT . AND LOGF
+
+    RPAREN          reduce using rule 69 (LOGE -> LOGE OR LOGT .)
+    OR              reduce using rule 69 (LOGE -> LOGE OR LOGT .)
+    AND             shift and go to state 130
+
+
+state 153
+
+    (72) LOGT -> LOGT AND LOGF .
+
+    AND             reduce using rule 72 (LOGT -> LOGT AND LOGF .)
+    RPAREN          reduce using rule 72 (LOGT -> LOGT AND LOGF .)
+    OR              reduce using rule 72 (LOGT -> LOGT AND LOGF .)
+
+
+state 154
+
+    (74) LOGF -> VAR LT VAR .
+
+    AND             reduce using rule 74 (LOGF -> VAR LT VAR .)
+    RPAREN          reduce using rule 74 (LOGF -> VAR LT VAR .)
+    OR              reduce using rule 74 (LOGF -> VAR LT VAR .)
+
+
+state 155
+
+    (75) LOGF -> VAR LE VAR .
+
+    AND             reduce using rule 75 (LOGF -> VAR LE VAR .)
+    RPAREN          reduce using rule 75 (LOGF -> VAR LE VAR .)
+    OR              reduce using rule 75 (LOGF -> VAR LE VAR .)
+
+
+state 156
+
+    (76) LOGF -> VAR GT VAR .
+
+    AND             reduce using rule 76 (LOGF -> VAR GT VAR .)
+    RPAREN          reduce using rule 76 (LOGF -> VAR GT VAR .)
+    OR              reduce using rule 76 (LOGF -> VAR GT VAR .)
+
+
+state 157
+
+    (77) LOGF -> VAR GE VAR .
+
+    AND             reduce using rule 77 (LOGF -> VAR GE VAR .)
+    RPAREN          reduce using rule 77 (LOGF -> VAR GE VAR .)
+    OR              reduce using rule 77 (LOGF -> VAR GE VAR .)
+
+
+state 158
+
+    (78) LOGF -> VAR EQ VAR .
+
+    AND             reduce using rule 78 (LOGF -> VAR EQ VAR .)
+    RPAREN          reduce using rule 78 (LOGF -> VAR EQ VAR .)
+    OR              reduce using rule 78 (LOGF -> VAR EQ VAR .)
+
+
+state 159
+
+    (79) LOGF -> VAR NE VAR .
+
+    AND             reduce using rule 79 (LOGF -> VAR NE VAR .)
+    RPAREN          reduce using rule 79 (LOGF -> VAR NE VAR .)
+    OR              reduce using rule 79 (LOGF -> VAR NE VAR .)
+
+
+state 160
+
+    (47) S -> WHILE WHILEAUX LCURL X RCURL . WHILEAUX2 X
+    (49) WHILEAUX2 -> .
+
+    DEF             reduce using rule 49 (WHILEAUX2 -> .)
+    LET             reduce using rule 49 (WHILEAUX2 -> .)
+    CALL            reduce using rule 49 (WHILEAUX2 -> .)
+    IN              reduce using rule 49 (WHILEAUX2 -> .)
+    PRINT           reduce using rule 49 (WHILEAUX2 -> .)
+    IF              reduce using rule 49 (WHILEAUX2 -> .)
+    WHILE           reduce using rule 49 (WHILEAUX2 -> .)
+    DO              reduce using rule 49 (WHILEAUX2 -> .)
+    FOR             reduce using rule 49 (WHILEAUX2 -> .)
+    PROCEDURE       reduce using rule 49 (WHILEAUX2 -> .)
+    PROGRAM         reduce using rule 49 (WHILEAUX2 -> .)
+    PEND            reduce using rule 49 (WHILEAUX2 -> .)
+    RCURL           reduce using rule 49 (WHILEAUX2 -> .)
+
+    WHILEAUX2                      shift and go to state 177
+
+state 161
+
+    (50) S -> DO DOAUX LCURL X RCURL . WHILE DOAUX2 X
+
+    WHILE           shift and go to state 178
+
+
+state 162
+
+    (53) S -> FOR FORAUX LCURL X RCURL . FORAUX2 X
+    (55) FORAUX2 -> .
+
+    DEF             reduce using rule 55 (FORAUX2 -> .)
+    LET             reduce using rule 55 (FORAUX2 -> .)
+    CALL            reduce using rule 55 (FORAUX2 -> .)
+    IN              reduce using rule 55 (FORAUX2 -> .)
+    PRINT           reduce using rule 55 (FORAUX2 -> .)
+    IF              reduce using rule 55 (FORAUX2 -> .)
+    WHILE           reduce using rule 55 (FORAUX2 -> .)
+    DO              reduce using rule 55 (FORAUX2 -> .)
+    FOR             reduce using rule 55 (FORAUX2 -> .)
+    PROCEDURE       reduce using rule 55 (FORAUX2 -> .)
+    PROGRAM         reduce using rule 55 (FORAUX2 -> .)
+    PEND            reduce using rule 55 (FORAUX2 -> .)
+    RCURL           reduce using rule 55 (FORAUX2 -> .)
+
+    FORAUX2                        shift and go to state 179
+
+state 163
+
+    (54) FORAUX -> LPAREN FORASSIGN COMMA LOGE . RPAREN
+    (69) LOGE -> LOGE . OR LOGT
+
+    RPAREN          shift and go to state 180
+    OR              shift and go to state 129
+
+
+state 164
+
+    (56) FORASSIGN -> VARID EQUAL E .
+    (59) E -> E . PLUS T
+    (60) E -> E . MINUS T
+
+    COMMA           reduce using rule 56 (FORASSIGN -> VARID EQUAL E .)
+    PLUS            shift and go to state 65
+    MINUS           shift and go to state 66
+
+
+state 165
+
+    (38) PRINTAUX -> LPAREN APOS ID APOS RPAREN .
+
+    DEF             reduce using rule 38 (PRINTAUX -> LPAREN APOS ID APOS RPAREN .)
+    LET             reduce using rule 38 (PRINTAUX -> LPAREN APOS ID APOS RPAREN .)
+    CALL            reduce using rule 38 (PRINTAUX -> LPAREN APOS ID APOS RPAREN .)
+    IN              reduce using rule 38 (PRINTAUX -> LPAREN APOS ID APOS RPAREN .)
+    PRINT           reduce using rule 38 (PRINTAUX -> LPAREN APOS ID APOS RPAREN .)
+    IF              reduce using rule 38 (PRINTAUX -> LPAREN APOS ID APOS RPAREN .)
+    WHILE           reduce using rule 38 (PRINTAUX -> LPAREN APOS ID APOS RPAREN .)
+    DO              reduce using rule 38 (PRINTAUX -> LPAREN APOS ID APOS RPAREN .)
+    FOR             reduce using rule 38 (PRINTAUX -> LPAREN APOS ID APOS RPAREN .)
+    PROCEDURE       reduce using rule 38 (PRINTAUX -> LPAREN APOS ID APOS RPAREN .)
+    PROGRAM         reduce using rule 38 (PRINTAUX -> LPAREN APOS ID APOS RPAREN .)
+    PEND            reduce using rule 38 (PRINTAUX -> LPAREN APOS ID APOS RPAREN .)
+    RCURL           reduce using rule 38 (PRINTAUX -> LPAREN APOS ID APOS RPAREN .)
+
+
+state 166
+
+    (10) CUBEDEF -> ID LBRACK NINT COMMA NINT COMMA NINT RBRACK . AS VARTYPE
+
+    AS              shift and go to state 181
+
+
+state 167
+
+    (9) MATDEF -> ID LBRACK NINT COMMA NINT RBRACK AS VARTYPE .
+
+    DEF             reduce using rule 9 (MATDEF -> ID LBRACK NINT COMMA NINT RBRACK AS VARTYPE .)
+    LET             reduce using rule 9 (MATDEF -> ID LBRACK NINT COMMA NINT RBRACK AS VARTYPE .)
+    CALL            reduce using rule 9 (MATDEF -> ID LBRACK NINT COMMA NINT RBRACK AS VARTYPE .)
+    IN              reduce using rule 9 (MATDEF -> ID LBRACK NINT COMMA NINT RBRACK AS VARTYPE .)
+    PRINT           reduce using rule 9 (MATDEF -> ID LBRACK NINT COMMA NINT RBRACK AS VARTYPE .)
+    IF              reduce using rule 9 (MATDEF -> ID LBRACK NINT COMMA NINT RBRACK AS VARTYPE .)
+    WHILE           reduce using rule 9 (MATDEF -> ID LBRACK NINT COMMA NINT RBRACK AS VARTYPE .)
+    DO              reduce using rule 9 (MATDEF -> ID LBRACK NINT COMMA NINT RBRACK AS VARTYPE .)
+    FOR             reduce using rule 9 (MATDEF -> ID LBRACK NINT COMMA NINT RBRACK AS VARTYPE .)
+    PROCEDURE       reduce using rule 9 (MATDEF -> ID LBRACK NINT COMMA NINT RBRACK AS VARTYPE .)
+    PROGRAM         reduce using rule 9 (MATDEF -> ID LBRACK NINT COMMA NINT RBRACK AS VARTYPE .)
+    PEND            reduce using rule 9 (MATDEF -> ID LBRACK NINT COMMA NINT RBRACK AS VARTYPE .)
+    RCURL           reduce using rule 9 (MATDEF -> ID LBRACK NINT COMMA NINT RBRACK AS VARTYPE .)
+
+
+state 168
+
+    (18) VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA . NUMTYPE RBRACK
+    (22) NUMTYPE -> . NINT
+    (23) NUMTYPE -> . ID
+
+    NINT            shift and go to state 46
+    ID              shift and go to state 47
+
+    NUMTYPE                        shift and go to state 182
+
+state 169
+
+    (17) VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .
+
+    DEF             reduce using rule 17 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    LET             reduce using rule 17 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    CALL            reduce using rule 17 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    IN              reduce using rule 17 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    PRINT           reduce using rule 17 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    IF              reduce using rule 17 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    WHILE           reduce using rule 17 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    DO              reduce using rule 17 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    FOR             reduce using rule 17 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    PROCEDURE       reduce using rule 17 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    PROGRAM         reduce using rule 17 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    PEND            reduce using rule 17 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+    RCURL           reduce using rule 17 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK .)
+
+
+state 170
+
+    (15) VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK . EQUAL E
+
+    EQUAL           shift and go to state 183
+
+
+state 171
+
+    (14) VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .
+    (59) E -> E . PLUS T
+    (60) E -> E . MINUS T
+
+    DEF             reduce using rule 14 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    LET             reduce using rule 14 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    CALL            reduce using rule 14 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    IN              reduce using rule 14 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    PRINT           reduce using rule 14 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    IF              reduce using rule 14 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    WHILE           reduce using rule 14 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    DO              reduce using rule 14 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    FOR             reduce using rule 14 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    PROCEDURE       reduce using rule 14 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    PROGRAM         reduce using rule 14 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    PEND            reduce using rule 14 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    RCURL           reduce using rule 14 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    PLUS            shift and go to state 65
+    MINUS           shift and go to state 66
+
+
+state 172
+
+    (40) S -> IF IFAUX LCURL X RCURL IFAUX2 . X
+    (2) X -> . V P S
+    (3) V -> . DEF VARAUX X
+    (11) V -> . LET VARASSIGN X
+    (27) V -> . EMPTY
+    (58) EMPTY -> .
+
+    DEF             shift and go to state 3
+    LET             shift and go to state 4
+    CALL            reduce using rule 58 (EMPTY -> .)
+    IN              reduce using rule 58 (EMPTY -> .)
+    PRINT           reduce using rule 58 (EMPTY -> .)
+    IF              reduce using rule 58 (EMPTY -> .)
+    WHILE           reduce using rule 58 (EMPTY -> .)
+    DO              reduce using rule 58 (EMPTY -> .)
+    FOR             reduce using rule 58 (EMPTY -> .)
+    PROCEDURE       reduce using rule 58 (EMPTY -> .)
+    PROGRAM         reduce using rule 58 (EMPTY -> .)
+    PEND            reduce using rule 58 (EMPTY -> .)
+    RCURL           reduce using rule 58 (EMPTY -> .)
+
+    X                              shift and go to state 184
+    V                              shift and go to state 20
+    EMPTY                          shift and go to state 5
+
+state 173
+
+    (42) IFAUX2 -> IFELSE .
+
+    DEF             reduce using rule 42 (IFAUX2 -> IFELSE .)
+    LET             reduce using rule 42 (IFAUX2 -> IFELSE .)
+    CALL            reduce using rule 42 (IFAUX2 -> IFELSE .)
+    IN              reduce using rule 42 (IFAUX2 -> IFELSE .)
+    PRINT           reduce using rule 42 (IFAUX2 -> IFELSE .)
+    IF              reduce using rule 42 (IFAUX2 -> IFELSE .)
+    WHILE           reduce using rule 42 (IFAUX2 -> IFELSE .)
+    DO              reduce using rule 42 (IFAUX2 -> IFELSE .)
+    FOR             reduce using rule 42 (IFAUX2 -> IFELSE .)
+    PROCEDURE       reduce using rule 42 (IFAUX2 -> IFELSE .)
+    PROGRAM         reduce using rule 42 (IFAUX2 -> IFELSE .)
+    PEND            reduce using rule 42 (IFAUX2 -> IFELSE .)
+    RCURL           reduce using rule 42 (IFAUX2 -> IFELSE .)
+
+
+state 174
+
+    (43) IFAUX2 -> IFAUX3 .
+
+    DEF             reduce using rule 43 (IFAUX2 -> IFAUX3 .)
+    LET             reduce using rule 43 (IFAUX2 -> IFAUX3 .)
+    CALL            reduce using rule 43 (IFAUX2 -> IFAUX3 .)
+    IN              reduce using rule 43 (IFAUX2 -> IFAUX3 .)
+    PRINT           reduce using rule 43 (IFAUX2 -> IFAUX3 .)
+    IF              reduce using rule 43 (IFAUX2 -> IFAUX3 .)
+    WHILE           reduce using rule 43 (IFAUX2 -> IFAUX3 .)
+    DO              reduce using rule 43 (IFAUX2 -> IFAUX3 .)
+    FOR             reduce using rule 43 (IFAUX2 -> IFAUX3 .)
+    PROCEDURE       reduce using rule 43 (IFAUX2 -> IFAUX3 .)
+    PROGRAM         reduce using rule 43 (IFAUX2 -> IFAUX3 .)
+    PEND            reduce using rule 43 (IFAUX2 -> IFAUX3 .)
+    RCURL           reduce using rule 43 (IFAUX2 -> IFAUX3 .)
+
+
+state 175
+
+    (45) IFELSE -> ELSEAUX . LCURL X RCURL IFAUX3
+
+    LCURL           shift and go to state 185
+
+
+state 176
+
+    (46) ELSEAUX -> ELSE .
+
+    LCURL           reduce using rule 46 (ELSEAUX -> ELSE .)
+
+
+state 177
+
+    (47) S -> WHILE WHILEAUX LCURL X RCURL WHILEAUX2 . X
+    (2) X -> . V P S
+    (3) V -> . DEF VARAUX X
+    (11) V -> . LET VARASSIGN X
+    (27) V -> . EMPTY
+    (58) EMPTY -> .
+
+    DEF             shift and go to state 3
+    LET             shift and go to state 4
+    CALL            reduce using rule 58 (EMPTY -> .)
+    IN              reduce using rule 58 (EMPTY -> .)
+    PRINT           reduce using rule 58 (EMPTY -> .)
+    IF              reduce using rule 58 (EMPTY -> .)
+    WHILE           reduce using rule 58 (EMPTY -> .)
+    DO              reduce using rule 58 (EMPTY -> .)
+    FOR             reduce using rule 58 (EMPTY -> .)
+    PROCEDURE       reduce using rule 58 (EMPTY -> .)
+    PROGRAM         reduce using rule 58 (EMPTY -> .)
+    PEND            reduce using rule 58 (EMPTY -> .)
+    RCURL           reduce using rule 58 (EMPTY -> .)
+
+    X                              shift and go to state 186
+    V                              shift and go to state 20
+    EMPTY                          shift and go to state 5
+
+state 178
+
+    (50) S -> DO DOAUX LCURL X RCURL WHILE . DOAUX2 X
+    (52) DOAUX2 -> . LPAREN LOGE RPAREN
+
+    LPAREN          shift and go to state 188
+
+    DOAUX2                         shift and go to state 187
+
+state 179
+
+    (53) S -> FOR FORAUX LCURL X RCURL FORAUX2 . X
+    (2) X -> . V P S
+    (3) V -> . DEF VARAUX X
+    (11) V -> . LET VARASSIGN X
+    (27) V -> . EMPTY
+    (58) EMPTY -> .
+
+    DEF             shift and go to state 3
+    LET             shift and go to state 4
+    CALL            reduce using rule 58 (EMPTY -> .)
+    IN              reduce using rule 58 (EMPTY -> .)
+    PRINT           reduce using rule 58 (EMPTY -> .)
+    IF              reduce using rule 58 (EMPTY -> .)
+    WHILE           reduce using rule 58 (EMPTY -> .)
+    DO              reduce using rule 58 (EMPTY -> .)
+    FOR             reduce using rule 58 (EMPTY -> .)
+    PROCEDURE       reduce using rule 58 (EMPTY -> .)
+    PROGRAM         reduce using rule 58 (EMPTY -> .)
+    PEND            reduce using rule 58 (EMPTY -> .)
+    RCURL           reduce using rule 58 (EMPTY -> .)
+
+    X                              shift and go to state 189
+    V                              shift and go to state 20
+    EMPTY                          shift and go to state 5
+
+state 180
+
+    (54) FORAUX -> LPAREN FORASSIGN COMMA LOGE RPAREN .
+
+    LCURL           reduce using rule 54 (FORAUX -> LPAREN FORASSIGN COMMA LOGE RPAREN .)
+
+
+state 181
+
+    (10) CUBEDEF -> ID LBRACK NINT COMMA NINT COMMA NINT RBRACK AS . VARTYPE
+    (20) VARTYPE -> . INT
+    (21) VARTYPE -> . FLOAT
+
+    INT             shift and go to state 34
+    FLOAT           shift and go to state 35
+
+    VARTYPE                        shift and go to state 190
+
+state 182
+
+    (18) VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE . RBRACK
+
+    RBRACK          shift and go to state 191
+
+
+state 183
+
+    (15) VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK EQUAL . E
+    (59) E -> . E PLUS T
+    (60) E -> . E MINUS T
+    (61) E -> . T
+    (62) T -> . T MULT F
+    (63) T -> . T DIV F
+    (64) T -> . F
+    (65) F -> . LPAREN E RPAREN
+    (66) F -> . NINT
+    (67) F -> . NFLOAT
+    (68) F -> . ID
+
+    LPAREN          shift and go to state 42
+    NINT            shift and go to state 43
+    NFLOAT          shift and go to state 44
+    ID              shift and go to state 70
+
+    E                              shift and go to state 192
+    T                              shift and go to state 39
+    F                              shift and go to state 41
+
+state 184
+
+    (40) S -> IF IFAUX LCURL X RCURL IFAUX2 X .
+
+    CALL            reduce using rule 40 (S -> IF IFAUX LCURL X RCURL IFAUX2 X .)
+    IN              reduce using rule 40 (S -> IF IFAUX LCURL X RCURL IFAUX2 X .)
+    PRINT           reduce using rule 40 (S -> IF IFAUX LCURL X RCURL IFAUX2 X .)
+    IF              reduce using rule 40 (S -> IF IFAUX LCURL X RCURL IFAUX2 X .)
+    WHILE           reduce using rule 40 (S -> IF IFAUX LCURL X RCURL IFAUX2 X .)
+    DO              reduce using rule 40 (S -> IF IFAUX LCURL X RCURL IFAUX2 X .)
+    FOR             reduce using rule 40 (S -> IF IFAUX LCURL X RCURL IFAUX2 X .)
+    PROCEDURE       reduce using rule 40 (S -> IF IFAUX LCURL X RCURL IFAUX2 X .)
+    PROGRAM         reduce using rule 40 (S -> IF IFAUX LCURL X RCURL IFAUX2 X .)
+    PEND            reduce using rule 40 (S -> IF IFAUX LCURL X RCURL IFAUX2 X .)
+    RCURL           reduce using rule 40 (S -> IF IFAUX LCURL X RCURL IFAUX2 X .)
+
+
+state 185
+
+    (45) IFELSE -> ELSEAUX LCURL . X RCURL IFAUX3
+    (2) X -> . V P S
+    (3) V -> . DEF VARAUX X
+    (11) V -> . LET VARASSIGN X
+    (27) V -> . EMPTY
+    (58) EMPTY -> .
+
+    DEF             shift and go to state 3
+    LET             shift and go to state 4
+    CALL            reduce using rule 58 (EMPTY -> .)
+    IN              reduce using rule 58 (EMPTY -> .)
+    PRINT           reduce using rule 58 (EMPTY -> .)
+    IF              reduce using rule 58 (EMPTY -> .)
+    WHILE           reduce using rule 58 (EMPTY -> .)
+    DO              reduce using rule 58 (EMPTY -> .)
+    FOR             reduce using rule 58 (EMPTY -> .)
+    RCURL           reduce using rule 58 (EMPTY -> .)
+
+    X                              shift and go to state 193
+    V                              shift and go to state 20
+    EMPTY                          shift and go to state 5
+
+state 186
+
+    (47) S -> WHILE WHILEAUX LCURL X RCURL WHILEAUX2 X .
+
+    CALL            reduce using rule 47 (S -> WHILE WHILEAUX LCURL X RCURL WHILEAUX2 X .)
+    IN              reduce using rule 47 (S -> WHILE WHILEAUX LCURL X RCURL WHILEAUX2 X .)
+    PRINT           reduce using rule 47 (S -> WHILE WHILEAUX LCURL X RCURL WHILEAUX2 X .)
+    IF              reduce using rule 47 (S -> WHILE WHILEAUX LCURL X RCURL WHILEAUX2 X .)
+    WHILE           reduce using rule 47 (S -> WHILE WHILEAUX LCURL X RCURL WHILEAUX2 X .)
+    DO              reduce using rule 47 (S -> WHILE WHILEAUX LCURL X RCURL WHILEAUX2 X .)
+    FOR             reduce using rule 47 (S -> WHILE WHILEAUX LCURL X RCURL WHILEAUX2 X .)
+    PROCEDURE       reduce using rule 47 (S -> WHILE WHILEAUX LCURL X RCURL WHILEAUX2 X .)
+    PROGRAM         reduce using rule 47 (S -> WHILE WHILEAUX LCURL X RCURL WHILEAUX2 X .)
+    PEND            reduce using rule 47 (S -> WHILE WHILEAUX LCURL X RCURL WHILEAUX2 X .)
+    RCURL           reduce using rule 47 (S -> WHILE WHILEAUX LCURL X RCURL WHILEAUX2 X .)
+
+
+state 187
+
+    (50) S -> DO DOAUX LCURL X RCURL WHILE DOAUX2 . X
+    (2) X -> . V P S
+    (3) V -> . DEF VARAUX X
+    (11) V -> . LET VARASSIGN X
+    (27) V -> . EMPTY
+    (58) EMPTY -> .
+
+    DEF             shift and go to state 3
+    LET             shift and go to state 4
+    CALL            reduce using rule 58 (EMPTY -> .)
+    IN              reduce using rule 58 (EMPTY -> .)
+    PRINT           reduce using rule 58 (EMPTY -> .)
+    IF              reduce using rule 58 (EMPTY -> .)
+    WHILE           reduce using rule 58 (EMPTY -> .)
+    DO              reduce using rule 58 (EMPTY -> .)
+    FOR             reduce using rule 58 (EMPTY -> .)
+    PROCEDURE       reduce using rule 58 (EMPTY -> .)
+    PROGRAM         reduce using rule 58 (EMPTY -> .)
+    PEND            reduce using rule 58 (EMPTY -> .)
+    RCURL           reduce using rule 58 (EMPTY -> .)
+
+    X                              shift and go to state 194
+    V                              shift and go to state 20
+    EMPTY                          shift and go to state 5
+
+state 188
+
+    (52) DOAUX2 -> LPAREN . LOGE RPAREN
+    (69) LOGE -> . LOGE OR LOGT
+    (70) LOGE -> . NOT LOGT
+    (71) LOGE -> . LOGT
+    (72) LOGT -> . LOGT AND LOGF
+    (73) LOGT -> . LOGF
+    (74) LOGF -> . VAR LT VAR
+    (75) LOGF -> . VAR LE VAR
+    (76) LOGF -> . VAR GT VAR
+    (77) LOGF -> . VAR GE VAR
+    (78) LOGF -> . VAR EQ VAR
+    (79) LOGF -> . VAR NE VAR
+    (80) LOGF -> . LPAREN LOGE RPAREN
+    (24) VAR -> . NINT
+    (25) VAR -> . NFLOAT
+    (26) VAR -> . ID
+
+    NOT             shift and go to state 105
+    LPAREN          shift and go to state 102
+    NINT            shift and go to state 88
+    NFLOAT          shift and go to state 89
+    ID              shift and go to state 87
+
+    LOGE                           shift and go to state 195
+    LOGT                           shift and go to state 104
+    LOGF                           shift and go to state 106
+    VAR                            shift and go to state 107
+
+state 189
+
+    (53) S -> FOR FORAUX LCURL X RCURL FORAUX2 X .
+
+    CALL            reduce using rule 53 (S -> FOR FORAUX LCURL X RCURL FORAUX2 X .)
+    IN              reduce using rule 53 (S -> FOR FORAUX LCURL X RCURL FORAUX2 X .)
+    PRINT           reduce using rule 53 (S -> FOR FORAUX LCURL X RCURL FORAUX2 X .)
+    IF              reduce using rule 53 (S -> FOR FORAUX LCURL X RCURL FORAUX2 X .)
+    WHILE           reduce using rule 53 (S -> FOR FORAUX LCURL X RCURL FORAUX2 X .)
+    DO              reduce using rule 53 (S -> FOR FORAUX LCURL X RCURL FORAUX2 X .)
+    FOR             reduce using rule 53 (S -> FOR FORAUX LCURL X RCURL FORAUX2 X .)
+    PROCEDURE       reduce using rule 53 (S -> FOR FORAUX LCURL X RCURL FORAUX2 X .)
+    PROGRAM         reduce using rule 53 (S -> FOR FORAUX LCURL X RCURL FORAUX2 X .)
+    PEND            reduce using rule 53 (S -> FOR FORAUX LCURL X RCURL FORAUX2 X .)
+    RCURL           reduce using rule 53 (S -> FOR FORAUX LCURL X RCURL FORAUX2 X .)
+
+
+state 190
+
+    (10) CUBEDEF -> ID LBRACK NINT COMMA NINT COMMA NINT RBRACK AS VARTYPE .
+
+    DEF             reduce using rule 10 (CUBEDEF -> ID LBRACK NINT COMMA NINT COMMA NINT RBRACK AS VARTYPE .)
+    LET             reduce using rule 10 (CUBEDEF -> ID LBRACK NINT COMMA NINT COMMA NINT RBRACK AS VARTYPE .)
+    CALL            reduce using rule 10 (CUBEDEF -> ID LBRACK NINT COMMA NINT COMMA NINT RBRACK AS VARTYPE .)
+    IN              reduce using rule 10 (CUBEDEF -> ID LBRACK NINT COMMA NINT COMMA NINT RBRACK AS VARTYPE .)
+    PRINT           reduce using rule 10 (CUBEDEF -> ID LBRACK NINT COMMA NINT COMMA NINT RBRACK AS VARTYPE .)
+    IF              reduce using rule 10 (CUBEDEF -> ID LBRACK NINT COMMA NINT COMMA NINT RBRACK AS VARTYPE .)
+    WHILE           reduce using rule 10 (CUBEDEF -> ID LBRACK NINT COMMA NINT COMMA NINT RBRACK AS VARTYPE .)
+    DO              reduce using rule 10 (CUBEDEF -> ID LBRACK NINT COMMA NINT COMMA NINT RBRACK AS VARTYPE .)
+    FOR             reduce using rule 10 (CUBEDEF -> ID LBRACK NINT COMMA NINT COMMA NINT RBRACK AS VARTYPE .)
+    PROCEDURE       reduce using rule 10 (CUBEDEF -> ID LBRACK NINT COMMA NINT COMMA NINT RBRACK AS VARTYPE .)
+    PROGRAM         reduce using rule 10 (CUBEDEF -> ID LBRACK NINT COMMA NINT COMMA NINT RBRACK AS VARTYPE .)
+    PEND            reduce using rule 10 (CUBEDEF -> ID LBRACK NINT COMMA NINT COMMA NINT RBRACK AS VARTYPE .)
+    RCURL           reduce using rule 10 (CUBEDEF -> ID LBRACK NINT COMMA NINT COMMA NINT RBRACK AS VARTYPE .)
+
+
+state 191
+
+    (18) VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK .
+
+    DEF             reduce using rule 18 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK .)
+    LET             reduce using rule 18 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK .)
+    CALL            reduce using rule 18 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK .)
+    IN              reduce using rule 18 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK .)
+    PRINT           reduce using rule 18 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK .)
+    IF              reduce using rule 18 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK .)
+    WHILE           reduce using rule 18 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK .)
+    DO              reduce using rule 18 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK .)
+    FOR             reduce using rule 18 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK .)
+    PROCEDURE       reduce using rule 18 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK .)
+    PROGRAM         reduce using rule 18 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK .)
+    PEND            reduce using rule 18 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK .)
+    RCURL           reduce using rule 18 (VARASSIGN -> VARID EQUAL VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK .)
+
+
+state 192
+
+    (15) VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .
+    (59) E -> E . PLUS T
+    (60) E -> E . MINUS T
+
+    DEF             reduce using rule 15 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    LET             reduce using rule 15 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    CALL            reduce using rule 15 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    IN              reduce using rule 15 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    PRINT           reduce using rule 15 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    IF              reduce using rule 15 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    WHILE           reduce using rule 15 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    DO              reduce using rule 15 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    FOR             reduce using rule 15 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    PROCEDURE       reduce using rule 15 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    PROGRAM         reduce using rule 15 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    PEND            reduce using rule 15 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    RCURL           reduce using rule 15 (VARASSIGN -> VARID LBRACK NUMTYPE COMMA NUMTYPE COMMA NUMTYPE RBRACK EQUAL E .)
+    PLUS            shift and go to state 65
+    MINUS           shift and go to state 66
+
+
+state 193
+
+    (45) IFELSE -> ELSEAUX LCURL X . RCURL IFAUX3
+
+    RCURL           shift and go to state 196
+
+
+state 194
+
+    (50) S -> DO DOAUX LCURL X RCURL WHILE DOAUX2 X .
+
+    CALL            reduce using rule 50 (S -> DO DOAUX LCURL X RCURL WHILE DOAUX2 X .)
+    IN              reduce using rule 50 (S -> DO DOAUX LCURL X RCURL WHILE DOAUX2 X .)
+    PRINT           reduce using rule 50 (S -> DO DOAUX LCURL X RCURL WHILE DOAUX2 X .)
+    IF              reduce using rule 50 (S -> DO DOAUX LCURL X RCURL WHILE DOAUX2 X .)
+    WHILE           reduce using rule 50 (S -> DO DOAUX LCURL X RCURL WHILE DOAUX2 X .)
+    DO              reduce using rule 50 (S -> DO DOAUX LCURL X RCURL WHILE DOAUX2 X .)
+    FOR             reduce using rule 50 (S -> DO DOAUX LCURL X RCURL WHILE DOAUX2 X .)
+    PROCEDURE       reduce using rule 50 (S -> DO DOAUX LCURL X RCURL WHILE DOAUX2 X .)
+    PROGRAM         reduce using rule 50 (S -> DO DOAUX LCURL X RCURL WHILE DOAUX2 X .)
+    PEND            reduce using rule 50 (S -> DO DOAUX LCURL X RCURL WHILE DOAUX2 X .)
+    RCURL           reduce using rule 50 (S -> DO DOAUX LCURL X RCURL WHILE DOAUX2 X .)
+
+
+state 195
+
+    (52) DOAUX2 -> LPAREN LOGE . RPAREN
+    (69) LOGE -> LOGE . OR LOGT
+
+    RPAREN          shift and go to state 197
+    OR              shift and go to state 129
+
+
+state 196
+
+    (45) IFELSE -> ELSEAUX LCURL X RCURL . IFAUX3
+    (44) IFAUX3 -> .
+
+    DEF             reduce using rule 44 (IFAUX3 -> .)
+    LET             reduce using rule 44 (IFAUX3 -> .)
+    CALL            reduce using rule 44 (IFAUX3 -> .)
+    IN              reduce using rule 44 (IFAUX3 -> .)
+    PRINT           reduce using rule 44 (IFAUX3 -> .)
+    IF              reduce using rule 44 (IFAUX3 -> .)
+    WHILE           reduce using rule 44 (IFAUX3 -> .)
+    DO              reduce using rule 44 (IFAUX3 -> .)
+    FOR             reduce using rule 44 (IFAUX3 -> .)
+    PROCEDURE       reduce using rule 44 (IFAUX3 -> .)
+    PROGRAM         reduce using rule 44 (IFAUX3 -> .)
+    PEND            reduce using rule 44 (IFAUX3 -> .)
+    RCURL           reduce using rule 44 (IFAUX3 -> .)
+
+    IFAUX3                         shift and go to state 198
+
+state 197
+
+    (52) DOAUX2 -> LPAREN LOGE RPAREN .
+
+    DEF             reduce using rule 52 (DOAUX2 -> LPAREN LOGE RPAREN .)
+    LET             reduce using rule 52 (DOAUX2 -> LPAREN LOGE RPAREN .)
+    CALL            reduce using rule 52 (DOAUX2 -> LPAREN LOGE RPAREN .)
+    IN              reduce using rule 52 (DOAUX2 -> LPAREN LOGE RPAREN .)
+    PRINT           reduce using rule 52 (DOAUX2 -> LPAREN LOGE RPAREN .)
+    IF              reduce using rule 52 (DOAUX2 -> LPAREN LOGE RPAREN .)
+    WHILE           reduce using rule 52 (DOAUX2 -> LPAREN LOGE RPAREN .)
+    DO              reduce using rule 52 (DOAUX2 -> LPAREN LOGE RPAREN .)
+    FOR             reduce using rule 52 (DOAUX2 -> LPAREN LOGE RPAREN .)
+    PROCEDURE       reduce using rule 52 (DOAUX2 -> LPAREN LOGE RPAREN .)
+    PROGRAM         reduce using rule 52 (DOAUX2 -> LPAREN LOGE RPAREN .)
+    PEND            reduce using rule 52 (DOAUX2 -> LPAREN LOGE RPAREN .)
+    RCURL           reduce using rule 52 (DOAUX2 -> LPAREN LOGE RPAREN .)
+
+
+state 198
+
+    (45) IFELSE -> ELSEAUX LCURL X RCURL IFAUX3 .
+
+    DEF             reduce using rule 45 (IFELSE -> ELSEAUX LCURL X RCURL IFAUX3 .)
+    LET             reduce using rule 45 (IFELSE -> ELSEAUX LCURL X RCURL IFAUX3 .)
+    CALL            reduce using rule 45 (IFELSE -> ELSEAUX LCURL X RCURL IFAUX3 .)
+    IN              reduce using rule 45 (IFELSE -> ELSEAUX LCURL X RCURL IFAUX3 .)
+    PRINT           reduce using rule 45 (IFELSE -> ELSEAUX LCURL X RCURL IFAUX3 .)
+    IF              reduce using rule 45 (IFELSE -> ELSEAUX LCURL X RCURL IFAUX3 .)
+    WHILE           reduce using rule 45 (IFELSE -> ELSEAUX LCURL X RCURL IFAUX3 .)
+    DO              reduce using rule 45 (IFELSE -> ELSEAUX LCURL X RCURL IFAUX3 .)
+    FOR             reduce using rule 45 (IFELSE -> ELSEAUX LCURL X RCURL IFAUX3 .)
+    PROCEDURE       reduce using rule 45 (IFELSE -> ELSEAUX LCURL X RCURL IFAUX3 .)
+    PROGRAM         reduce using rule 45 (IFELSE -> ELSEAUX LCURL X RCURL IFAUX3 .)
+    PEND            reduce using rule 45 (IFELSE -> ELSEAUX LCURL X RCURL IFAUX3 .)
+    RCURL           reduce using rule 45 (IFELSE -> ELSEAUX LCURL X RCURL IFAUX3 .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for CALL in state 20 resolved as shift
+WARNING: shift/reduce conflict for IN in state 20 resolved as shift
+WARNING: shift/reduce conflict for PRINT in state 20 resolved as shift
+WARNING: shift/reduce conflict for IF in state 28 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 28 resolved as shift
+WARNING: shift/reduce conflict for DO in state 28 resolved as shift
+WARNING: shift/reduce conflict for FOR in state 28 resolved as shift
